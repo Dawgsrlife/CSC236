@@ -10,13 +10,41 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{amsmath}
-\usepackage{graphicx} % make sure to include this for images
-\usepackage{setspace} % and this for setting the spacing
-\usepackage{geometry} % and this for page layout
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{xcolor}  % Required for coloring in listings
 
 \graphicspath{{Images/}}
 \onehalfspacing
 \geometry{letterpaper, portrait, includeheadfoot=true, hmargin=1in, vmargin=1in}
+
+% Define custom colors
+\definecolor{myblue}{RGB}{0, 128, 255}
+\definecolor{mygreen}{RGB}{34, 139, 34}
+\definecolor{myorange}{RGB}{255, 140, 0}
+\definecolor{mygray}{RGB}{128, 128, 128}
+\definecolor{mypurple}{RGB}{148, 0, 211}
+\definecolor{myred}{RGB}{255, 69, 0}
+
+% Configure listings for Python with custom styles
+\lstset{
+    language=Python,             % Set language to Python
+    basicstyle=\ttfamily\small,  % Use a smaller monospace font
+    keywordstyle=\color{myblue}\bfseries,  % Keywords in blue and bold
+    commentstyle=\color{mygreen}\itshape,  % Comments in green and italic
+    stringstyle=\color{myorange},          % Strings in orange
+    numberstyle=\color{mygray},            % Line numbers in gray
+    identifierstyle=\color{mypurple},      % Functions and variables in purple
+    morekeywords={print, len, range},      % Define additional Python keywords
+    showstringspaces=false,                % Do not show spaces in strings
+    breaklines=true,                       % Enable line breaking
+    numbers=left,                          % Add line numbers to the left
+    numbersep=5pt,                         % Space between line numbers and code
+    frame=single,                          % Add a box around the code
+    rulecolor=\color{mygray},              % Frame color
+    moredelim=[is][\color{myred}]{@@}{@@}, % Custom inline LaTeX coloring
+}
 
 \begin{document}
 \renewcommand{\familydefault}{\rmdefault}
@@ -26,10 +54,301 @@
 \pagebreak
 \normalsize
 
-% Here's where you start adding the content from your sections
-
 \section*{Question \#1}
+Consider the following program from pg. 53-54 of the course textbook:
+\begin{lstlisting}
+def avg(A):
+    """
+    Pre: A is a non-empty list
+    Post: Returns the average of the numbers in A
+    """
+    sum = 0
+    i = 0
+    while i < len(A):
+        sum += A[i]
+        i += 1
+    return sum / len(A)
 
+print(avg([1, 2, 3, 4]))  # Example usage
+\end{lstlisting}
+Denote the predicate:
+\[
+Q(j): \text{At the beginning of the } j^{\text{th}} \text{ iteration, } \texttt{sum} = \sum_{k=0}^{i-1} A[k].
+\]
+\textbf{\underline{Claim:}} \\
+$\forall j \in \{1, \dots, len(A)\}, Q(j)$
+\begin{proof}
+\leavevmode\\
+    remarksgohere \\
+    \\
+    \underline{Base Case:} \\
+    wordsgohere \\
+    \\
+    \underline{Induction Hypothesis:} \\
+    wordsgohere \\
+    \\
+    \underline{Induction Step:} \\
+    wordsgohere \\
+    \\
+    conclusiongoeshere \\
+\end{proof}
 
+\section*{Question \#2}
+Recall \(Q(j)\) from Question \# 1. \\
+\\
+Denote the following predicate:
+\[
+    Q'(n): 0 \leq n < len(A) \implies Q(n + 1)
+\]
+\textbf{\underline{Claim:}} \\
+Referencing the previous question, proving $\forall j \in \{ 1, \dots, len(A) \}, Q(j)$ is equivalent to proving $\forall j \in \mathbb{N}, Q'(n)$.
 
+\begin{proof}
+\leavevmode\\
+    explain why it's equivalent
+\end{proof}
+
+\section*{Question \#3}
+As follows below, Q6-Q10 respectively represent questions 6 through 10 from pp. 64-66 of the course textbook. \\
+\\
+\textbf{Q6:} \\
+Consider the following code:
+\begin{lstlisting}
+    def f(x):
+        """Pre: x is a natural number"""
+        a = x
+        y = 10
+        while a > 0:
+            a -= y
+            y -= 1
+        return a * y
+\end{lstlisting}
+\textbf{(a):} Loop Invariant Characterizing \texttt{a} and \texttt{y} \\
+wordsgohere \\
+\\
+\textbf{(b):} Why This Function Fails to Terminate \\
+wordsgohere \\
+\\
+\textbf{Q7:} \\
+\textbf{(a)} Consider the recursive program below:
+\begin{lstlisting}
+    def exp_rec(a, b):
+        if b == 0:
+            return 1
+        else if b mod 2 == 0:
+            x = exp_rec(a, b / 2)
+            return x * x
+        else:
+            x = exp_rec(a, (b - 1) / 2)
+            return x * x * a
+\end{lstlisting}
+\underline{Preconditions:} \\
+wordsgohere \\
+\underline{Postconditions:} \\
+wordsgohere \\
+Denote the following predicate:
+\[P(n): somethinghere\]
+\textbf{\underline{Claim:}} expresshowthisiscorrect
+\begin{proof}
+\leavevmode\\
+    wordsgohere \\
+\end{proof}
+\leavevmode\\
+\textbf{(b)} Consider the iterative version of the previous program:
+\begin{lstlisting}
+    def exp_iter(a, b):
+        ans = 1
+        mult = a
+        exp = b
+        while exp > 0:
+            if exp mod 2 == 1:
+                ans *= mult
+            mult = mult * mult
+            exp = exp // 2
+        return ans
+\end{lstlisting}
+\underline{Preconditions:} \\
+wordsgohere
+\underline{Postconditions:} \\
+wordsgohere
+\\
+Denote the following predicate:
+\[P(n): somethinghere\]
+\textbf{\underline{Claim:}} expresshowthisiscorrect
+\begin{proof}
+\leavevmode\\
+    wordsgohere \\
+\end{proof}
+\leavevmode\\
+\textbf{Q8} \\
+Consider the following linear time program:
+\begin{lstlisting}
+    def majority(A):
+        """
+        Pre: A is a list with more than half its entries equal to x
+        Post: Returns the majority element x
+        """
+        c = 1
+        m = A[0]
+        i = 1
+        while i <= len(a) - 1:
+            if c == 0:
+                m = A[i]
+                c = 1
+            else if A[i] == m:
+                c += 1
+            else:
+                c -= 1
+            i += 1
+        return m
+\end{lstlisting}
+Denote the following predicate:
+\[P(n): somethinghere\]
+\textbf{\underline{Claim:}} expresshowthisiscorrect
+\begin{proof}
+\leavevmode\\
+    wordsgohere \\
+\end{proof}
+\leavevmode\\
+\textbf{Q9} \\
+Consider the bubblesort algorithm as follows:
+\begin{lstlisting}
+    def bubblesort(L):
+        """
+        Pre: L is a list of numbers
+        Post: L is sorted
+        """
+        k = 0
+        while k < len(L):
+            i = 0
+            while i < len(L) - k - 1:
+                if L[i] > L[i + 1]:
+                    swap L[i] and L[i + 1]
+                i += 1
+            k += 1
+\end{lstlisting}
+\textbf{(a):} Denote the inner loop's invariant:
+\[P(n): somethinghere\]
+\textbf{\underline{Claim:}} proveinnerloop
+\begin{proof}
+\leavevmode\\
+    wordsgohere \\
+\end{proof}
+\leavevmode
+\textbf{(b):} Denote the outer loop's invariant:
+\[P(n): somethinghere\]
+\textbf{\underline{Claim:}} proveouterloop
+\begin{proof}
+\leavevmode\\
+    wordsgohere \\
+\end{proof}
+\leavevmode
+\textbf{(c):} Denote the following predicate:
+\[P(n): somethinghere\]
+\textbf{\underline{Claim:}} expresshowthisiscorrect
+\begin{proof}
+\leavevmode\\
+    wordsgohere \\
+\end{proof}
+\leavevmode\\
+\textbf{Q10} \\
+Consider the following generalization of the \texttt{min} function:
+\begin{lstlisting}
+    def extract(A, k):
+        pivot = A[0]
+        # Use partition from quicksort
+        L, G = partition(A[1, ..., len(A) - 1], pivot)
+        if len(L) == k - 1:
+            return pivot
+        else if len(L) >= k:
+            return extract(L, k)
+        else:
+            return extract(G, k - len(L) - 1)
+\end{lstlisting}
+\textbf{(a):} Proof of Correctness \\
+\[P(n): somethinghere\]
+\textbf{\underline{Claim:}} proofofcorrectnessclaim
+\begin{proof}
+\leavevmode\\
+    wordsgohere \\
+\end{proof}
+\leavevmode\\
+\textbf{(b):} Worst-Case Runtime \\
+wordsgohere \\
+\\
+
+\section*{Question \#4}
+As follows below, VI, VII, X, XII, and XIV respectively represent questions 6, 7, 10, 12, and 14 from pp. 46-48 of the course textbook. \\
+\\
+\textbf{VI} \\
+Let $T(n)$ be the number of binary strings of length $n$ in which there are no consecutive $1$'s. So, \(T(0) = 1, T(1) = 2, T(2) = 3, ...\), etc. \\
+\\
+\textbf{(a):} Recurrence for $T(n)$: \\
+recurrencehere \\
+\\
+\textbf{(b):} Closed Form Expression for $T(n)$: \\
+closedformhere \\
+\\
+\textbf{(c):} Proof of Correctness of Closed Form Expression \\
+Denote the following predicate: \\
+\[P(n): somethinghere\]
+\textbf{\underline{Claim:}} expresshowthisiscorrect
+\begin{proof}
+\leavevmode\\
+    wordsgohere \\
+\end{proof}
+\leavevmode\\
+\textbf{VII} \\
+Let $T(n)$ denote the number of distinct full binary trees with $n$ nodes. For example, \(T(1) = 1, T(3) = 1, and T(7) = 5\). Note that every full binary tree has an odd number of nodes. \\
+\textbf{\underline{Recurrence for $T(n)$:}} \\
+recurrencehere \\
+\[P(n): somethinghere\]
+\textbf{\underline{Claim:}} \(T(n) \geq (\frac{1}{n})(2)^{(n - 1) / 2}\)
+\begin{proof}
+\leavevmode\\
+    wordsgohere \\
+\end{proof}
+\leavevmode\\
+\textbf{X} \\
+A \textit{block} in a binary string is a maximal substring consisting of the same symbol. For example, the string \texttt{0100011} has four blocks: \texttt{0}, \texttt{1}, \texttt{000}, and \texttt{11}. Let $H(n)$ denote the number of binary strings of length $n$ that have no odd length blocks of \texttt{1}'s. For example, $H(4) = 5$:
+\[
+0000 \;\; 1100 \;\; 0110 \;\; 0011 \;\; 1111
+\]
+\textbf{\underline{Recursive Function for $H(n)$:}} \\
+\[P(n): somethinghere\]
+\textbf{\underline{Claim:}} proveouterloop
+\begin{proof}
+\leavevmode\\
+    wordsgohere \\
+\end{proof}
+\leavevmode\\
+\textbf{\underline{Closed Form for $H$ (Using Repeated Substitution):}} \\
+\\
+\textbf{XII} \\
+Consider the following function:
+\begin{lstlisting}
+    def fast_rec_mult(): # maybe params needed?
+    """FILL THIS IN!!!"""
+\end{lstlisting}
+\textbf{\underline{Worst-Case Runtime Analysis:}} \\
+wordsgohere
+\\
+\textbf{XIV} \\
+Recall the recurrence for the worst-case runtime of quicksort:
+\[ \begin{dcases}
+    c, &\text{ if } n \leq 1; \\
+    T(|L|) + T(|G|) + dn, &\text{ if } n > 1.
+\end{dcases}
+\] where $L$ and $G$ are the partitions of the list. \\
+\\
+For simplicity, ignore that each list has size \(\frac{n-1}{2}\). \\
+\\
+\textbf{(a):} Assume the lists are always evenly split; that is, \(|L| = |G| = \frac{n}{2}\) at each recursive call. \\
+\textbf{\underline{Tight Asymptotic Bound on the Runtime of Quicksort:}} \\
+determinehere \\
+\\
+\textbf{(b):} Assume the lists are always very unevenly split; that is, \(|L| = n - 2\) and \(|G| = 1\) at each recursive call. \\
+\textbf{\underline{Tight Asymptotic Bound on the Runtime of Quicksort:}} \\
+determinehere \\
+\\
 \end{document}
