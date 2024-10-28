@@ -79,16 +79,32 @@ Q(j): \text{At the beginning of the } j^{\text{th}} \text{ iteration, } \texttt{
 $\forall j \in \{1, \dots, len(A)\}, Q(j)$
 \begin{proof}
 \leavevmode\\
-    remarksgohere \\
+    This proof leverages the Principle of Simple Induction. \\
     \\
     \underline{Base Case:} \\
-    wordsgohere \\
+    Let $j = 1$. \\
+    \\
+    At the beginning of the $1^{\text{st}}$ iteration, $\texttt{sum} = 0$ and $i = 0$. \\
+    \\
+    As well,
+    \begin{equation*}
+        \begin{aligned}
+            \texttt{sum} &= \sum_{k=0}^{0-1} A[k] \\
+            &= \sum_{k=0}^{-1} A[k] \\
+            &= 0\text{.}
+        \end{aligned}
+    \end{equation*}
+    Hence, \(Q(1)\). \\
     \\
     \underline{Induction Hypothesis:} \\
-    wordsgohere \\
+    Assume that for some iteration $m \in \{ 1, ..., len(A) \}$ \\
+    \\
+    Suppose $j \in \{ 1, \dots, len(j) \}$ and $Q(j)$ holds. \\
     \\
     \underline{Induction Step:} \\
-    wordsgohere \\
+    Proceed through the $j^{\text{th}}$ iteration as follows: \\
+    \\
+    Let $\texttt{sum}_{j}, i_{j}$ be values at the start of the $j^{\text{th}}$ iteration,
     \\
     conclusiongoeshere \\
 \end{proof}
@@ -105,7 +121,33 @@ Referencing the previous question, proving $\forall j \in \{ 1, \dots, len(A) \}
 
 \begin{proof}
 \leavevmode\\
-    explain why it's equivalent
+    It is sufficient to show that $\forall j \in \{ 1, \dots, len(A) \}, Q(j) \iff \forall j \in \mathbb{N}, Q'(n)$, to show that proving one of these statements is equivalent to proving the other. \\
+    \\
+    \underline{$(\forall j \in \{ 1, \dots, len(A) \}, Q(j)) \implies (\forall j \in \mathbb{N}, Q'(n))$:} \\
+    Suppose $\forall j \in \{ 1, \dots, len(A) \}, Q(j)$. \\
+    \\
+    Fix $n \in \mathbb{N}$. \\
+    \\
+    Suppose $0 \leq n \leq  len(A)$. \\
+    \\
+    Then, $n + 1 \in \{ 1, \dots, len(A) \} $ \\
+    \\
+    By assumption, $Q'(n + 1)$ holds. \\
+    \\
+    \underline{$(\forall j \in \{ 1, \dots, len(A) \}, Q(j)) \impliedby (\forall j \in \mathbb{N}, Q'(n))$:} \\
+    \\
+    Suppose $\forall j \in \mathbb{N}, Q'(n)$. \\
+    \\
+    Let $j \in \{ 1, \dots, len(A) \}$. \\
+    \\
+    Then, $(j - 1) \in \mathbb{N}$ and $0 \leq j - 1 \leq len(A) - 1$, so $0 \leq j - 1 < len(A)$. \\
+    \\
+    By assumption, $Q(n)$ holds. \\
+    \\
+    \underline{Conclusion:} \\
+    \\
+
+
 \end{proof}
 
 \section*{Question \#3}
@@ -123,8 +165,8 @@ Consider the following code:
             y -= 1
         return a * y
 \end{lstlisting}
-\textbf{(a):} Loop Invariant Characterizing \texttt{a} and \texttt{y} \\
-wordsgohere \\
+\underline{\textbf{(a):} Loop Invariant Which Characterizes \texttt{a} and \texttt{y}:} \\
+Denote the loop invariant as \\
 \\
 \textbf{(b):} Why This Function Fails to Terminate \\
 wordsgohere \\
@@ -328,8 +370,20 @@ A \textit{block} in a binary string is a maximal substring consisting of the sam
 \textbf{XII} \\
 Consider the following function:
 \begin{lstlisting}
-    def fast_rec_mult(): # maybe params needed?
-    """FILL THIS IN!!!"""
+    def fast_rec_mult(x, y):
+    n = length of x  # Assume x and y have the same length
+    if n == 1:
+        return x * y
+    else:
+        a = x // 10^(n // 2)
+        b = x % 10^(n // 2)
+        c = y // 10^(n // 2)
+        d = y % 10^(n // 2)
+        p = fast_rec_mult(a + b, c + d)
+        r = fast_rec_mult(a, c)
+        u = fast_rec_mult(b, d)
+
+        return r * 10^n + (p - r + u) * 10^(n // 2) + u
 \end{lstlisting}
 \textbf{\underline{Worst-Case Runtime Analysis:}} \\
 wordsgohere
