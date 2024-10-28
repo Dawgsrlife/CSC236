@@ -73,7 +73,7 @@ print(avg([1, 2, 3, 4]))  # Example usage
 \end{lstlisting}
 Denote the predicate:
 \[
-Q(j): \text{At the beginning of the } j^{\text{th}} \text{ iteration, } \texttt{sum} = \sum_{k=0}^{i-1} A[k].
+Q(j): \text{At the beginning of the } j^{\text{th}} \text{ iteration, } \texttt{sum}_j = \sum_{k=0}^{i_j-1} A[k].
 \]
 \textbf{\underline{Claim:}} \\
 $\forall j \in \{1, \dots, len(A)\}, Q(j)$
@@ -84,31 +84,47 @@ $\forall j \in \{1, \dots, len(A)\}, Q(j)$
     \underline{Base Case:} \\
     Let $j = 1$. \\
     \\
-    At the beginning of the $1^{\text{st}}$ iteration, $\texttt{sum} = 0$ and $i = 0$. \\
+    At the beginning of the $1^{\text{st}}$ iteration, $\texttt{sum}_1 = 0$ and $i_1 = 0$. \\
     \\
-    As well,
-    \begin{equation*}
-        \begin{aligned}
-            \texttt{sum} &= \sum_{k=0}^{0-1} A[k] \\
-            &= \sum_{k=0}^{-1} A[k] \\
-            &= 0\text{.}
-        \end{aligned}
-    \end{equation*}
+    It follows that
+    \[
+    \texttt{sum}_1 = \sum_{k=0}^{i_1-1} A[k]
+    = \sum_{k=0}^{0-1} A[k]
+    = \sum_{k=0}^{-1} A[k]
+    = 0\text{.}
+    \]
     Hence, \(Q(1)\). \\
     \\
     \underline{Induction Hypothesis:} \\
-    Assume that for some iteration $m \in \{ 1, ..., len(A) \}$ \\
+    Assume for some iteration $m \in \{ 1, ..., len(A) - 1 \}$, $Q(m)$. \\
     \\
-    Suppose $j \in \{ 1, \dots, len(j) \}$ and $Q(j)$ holds. \\
+    Namely, for the $m^{\text{th}}$ iteration,
+    \[\texttt{sum}_m = \sum_{k = 0}^{i_m - 1} A[k] \text{.}\]
     \\
     \underline{Induction Step:} \\
-    Proceed through the $j^{\text{th}}$ iteration as follows: \\
+    Proceed to show \(Q(m + 1)\): \\
     \\
-    Let $\texttt{sum}_{j}, i_{j}$ be values at the start of the $j^{\text{th}}$ iteration,
+    Notice that \(\texttt{sum}_{m + 1} = \texttt{sum}_m + A[i_{m + 1}]\), by \textit{Line 9} of the program. \\
     \\
-    conclusiongoeshere \\
+    By the Induction Hypothesis,
+    \[
+    \texttt{sum}_m + A[i_{m + 1}]
+    = \sum_{k = 0}^{i_m - 1} A[k] + A[i_{m + 1}] \text{,}
+    \]
+    and by \textit{Line 10} of the program, \(i_{m + 1} = i_m + 1\);
+    \[
+    \sum_{k = 0}^{i_m - 1} A[k] + A[i_{m + 1}]
+    = \sum_{k = 0}^{i_{m + 1} - 1} A[k] \text{.}
+    \]
+    Thus,
+    \[
+    \texttt{sum}_{m + 1} = \sum_{k = 0}^{i_{m + 1} - 1} A[k]
+    \]
+    as needed. \\
+    \\
+    Therefore, by the Principle of Simple Induction, $Q(j)$ holds for all $j \in \{1, \dots, len(A)\}$. \\
 \end{proof}
-
+\pagebreak
 \section*{Question \#2}
 Recall \(Q(j)\) from Question \# 1. \\
 \\
@@ -149,7 +165,7 @@ Referencing the previous question, proving $\forall j \in \{ 1, \dots, len(A) \}
 
 
 \end{proof}
-
+\pagebreak
 \section*{Question \#3}
 As follows below, Q6-Q10 respectively represent questions 6 through 10 from pp. 64-66 of the course textbook. \\
 \\
@@ -318,7 +334,7 @@ Consider the following generalization of the \texttt{min} function:
 \textbf{(b):} Worst-Case Runtime \\
 wordsgohere \\
 \\
-
+\pagebreak
 \section*{Question \#4}
 As follows below, VI, VII, X, XII, and XIV respectively represent questions 6, 7, 10, 12, and 14 from pp. 46-48 of the course textbook. \\
 \\
