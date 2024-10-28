@@ -126,44 +126,51 @@ $\forall j \in \{1, \dots, len(A)\}, Q(j)$
 \end{proof}
 \pagebreak
 \section*{Question \#2}
-Recall \(Q(j)\) from Question \# 1. \\
+Recall \(Q(j)\) from \textit{Question \# 1}: \\
+\[
+Q(j): \text{At the beginning of the } j^{\text{th}} \text{ iteration, } \texttt{sum}_j = \sum_{k=0}^{i_j-1} A[k].
+\]
 \\
 Denote the following predicate:
 \[
     Q'(n): 0 \leq n < len(A) \implies Q(n + 1)
 \]
 \textbf{\underline{Claim:}} \\
-Referencing the previous question, proving $\forall j \in \{ 1, \dots, len(A) \}, Q(j)$ is equivalent to proving $\forall j \in \mathbb{N}, Q'(n)$.
+Proving $\forall j \in \{ 1, \dots, len(A) \}, Q(j)$ is equivalent to proving $\forall n \in \mathbb{N}, Q'(n)$.
 
 \begin{proof}
 \leavevmode\\
-    It is sufficient to show that $\forall j \in \{ 1, \dots, len(A) \}, Q(j) \iff \forall j \in \mathbb{N}, Q'(n)$, to show that proving one of these statements is equivalent to proving the other. \\
+    \underline{Remarks} \\
+    It is sufficient to show that $\forall j \in \{ 1, \dots, len(A) \}, Q(j) \iff \forall n \in \mathbb{N}, Q'(n)$, to show that proving one of these statements is equivalent to proving the other. \\
     \\
-    \underline{$(\forall j \in \{ 1, \dots, len(A) \}, Q(j)) \implies (\forall j \in \mathbb{N}, Q'(n))$:} \\
+    \underline{$(\forall j \in \{ 1, \dots, len(A) \}, Q(j)) \implies (\forall n \in \mathbb{N}, Q'(n))$:} \\
     Suppose $\forall j \in \{ 1, \dots, len(A) \}, Q(j)$. \\
     \\
-    Fix $n \in \mathbb{N}$. \\
+    Then, fix $n \in \mathbb{N}$ and suppose $0 \leq n <  len(A)$. \\
     \\
-    Suppose $0 \leq n \leq  len(A)$. \\
+    Because $n \in \{0, ..., len(A) - 1\}$, it follows that $(n + 1) \in \{ 1, \dots, len(A) \} $. \\
     \\
-    Then, $n + 1 \in \{ 1, \dots, len(A) \} $ \\
+    By assumption, $Q(n + 1)$. \\
     \\
-    By assumption, $Q'(n + 1)$ holds. \\
+    Thus, $\forall n \in \mathbb{N}, Q'(n)$. \\
     \\
-    \underline{$(\forall j \in \{ 1, \dots, len(A) \}, Q(j)) \impliedby (\forall j \in \mathbb{N}, Q'(n))$:} \\
-    \\
-    Suppose $\forall j \in \mathbb{N}, Q'(n)$. \\
+    \underline{$(\forall j \in \{ 1, \dots, len(A) \}, Q(j)) \impliedby (\forall n \in \mathbb{N}, Q'(n))$:} \\
+    Suppose $\forall n \in \mathbb{N}, Q'(n)$. \\
     \\
     Let $j \in \{ 1, \dots, len(A) \}$. \\
     \\
-    Then, $(j - 1) \in \mathbb{N}$ and $0 \leq j - 1 \leq len(A) - 1$, so $0 \leq j - 1 < len(A)$. \\
+    Then, $(j - 1) \in \mathbb{N}$. \\
     \\
-    By assumption, $Q(n)$ holds. \\
+    It follows that $0 \leq j - 1 \leq len(A) - 1$. \\
+    \\
+    Since $len(A) - 1 < len(A)$, $0 \leq j - 1 < len(A)$. \\
+    \\
+    By assumption, $Q((j - 1) + 1)$. \\
+    \\
+    Thus, $\forall j \in \{1, \dots, len(A)\}, Q(j)$. \\
     \\
     \underline{Conclusion:} \\
-    \\
-
-
+    Therefore, $\forall j \in \{ 1, \dots, len(A) \}, Q(j) \iff \forall j \in \mathbb{N}, Q'(n)$. \\
 \end{proof}
 \pagebreak
 \section*{Question \#3}
@@ -182,10 +189,33 @@ Consider the following code:
         return a * y
 \end{lstlisting}
 \underline{\textbf{(a):} Loop Invariant Which Characterizes \texttt{a} and \texttt{y}:} \\
-Denote the loop invariant as \\
+For arbitrary natural n... \\
+Let $i_1 = 0$ and $i_n = i_{n-1} + 1$. \\
+Let $y_n$ be the value of $y$ after the $(n + 1)^{\text{th}}$ iteration. By \textit{Line 4} and \textit{Line 7} of the program, $y_n = \sum_{q = 1}^{n} 1 = 10 - n \times 1 = 10 - n$. \\
 \\
-\textbf{(b):} Why This Function Fails to Terminate \\
-wordsgohere \\
+Denote the loop invariant: \\
+\[
+P(j): a_j = x - \sum_{k = 0}^{i_j - 1} y_k
+\]
+\\
+For example, before the $1^{\text{st}}$ iteration, $a_1 = x - \sum_{k = 0}^{i_1 - 1} y_k = \sum_{k = 0}^{0 - 1} y_k = x - 0 = x$. \\
+\\
+Before the $2^{\text{nd}}$ iteration, $a_2 = x - \sum_{k = 0}^{i_2 - 1} y_k = \sum_{k = 0}^{1 - 1} y_k = x - y_0 = x - 10$. \\
+\\
+\underline{\textbf{(b):} Why This Function Fails to Terminate} \\
+Suppose $x > \sum_{k=1}^{10} k = 55$. \\
+\\
+Then, before the $11^{\text{th}}$ iteration, $a_{11} = x - \sum_{k = 0}^{i_{11} - 1} y_k = \sum_{k = 0}^{10 - 1} y_k = x - y_9 = x - \sum_{k = 1}^{9 + 1} k = x - 55$. \\
+\\
+Since $x > 55$, it follows that $a_{11} = x - 55 > 0$. \\
+\\
+As well, $y_{10}$ (the value of $y$ after the $11^{\text{th}}$ iteration) is $10 - 11 = -1$. \\
+\\
+Notice that in all subsequent iterations, $a$ will decrement by $y_n < 0 |_{n \geq 11}$ (where $n$ is the iteration number of the corresponding iteration). \\
+\\
+Since $a$ decrements by a negative number subsequently, the loop causes $a$ to grow large, thereby retaining $a > 0$. \\
+\\
+Thus, the function fails to terminate for $x > 55$ (because $\neg (a > 0)$ is never satisfied). \\
 \\
 \textbf{Q7:} \\
 \textbf{(a)} Consider the recursive program below:
