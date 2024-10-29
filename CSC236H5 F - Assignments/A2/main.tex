@@ -316,30 +316,38 @@ def exp_iter(a, b):
 \[
     \text{Returns } a^b \text{.}
 \]
-Denote the following predicate:
-\[P(i): a^b = \verb|mult|_i^{\verb|exp|_i} \times \verb|ans|_i \]
-\textbf{\underline{Claim:}} $(\forall b \in \mathbb{N})(\forall i \in [0, b] \cap \mathbb{N})(P(i))$ and the program terminates.
+\textbf{\underline{Claim:}} For all natural $b$, the program returns $a^b$ and terminates.
 \begin{proof}
 \leavevmode\\
+    Fix $a \neq 0$ and $b \in \mathbb{N}$. \\
+    \\
     \underline{Loop Invariant Proof:} \\
-    To prove the loop invariant, this proof explores the Principle of Simple Induction on $i$. \\
+    Denote the Loop Invariant:
+    \[P(i): a^b = \verb|mult|_i^{\verb|exp|_i} \times \verb|ans|_i \]
+    To prove the loop invariant, this proof explores the Principle of Simple Induction on $i \in [1, \lfloor log_2b \rfloor + 2] \cap \mathbb{N}$. \\
     \\
     \underline{Base Case:} \\
-    Fix $b \in \mathbb{N}$. Let $i = 0$. \\
+    Let $i = 1$. \\
     \\
-    Then, the program retains the values $\verb|mult|_0 = a$, $\verb|exp|_0 = b$, and $\verb|ans|_0 = 1$, and does not enter the loop. \\
+    Then, the program retains the values $\verb|mult|_1 = a$, $\verb|exp|_1 = b$, $\verb|ans_1 = 1|$. \\
     \\
-    Notice that $a^b = a^b \times 1 = \verb|mult|_0^{\verb|exp|_0} \times \verb|ans|_0$. \\
+    Notice that $a^b = a^b \times 1 = \verb|mult|_1^{\verb|exp|_1} \times \verb|ans|_1$. \\
     \\
-    Hence, $P(0)$. \\
+    Hence, at the beginning of the $1^{\text{st}}$ iteration, $P(1)$. \\
     \\
     \underline{Induction Hypothesis:} \\
-    Assume for some $k \in \mathbb{N}, P(k)$;
+    Assume for some $k \in [1, \lfloor log_2b \rfloor + 1] \cap \mathbb{N}, P(k)$;
     \[
         P(k): (a^b = \verb|mult|_k^{\verb|exp|_k} \times \verb|ans|_k) \text{.}
     \]
     \underline{Induction Step:} \\
-    Suppose $\verb|exp|_{k + 1} > 0$, so the following iteration runs. \\
+    Notice that $\verb|exp|_k = \lfloor \frac{b}{2^{k - 1}} \rfloor$. \\
+    \\
+    Because $k - 1 \leq \lfloor log_2b \rfloor$, then $2^{k - 1} \leq 2^{\lfloor log_2b \rfloor} \leq 2^{log_2b} = b$. \\
+    \\
+    Therefore, it follows that \(\frac{b}{2^{k - 1}} \geq 1\). \\
+    \\
+    Thus, $\verb|exp|_k = \lfloor \frac{b}{2^{k - 1}} \rfloor \geq 1$, and the following iteration runs. \\
     \\
     Then, the program yields the following values:
     \[
@@ -395,7 +403,7 @@ Denote the following predicate:
     \underline{Conclusion of Loop Invariant:} \\
     Collectively, $P(k + 1)$ holds in all cases. \\
     \\
-    By the Principle of Simple Induction, $(\forall b \in \mathbb{N})(\forall i \in [0, b] \cap \mathbb{N})(P(i))$. \\
+    By the Principle of Simple Induction, $P(i)$ holds for all $i \in [1, \lfloor log_2b \rfloor + 2]$. \\
     \\
     \underline{Program Termination Proof} \\
     Notice that \textit{Line 9} of the program performs floor division by $2$ on \texttt{exp} in each iteration. \\
