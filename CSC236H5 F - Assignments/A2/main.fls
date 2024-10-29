@@ -254,6 +254,8 @@ INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmtt8.tfm
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmti12.tfm
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmti8.tfm
+INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmti7.tfm
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
 INPUT c:/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
@@ -284,4 +286,6 @@ INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb
+INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb
+INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/latxfont/line10.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb

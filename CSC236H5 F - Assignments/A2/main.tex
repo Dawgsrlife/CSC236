@@ -179,33 +179,32 @@ As follows below, Q6-Q10 respectively represent questions 6 through 10 from pp. 
 \textbf{Q6:} \\
 Consider the following code:
 \begin{lstlisting}
-    def f(x):
-        """Pre: x is a natural number"""
-        a = x
-        y = 10
-        while a > 0:
-            a -= y
-            y -= 1
-        return a * y
+def f(x):
+    """Pre: x is a natural number"""
+    a = x
+    y = 10
+    while a > 0:
+        a -= y
+        y -= 1
+    return a * y
 \end{lstlisting}
 \underline{\textbf{(a):} Loop Invariant Which Characterizes \texttt{a} and \texttt{y}:} \\
 For arbitrary natural n... \\
 Let $i_1 = 0$ and $i_n = i_{n-1} + 1$. \\
-Let $y_n$ be the value of $y$ after the $(n + 1)^{\text{th}}$ iteration. By \textit{Line 4} and \textit{Line 7} of the program, $y_n = \sum_{q = 1}^{n} 1 = 10 - n \times 1 = 10 - n$. \\
-\\
+Let $y_n$ be the value of $y$ before the $(n + 1){\text{th}}$ iteration. By \textit{Line 4} (initializes $y = 10$) and \textit{Line 7} (decrements $y$ by $1$) of the program, $y_n = 10 - \sum_{q = 1}^{n} 1 = 10 - n \times 1 = 10 - n$. \\
 Denote the loop invariant: \\
 \[
-P(j): a_j = x - \sum_{k = 0}^{i_j - 1} y_k
+P(j): (a_j = x - \sum_{k = 0}^{i_j - 1} y_k) \land (y_j = 10 - j)
 \]
 \\
-For example, before the $1^{\text{st}}$ iteration, $a_1 = x - \sum_{k = 0}^{i_1 - 1} y_k = \sum_{k = 0}^{0 - 1} y_k = x - 0 = x$. \\
+For example, before the $1^{\text{st}}$ iteration, $a_1 = x - \sum_{k = 0}^{i_1 - 1} y_k = x - \sum_{k = 0}^{0 - 1} y_k = x - 0 = x$. \\
 \\
-Before the $2^{\text{nd}}$ iteration, $a_2 = x - \sum_{k = 0}^{i_2 - 1} y_k = \sum_{k = 0}^{1 - 1} y_k = x - y_0 = x - 10$. \\
+Before the $2^{\text{nd}}$ iteration, $a_2 = x - \sum_{k = 0}^{i_2 - 1} y_k = x - \sum_{k = 0}^{1 - 1} y_k = x - y_0 = x - 10$. \\
 \\
 \underline{\textbf{(b):} Why This Function Fails to Terminate} \\
 Suppose $x > \sum_{k=1}^{10} k = 55$. \\
 \\
-Then, before the $11^{\text{th}}$ iteration, $a_{11} = x - \sum_{k = 0}^{i_{11} - 1} y_k = \sum_{k = 0}^{10 - 1} y_k = x - y_9 = x - \sum_{k = 1}^{9 + 1} k = x - 55$. \\
+By $P(j)$, before the $11^{\text{th}}$ iteration, $a_{11} = x - \sum_{k = 0}^{i_{11} - 1} y_k = x - \sum_{k = 0}^{10 - 1} y_k = x - \sum_{k = 0}^{9} (10 - k) = x - [10\sum_{k = 0}^{9} (1) - \sum_{k = 0}^{9} (k)] = x - [10(10) - \frac{9(9 + 1)}{2}] = x - [100 - 45] = x - 55$. \\
 \\
 Since $x > 55$, it follows that $a_{11} = x - 55 > 0$. \\
 \\
@@ -220,52 +219,193 @@ Thus, the function fails to terminate for $x > 55$ (because $\neg (a > 0)$ is ne
 \textbf{Q7:} \\
 \textbf{(a)} Consider the recursive program below:
 \begin{lstlisting}
-    def exp_rec(a, b):
-        if b == 0:
-            return 1
-        else if b mod 2 == 0:
-            x = exp_rec(a, b / 2)
-            return x * x
-        else:
-            x = exp_rec(a, (b - 1) / 2)
-            return x * x * a
+def exp_rec(a, b):
+    if b == 0:
+        return 1
+    else if b mod 2 == 0:
+        x = exp_rec(a, b / 2)
+        return x * x
+    else:
+        x = exp_rec(a, (b - 1) / 2)
+        return x * x * a
 \end{lstlisting}
-\underline{Preconditions:} \\
-wordsgohere \\
-\underline{Postconditions:} \\
-wordsgohere \\
+\underline{Preconditions:}
+\[
+    (b \in \mathbb{N}) \land (a \neq 0)
+\]
+\underline{Postconditions:}
+\[
+    \text{Returns } a^b \text{.}
+\]
 Denote the following predicate:
-\[P(n): somethinghere\]
-\textbf{\underline{Claim:}} expresshowthisiscorrect
+\[P(b): \text{The program returns } a^b \text{.}\]
+\textbf{\underline{Claim:}} \(\forall b \in \mathbb{N}, P(b)\) 
 \begin{proof}
 \leavevmode\\
-    wordsgohere \\
+    This proof explores the Principle of Complete Induction on $b$. \\
+    \\
+    Fix $a \neq 0$. \\
+    \\
+    \underline{Base Case:} \\
+    Let $b = 0$. \\
+    \\
+    Then, by \textit{Lines 2-3} of the program, the program returns $1 = a^0 = a^b$. \\
+    \\
+    Hence, $P(0)$. \\
+    \\
+    \underline{Induction Hypothesis:} \\
+    Assume for some \(k \in \mathbb{N}\) and for all \(l \in [0, k] \cap \mathbb{N}\), \(P(l)\). \\
+    \\
+    This means the program returns $a^l$ for every $l$ as described. \\
+    \\
+    \underline{Induction Step:} \\
+    Proceed to show \(P(k + 1)\) with case analysis: \\
+    \\
+    \textit{Case 1 - Suppose $(k + 1) (\text{mod } 2) \not\equiv 0$:} \\
+    Then, program again enters the \texttt{else} statement in \textit{Line 7}. \\
+    \\
+    Here, the program sets $x$ to \verb|exp_rec(a, ((k + 1) - 1) / 2)|. \\
+    \\
+    Notice that \(\verb|exp_rec(a, ((k + 1) - 1) / 2)| = \verb|exp_rec(a, (k / 2))|\). \\
+    \\
+    Since $(k + 1)(\text{mod } 2) \not\equiv 0$, it must be that $k (\text{mod 2} \equiv 0)$. \\
+    \\
+    Thus, $\frac{k}{2} \in \mathbb{N}$ and $\frac{k}{2} < k$. \\ 
+    \\
+    By the Induction Hypothesis, \verb|exp_rec(a, k / 2)| returns $a^{\frac{k}{2}}$. \\
+    \\
+    Finally, the original function call returns $x \times x \times a$, which evaluates to $a^{\frac{k}{2}} \times a^{\frac{k}{2}} \times a = a^{\frac{k}{2} + \frac{k}{2} + 1} = a^{k + 1}$, as needed. \\
+    \\
+    Thus, $P(k + 1)$ holds. \\
+    \\
+    \textit{Case 2 - Suppose $(k + 1) (\text{mod } 2) \equiv 0$:} \\
+    Then, the program reaches \textit{Line 5} and sets $x$ to \verb|exp_rec(a, (k + 1) / 2)|. \\
+    \\
+    Notice that $\frac{k + 1}{2} \in \mathbb{N}$ and $\frac{k + 1}{2} \leq k$. \\
+    \\
+    By the Induction Hypothesis, \verb|exp_rec(a, (k + 1) / 2)| returns $a^{\frac{k + 1}{2}}$. \\
+    \\
+    Finally, the original function call returns $x \times x$, evaluating to $a^{\frac{k + 1}{2}} \times a^{\frac{k + 1}{2}} = a^{\frac{k + 1}{2} + \frac{k + 1}{2}} = a^{k + 1}$, as needed. \\
+    \\
+    Thus, P(k + 1) holds. \\
+    \\
+    \underline{Conclusion:} \\
+    Therefore, $P(k + 1)$ holds in all cases. \\
+    \\
+    By the Principle of Complete Induction, $\forall b \in \mathbb{N}, P(b)$. \\
 \end{proof}
 \leavevmode\\
 \textbf{(b)} Consider the iterative version of the previous program:
 \begin{lstlisting}
-    def exp_iter(a, b):
-        ans = 1
-        mult = a
-        exp = b
-        while exp > 0:
-            if exp mod 2 == 1:
-                ans *= mult
-            mult = mult * mult
-            exp = exp // 2
-        return ans
+def exp_iter(a, b):
+    ans = 1
+    mult = a
+    exp = b
+    while exp > 0:
+        if exp mod 2 == 1:
+            ans *= mult
+        mult = mult * mult
+        exp = exp // 2
+    return ans
 \end{lstlisting}
-\underline{Preconditions:} \\
-wordsgohere
-\underline{Postconditions:} \\
-wordsgohere
-\\
+\underline{Preconditions:}
+\[
+    (b \in \mathbb{N}) \land (a \neq 0)
+\]
+\underline{Postconditions:}
+\[
+    \text{Returns } a^b \text{.}
+\]
 Denote the following predicate:
-\[P(n): somethinghere\]
-\textbf{\underline{Claim:}} expresshowthisiscorrect
+\[P(i): a^b = \verb|mult|_i^{\verb|exp|_i} \times \verb|ans|_i \]
+\textbf{\underline{Claim:}} $(\forall b \in \mathbb{N})(\forall i \in [0, b] \cap \mathbb{N})(P(i))$ and the program terminates.
 \begin{proof}
 \leavevmode\\
-    wordsgohere \\
+    \underline{Loop Invariant Proof:} \\
+    To prove the loop invariant, this proof explores the Principle of Simple Induction on $i$. \\
+    \\
+    \underline{Base Case:} \\
+    Fix $b \in \mathbb{N}$. Let $i = 0$. \\
+    \\
+    Then, the program retains the values $\verb|mult|_0 = a$, $\verb|exp|_0 = b$, and $\verb|ans|_0 = 1$, and does not enter the loop. \\
+    \\
+    Notice that $a^b = a^b \times 1 = \verb|mult|_0^{\verb|exp|_0} \times \verb|ans|_0$. \\
+    \\
+    Hence, $P(0)$. \\
+    \\
+    \underline{Induction Hypothesis:} \\
+    Assume for some $k \in \mathbb{N}, P(k)$;
+    \[
+        P(k): (a^b = \verb|mult|_k^{\verb|exp|_k} \times \verb|ans|_k) \text{.}
+    \]
+    \underline{Induction Step:} \\
+    Suppose $\verb|exp|_{k + 1} > 0$, so the following iteration runs. \\
+    \\
+    Then, the program yields the following values:
+    \[
+    \left\{
+    \begin{array}{ll}
+    \verb|mult|_{k + 1} = \verb|mult|_k \times \verb|mult|_k = \verb|mult|_k^2, & \hspace{1cm} \text{by \textit{Line 8}} \\
+    \verb|exp|_{k + 1} = \left\lfloor \frac{\texttt{exp}_k}{2} \right\rfloor, & \hspace{1cm} \text{by \textit{Line 9}}
+    \end{array}
+    \right.
+    \]
+    \\
+    Notice that \(\verb|mult|_{k + 1}^{\verb|exp|_{k + 1}} = (\verb|mult|_k^2)^{\lfloor \frac{\texttt{exp}_k}{2} \rfloor} = \verb|mult|_k^{2 \lfloor \frac{\texttt{exp}_k}{2} \rfloor}\). \\
+    \\
+    Proceed to show $P(k + 1)$ with case analysis: \\
+    \\
+    \underline{\textit{Case 1 - Suppose \(exp_k (\text{mod } 2) \equiv 1\):}} \\
+    By \textit{Lines 6-7} of the program, \(\verb|ans|_{k + 1} = \verb|ans|_k \times \verb|mult|_k\). \\
+    \\
+    So, \((\verb|mult|_{k + 1}^{\verb|exp|_{k + 1}}) \times (\verb|ans|_{k + 1}) = (\verb|mult|_k^{2 \lfloor \frac{\texttt{exp}_k}{2} \rfloor}) \times (\verb|ans|_k \times \verb|mult|_k)\). \\
+    \\
+    Since \(\verb|exp|_k (\text{mod } 2) \equiv 1\), it follows that \(2 \lfloor \frac{\texttt{exp}_k}{2} \rfloor = \cancel{2} (\frac{\texttt{exp}_k - 1}{\cancel{2}}) = \verb|exp|_k - 1\). \\
+    \\
+    Thus,
+    \begin{equation*}
+        \begin{aligned}
+            (\verb|mult|_k^{2 \lfloor \frac{\texttt{exp}_k}{2} \rfloor}) \times (\verb|ans|_k \times \verb|mult|_k) &= (\verb|mult|_k^{\verb|exp|_k - 1}) \times (\verb|mult|_k \times \verb|ans|_k) \\
+            &= \verb|mult|_k^{\verb|exp|_k - 1} \times \verb|mult|_k \times \verb|ans|_k \\
+            &= (\verb|mult|_k^{\verb|exp|_k - 1} \times \verb|mult|_k) \times \verb|ans|_k \\
+            &= (\verb|mult|_k^{(\verb|exp|_k - 1) + 1}) \times \verb|ans|_k \\
+            &= \verb|mult|_k^{\verb|exp|_k} \times \verb|ans|_k \\
+            &= a^b \text{,}
+        \end{aligned}
+    \end{equation*}
+    by the Induction Hypothesis.
+    \\
+    Therefore, \((\verb|mult|_{k + 1}^{\verb|exp|_{k + 1}}) \times (\verb|ans|_{k + 1}) = a^b\); $P(k + 1)$ holds. \\
+    \\
+    \underline{\textit{Case 2 - Suppose \(exp_k (\text{mod } 2) \not\equiv 1\):}} \\
+    By \textit{Line 6} of the program, \textit{Line 7} does not run. \\
+    \\
+    Hence, $\verb|ans|_{k + 1}$ retains the value as represented by $\verb|ans|_k$; \(\verb|ans|_{k + 1} = \verb|ans|_k\). \\
+    \\
+    So, \((\verb|mult|_{k + 1}^{\verb|exp|_{k + 1}}) \times (\verb|ans|_{k + 1}) = (\verb|mult|_k^{2 \lfloor \frac{\texttt{exp}_k}{2} \rfloor}) \times \verb|ans|_k\). \\
+    \\
+    Notice that \(\verb|exp|_k (\text{mod } 2) \not\equiv 1 \iff \verb|exp|_k (\text{mod } 2) \equiv 0\). \\
+    \\
+    So, \(2 \lfloor \frac{\texttt{exp}_k}{2} \rfloor = \cancel{2} (\frac{\texttt{exp}_k}{\cancel{2}}) = \verb|exp|_k\). \\
+    \\
+    Then, it follows that \((\verb|mult|_k^{2 \lfloor \frac{\texttt{exp}_k}{2} \rfloor}) \times \verb|ans|_k = (\verb|mult|_k^{\verb|exp|_k}) \times \verb|ans|_k = a^b\), by the Induction Hypothesis. \\
+    \\
+    Still, \((\verb|mult|_{k + 1}^{\verb|exp|_{k + 1}}) \times (\verb|ans|_{k + 1}) = a^b\); $P(k + 1)$ likewise holds. \\
+    \\
+    \underline{Conclusion of Loop Invariant:} \\
+    Collectively, $P(k + 1)$ holds in all cases. \\
+    \\
+    By the Principle of Simple Induction, $(\forall b \in \mathbb{N})(\forall i \in [0, b] \cap \mathbb{N})(P(i))$. \\
+    \\
+    \underline{Program Termination Proof} \\
+    Notice that \textit{Line 9} of the program performs floor division by $2$ on \texttt{exp} in each iteration. \\
+    \\
+    From continual division, \texttt{exp} eventually becomes small enough that it reaches $0$ through the next floor division by $2$. \\
+    \\
+    Since the program's loop requires $\texttt{exp} > 0$ to run, having \texttt{exp} reach $0$ indeed terminates the loop. \\
+    \\
+    \underline{Conclusion:} \\
+    Therefore, this program is both correct (by the loop invariant) and terminates. \\
 \end{proof}
 \leavevmode\\
 \textbf{Q8} \\
