@@ -523,7 +523,7 @@ def bubblesort(L):
 \end{lstlisting}
 \textbf{(a):} Denote the inner loop's invariant:
 \[P(j): (\forall i \in [0, j - 1] \cap \mathbb{N})(L[i] \leq L[j])\]
-\textbf{\underline{Claim:}} For all iterations $j \in [1, len(L)] \cap \mathbb{N}$, $P(j)$.
+\textbf{\underline{Claim:}} At the start of all iterations $j \in [1, len(L) - k] \cap \mathbb{N}$, $P(j)$.
 \begin{proof}
 \leavevmode\\
     \underline{Base Case:} \\
@@ -531,42 +531,88 @@ def bubblesort(L):
     \\
     Then, $i = 0$. \\
     \\
-    Notice that $L[0] \leq L[1]$, by \textit{Lines 10-11} of the program (if ). \\
+    Notice that $L[0] \leq L[1]$, by \textit{Lines 10-11} of the program (if this is not satisfied, the elements are swapped so that it is). \\
+    \\
+    Thus, $P(1)$. \\
     \\
     \underline{Induction Hypothesis:} \\
-    Assume for some $k \in [1, len(L)] \cap \mathbb{N}$, $P(k)$ holds. \\
+    Assume for some $k \in [1, len(L) - k - 1] \cap \mathbb{N}$, $P(k)$ holds. \\
     \\
-    This means, $(\forall i \in [0, k] \cap \mathbb{N})(L[i] \leq L[k - 1])$. \\
+    This means, $(\forall i \in [0, k - 1] \cap \mathbb{N})(L[i] \leq L[k])$. \\
     \\
     \underline{Induction Step:} \\
-    wordsgohere \\
+    Suppose $L[j] \leq L[j + 1]$. \\
     \\
-    \underline{Base Case:} \\
-    wordsgohere \\
+    Then, no swaps are made and $P(j + 1)$ immediately holds by the Induction Hypothesis. \\
     \\
-    \underline{Base Case:} \\
-    wordsgohere \\
+    So, consider $L[j] > L[j + 1]$. \\
     \\
-    \underline{Base Case:} \\
-    wordsgohere \\
+    By \textit{Lines 10-11} of the program, the two elements are swapped. \\
     \\
-    wordsgohere \\
+    The result is $L[j] \leq L[j + 1]$ before the $(j + 1)^{\text{th}}$ iteration, and $P(j + 1)$ likewise holds by the Induction Hypothesis. \\
 \end{proof}
-\leavevmode
+\leavevmode\\
 \textbf{(b):} Denote the outer loop's invariant:
-\[P(n): somethinghere\]
-\textbf{\underline{Claim:}} proveouterloop
+\[Q(n): L[len(L) - n:] \text{ is sorted.}\]
+\textbf{\underline{Claim:}} At the start of all iterations $n \in [1, len(L)]$, $Q(n)$.
 \begin{proof}
 \leavevmode\\
-    wordsgohere \\
+    \underline{Base Case:} \\
+    Let $n = 1$. \\
+    \\
+    Then, $L[len(L) - n:] = L[len(L) - 1:]$ is a sublist of $L$ containing only the last element of $L$. \\
+    \\
+    Vacuously, this list is indeed sorted, so $Q(1)$. \\
+    \\
+    \underline{Induction Hypothesis:} \\
+    Assume for some $m \in [1, len(L)]$, $Q(m)$. \\
+    \\
+    This means $L[len(L) - m:]$ is sorted. \\
+    \\
+    \underline{Induction Step:} \\
+    By the inner loop of the program $(\forall i \in [0, m - 1] \cap \mathbb{N})(L[i] \leq L[m])$. \\
+    \\
+    This means, there is no element larger than $L[len(L) - m]$ for elements in indices less than $len(L) - m$. \\
+    \\
+    The inner loop places this large value at $L[len(L) - m]$. \\
+    \\
+    By the Induction Hypothesis, $L[len(L) - m:]$ is sorted. \\
+    \\
+    In the subsequent iteration, the program's inner loop grabs a new element from the pool of elements not larger than $L[len(L) - m]$ (from the smaller indices). \\
+    \\
+    This inner loop places this new large value at $L[len(L) - (m + 1)]$. \\
+    \\
+    Since this $L[len(L) - (m + 1)]$ is not larger than $L[len(L) - m]$, and because $L[len(L) - m:]$ is sorted, $L[len(L) - (m + 1):]$ is updated as a sorted sublist. \\
+    \\
+    Thus, $Q(m + 1)$. \\
 \end{proof}
-\leavevmode
-\textbf{(c):} Denote the following predicate:
-\[P(n): somethinghere\]
-\textbf{\underline{Claim:}} expresshowthisiscorrect
+\leavevmode\\
+\textbf{(c):}
+\textbf{\underline{Claim:}} If $L$ is a list of numbers, then the program returns $L$ as a sorted list. \\
 \begin{proof}
 \leavevmode\\
-    wordsgohere \\
+    To show that this program is correct, it remains to show that the inner and outer loops both terminate, since their invariants are proven. \\
+    \\
+    \underline{Inner Loop Termination:} \\
+    To show that the inner loop terminates, consider the loop variant $Var = len(L) - k - i$. \\
+    \\
+    Denote $\widetilde{Var}$ as the loop variant in the subsequent iteration. \\
+    \\
+    Then, notice that $\widetilde{Var} = len(L) - k - (i + 1) < len(L) - k - i = Var$. \\
+    \\
+    Since $len(L), k, i \in \mathbb{N}$, and the variant decreases in subsequent iterations, the inner loop indeed terminates. \\
+    \\
+    \underline{Outer Loop Termination:} \\
+    To show that the outer loop terminates, consider the loop invariant $Var = len(L) - i$. \\
+    \\
+    Denote $\widetilde{Var}$ as the loop variant in the subsequent iteration. \\
+    \\
+    Then, notice that $\widetilde{Var} = len(L) - (i + 1) < len(L) - i = Var$. \\
+    \\
+    Likewise, since $len(L), i \in \mathbb{N}$, and the invariant decreases in subsequent iterations, the outer loopp terminates as well. \\
+    \\
+    \underline{Conclusion:} \\
+    Therefore, because both the inner and outer loop are correct and terminate, the program correctly takes any list of numbers $L$ and returns its corresponding sorted list. \\
 \end{proof}
 \leavevmode\\
 \textbf{Q10} \\
