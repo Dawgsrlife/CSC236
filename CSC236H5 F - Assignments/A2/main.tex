@@ -400,7 +400,7 @@ def exp_iter(a, b):
     \\
     Still, \((\verb|mult|_{k + 1}^{\verb|exp|_{k + 1}}) \times (\verb|ans|_{k + 1}) = a^b\); $P(k + 1)$ likewise holds. \\
     \\
-    \underline{Conclusion of Loop Invariant:} \\
+    \underline{Conclusion of Loop Invariant Proof:} \\
     Collectively, $P(k + 1)$ holds in all cases. \\
     \\
     By the Principle of Simple Induction, $P(i)$ holds for all $i \in [1, \lfloor log_2b \rfloor + 2]$. \\
@@ -419,55 +419,137 @@ def exp_iter(a, b):
 \textbf{Q8} \\
 Consider the following linear time program:
 \begin{lstlisting}
-    def majority(A):
-        """
-        Pre: A is a list with more than half its entries equal to x
-        Post: Returns the majority element x
-        """
-        c = 1
-        m = A[0]
-        i = 1
-        while i <= len(a) - 1:
-            if c == 0:
-                m = A[i]
-                c = 1
-            else if A[i] == m:
-                c += 1
-            else:
-                c -= 1
-            i += 1
-        return m
+def majority(A):
+    """
+    Pre: A is a list with more than half its entries equal to x
+    Post: Returns the majority element x
+    """
+    c = 1
+    m = A[0]
+    i = 1
+    while i <= len(a) - 1:
+        if c == 0:
+            m = A[i]
+            c = 1
+        else if A[i] == m:
+            c += 1
+        else:
+            c -= 1
+        i += 1
+    return m
 \end{lstlisting}
-Denote the following predicate:
-\[P(n): somethinghere\]
-\textbf{\underline{Claim:}} expresshowthisiscorrect
+\textbf{\underline{Claim:}} For all lists $A$ with more than half its entries equal to $x$, the program returns the majority element $x$ and terminates. \\
 \begin{proof}
 \leavevmode\\
+    For simplicity, express ``\texttt{List} has more than half its entries equal to $x$'' by ``\texttt{List} is valid,'' and its complement by ``\texttt{List} is NOT valid.''\\
+    \\
+    Let $v_n$ represent the difference between the count of $x$ and the count of elements that are not $x$ in sublist $A[0:n]$, before the $n^{\text{th}}$ iteration. \\
+    \\
+    \underline{Loop Invariant Proof:} \\
+    Denote the Loop Invariant:
+    \begin{center}
+        \(P(i):\)
+        \[((A[0:i] \text{ is valid}) \implies ((m_i = x) \land (c_i \geq v_i)))\]
+        \[\land\]
+        \[((A[0:i] \text{ is NOT valid}) \implies ((m_i = x) \lor (c_i \leq -v_i)))\]
+    \end{center}
+    To prove the loop invariant, this proof explores the Principle of Simple Induction on $i \in [1, len(a)]$. \\
+    \\    
+    \underline{Base Case:} \\
+    Let $i = 1$. \\
+    \\
+    Then, $A[0:i] = A[0:1] = [A[0]] = [x]$, by the precondition. \\
+    \\
+    With the sole element being $x$, $A[0:i]$ is valid. \\
+    \\
+    Notice that \textit{Line 7} of the program sets $m_1$ to $A[0] = x$, and $c_1 = 1 = v_1$. \\
+    \\
+    Thus, $m_1 = x$ and $c_1 \geq v_1$; $P(1)$ holds. \\
+    \\
+    \underline{Induction Hypothesis:} \\
+    \\
+    Assume for some $k \in [1, len(a) - 1]$, $P(k)$:
+    \begin{center}
+        \(P(k):\)
+        \[((A[0:k] \text{ is valid}) \implies ((m_k = x) \land (c_k \geq v_k)))\]
+        \[\land\]
+        \[((A[0:k] \text{ is NOT valid}) \implies ((m_k = x) \lor (c_k \leq -v_k)))\]
+    \end{center}
+    \underline{Induction Step:} \\
+    Consider the following cases... \\
+    \\
+    \underline{\textit{Suppose $A[0:k + 1]$ is valid:}} \\
+    By the Induction Hypothesis, $m_k = x$ and $c_k \geq v_k$. \\
+    \\
+    Notice that $v_k > 0$ because $A[0:k + 1]$ is valid (the sublist has more entries of $x$ than entires of not $x$). \\
+    \\
+    It follows that $c_k \geq v_k > 0$, so $c \neq 0$. \\
+    \\
+    When the iteration runs, the program does not enter \textit{Lines 10-12}. \\
+    \\
+    So, $m_{k + 1}$ retains the value of $m_k = x$, and $CONTINUE HERE!!!$. \\
+    \\
+    \underline{\textit{Suppose $A[0:k + 1]$ is NOT valid:}} \\
+    \\
+    \underline{Conclusion of Loop Invariant Proof} \\
+    \\
+    wordsgohere \\
+    \\
+    \underline{Program Termination Proof:} \\
+    \\
+    wordsgohere \\
+    \\
+    \underline{Conclusion:} \\
+    \\
     wordsgohere \\
 \end{proof}
 \leavevmode\\
 \textbf{Q9} \\
 Consider the bubblesort algorithm as follows:
 \begin{lstlisting}
-    def bubblesort(L):
-        """
-        Pre: L is a list of numbers
-        Post: L is sorted
-        """
-        k = 0
-        while k < len(L):
-            i = 0
-            while i < len(L) - k - 1:
-                if L[i] > L[i + 1]:
-                    swap L[i] and L[i + 1]
-                i += 1
-            k += 1
+def bubblesort(L):
+    """
+    Pre: L is a list of numbers
+    Post: L is sorted
+    """
+    k = 0
+    while k < len(L):
+        i = 0
+        while i < len(L) - k - 1:
+            if L[i] > L[i + 1]:
+                swap L[i] and L[i + 1]
+            i += 1
+        k += 1
 \end{lstlisting}
 \textbf{(a):} Denote the inner loop's invariant:
-\[P(n): somethinghere\]
-\textbf{\underline{Claim:}} proveinnerloop
+\[P(j): (\forall i \in [0, j - 1] \cap \mathbb{N})(L[i] \leq L[j])\]
+\textbf{\underline{Claim:}} For all iterations $j \in [1, len(L)] \cap \mathbb{N}$, $P(j)$.
 \begin{proof}
 \leavevmode\\
+    \underline{Base Case:} \\
+    Let $j = 1$. Then, $i \in [0, 1 - 1] \cap \mathbb{N}$. \\
+    \\
+    Then, $i = 0$. \\
+    \\
+    Notice that $L[0] \leq L[1]$, by \textit{Lines 10-11} of the program (if ). \\
+    \\
+    \underline{Induction Hypothesis:} \\
+    Assume for some $k \in [1, len(L)] \cap \mathbb{N}$, $P(k)$ holds. \\
+    \\
+    This means, $(\forall i \in [0, k] \cap \mathbb{N})(L[i] \leq L[k - 1])$. \\
+    \\
+    \underline{Induction Step:} \\
+    wordsgohere \\
+    \\
+    \underline{Base Case:} \\
+    wordsgohere \\
+    \\
+    \underline{Base Case:} \\
+    wordsgohere \\
+    \\
+    \underline{Base Case:} \\
+    wordsgohere \\
+    \\
     wordsgohere \\
 \end{proof}
 \leavevmode
