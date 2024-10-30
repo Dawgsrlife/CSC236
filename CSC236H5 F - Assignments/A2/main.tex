@@ -618,23 +618,126 @@ def bubblesort(L):
 \textbf{Q10} \\
 Consider the following generalization of the \texttt{min} function:
 \begin{lstlisting}
-    def extract(A, k):
-        pivot = A[0]
-        # Use partition from quicksort
-        L, G = partition(A[1, ..., len(A) - 1], pivot)
-        if len(L) == k - 1:
-            return pivot
-        else if len(L) >= k:
-            return extract(L, k)
-        else:
-            return extract(G, k - len(L) - 1)
+def extract(A, k):
+    pivot = A[0]
+    # Use partition from quicksort
+    L, G = partition(A[1, ..., len(A) - 1], pivot)
+    if len(L) == k - 1:
+        return pivot
+    else if len(L) >= k:
+        return extract(L, k)
+    else:
+        return extract(G, k - len(L) - 1)
 \end{lstlisting}
 \textbf{(a):} Proof of Correctness \\
-\[P(n): somethinghere\]
-\textbf{\underline{Claim:}} proofofcorrectnessclaim
+\underline{Preconditions:}
+\[A \text{ is a list of numbers such that } len(A) \geq 1 \text{, and } k \in [1, len(A)] \cap \mathbb{N} \text{.}\]
+\underline{Postconditions:}
+\[\text{Returns the } k^{\text{th}} \text{ smallest element of } A \text{.}\]
+Denote the following predicate:
+\[P(n): \text{The program returns the } 1 \leq k^{\text{th}} \leq n \text{ smallest element from the list } A \text{ of size } n \text{.}\]
+\textbf{\underline{Claim:}} For any list $A$ of length $n = len(A) \geq 1$, $P(n)$ holds.
 \begin{proof}
 \leavevmode\\
-    wordsgohere \\
+    This proof explores the Principle of Complete Induction on $n$. \\
+    \\
+    Fix $k \in [1, n] \cap \mathbb{N}$. \\
+    \\
+    \underline{Base Case:} \\
+    Let $A$ be a list of length $n = len(A) = 1$.
+    \\
+    Then, $A$ is a list containing one element, and $k = 1$ (representing the \textit{first smallest} element of $A$) is the only value of $k$. \\
+    \\
+    By \textit{Line 2} of the program, $\texttt{pivot} = A[0]$. \\
+    \\
+    Because \texttt{pivot} is an element of $A$, the precondition for the function $partition(A, \texttt{pivot})$ is satisfied. \\
+    \\
+    So, assume the corresponding postcondition of $partition(A, \texttt{pivot})$:
+    \begin{center}
+        $L$ contains the elements of $A$ less than the pivot, \\
+        and $G$ contains the elements greater than the pivot.
+    \end{center}
+    With no other elements to compare with, both $L$ and $G$ will be empty. \\
+    \\
+    In \textit{Line 5} of the program, notice that $len(L) == k - 1$ holds as $len(L) = 0 = (1) - 1$. \\
+    \\
+    Therefore, the program enters \textit{Line 6} and returns \texttt{pivot}. \\
+    \\
+    As the sole and smallest element of $A$, returning \texttt{pivot} indeed returns the $1^{\text{st}}$ smallest element of $A$. \\
+    \\
+    Thus, $P(1)$. \\
+    \\
+    \underline{Induction Hypothesis:} \\
+    Assume for all lists $A$ of length $j \in [1, i] \cap \mathbb{N}$, for some $i \geq 1$ and $k \in [1, j] \cap \mathbb{N}$, $P(j)$ holds. \\
+    \\
+    This means all lists $A_1, A_2, \dots, A_i$ passed into $extract(A, k)$ result in $extract(A, k)$ returning the $k_1^{\text{th}}$ or $k_2^{\text{th}}$ or $\dots$ or $k_i^{\text{th}}$ corresponding smallest element from the corresponding list. \\
+    \\
+    \underline{Induction Step:} \\
+    Assume the algorithm is correct for all lists of length $j \in [1, i] \cap \mathbb{N}$ for some $i \geq 1$ and $k \in [1, j] \cap \mathbb{N}$. \\
+    \\
+    To show $P(1), P(2), \dots, P(i) \implies P(i + 1)$, it is necessary to show that the function algorithm is correct for all lists of size $i + 1$ and $k \in [1, i + 1] \cap \mathbb{N}$ for some $i \geq 1$ and $k \in [1, j] \cap \mathbb{N}$, while assuming the preconditions hold on the function call. \\
+    \\
+    Notice that the program sets \texttt{pivot} to $A[0]$, the first element in $A$. \\
+    \\
+    So, \texttt{pivot} represents an element of $A$, satisfying the precondition for the $partition$ function. \\
+    \\
+    $partition$ then returns $L$ and $G$, which are lists containing all elements less than the pivot and greater than the pivot, respectively. \\
+    \\
+    Consider the following cases... \\
+    \\
+    \underline{\textit{Suppose $len(L) = k - 1$:}} \\
+    Then, there are $k - 1$ elements smaller than the pivot, by the postcondition of $partition$. \\
+    \\
+    Therefore, \texttt{pivot} must be the $k^{\text{th}}$ smallest element in $A$. \\
+    \\
+    The program enters \textit{Line 6} and returns \texttt{pivot}. \\
+    \\
+    Thus, $P(i + 1)$. \\
+    \\
+    \underline{\textit{Suppose $len(L) \geq k$:}} \\
+    Then, $L$ has enough elements to contain the $k^{\text{th}}$ smallest element in $A$, so the $k^{\text{th}}$ smallest element in $A$ must be in $L$. \\
+    \\
+    Notice, additionally, that \texttt{pivot} is not the $k^{\text{th}}$ smallest element. \\
+    \\
+    Then, the program reaches \textit{Line 8}, returning $extract(L, k)$. \\
+    \\
+    Notice that $L$ is a list with $len(L) \geq 1$, and $k \in [1, len(L)] \cap \mathbb{N}$. \\
+    \\
+    Then, by the Induction Hypothesis (as $len(L) < len(A)$), $extract(L, k)$ correctly returns the $k^{\text{th}}$ smallest element in the list $L$. \\
+    \\
+    Thus, $P(i + 1)$. \\
+    \\
+    \underline{\textit{Suppose $len(L) < k - 1$:}} \\
+    Then, $L$ does not have enough elements to contain the $k^{\text{th}}$ smallest element in $A$, so the $k^{\text{th}}$ smallest element in $A$ must be $G$. \\
+    \\
+    Again, \texttt{pivot} is not the $k^{\text{th}}$ smallest element. \\
+    \\
+    Then, the program reaches \textit{Line 10}, returning $extract(G, k - len(L) - 1)$. \\
+    \\
+    Notice that the $(k - len(L) - 1)^{\text{th}}$ smallest element in $G$ is the smallest element in $A$ (exclude the number of elements in $L$ and \texttt{pivot}). \\
+    \\
+    Notice that $G$ is a list with $len(G) \geq 1$, and $(k - len(L) - 1) \in [1, len(G)] \cap \mathbb{N}$. \\
+    \\
+    Then, by the Induction Hypothesis (as $len(G) < len(A)$), $extract(G, k - len(L) - 1)$ correctly returns the $(k - len(L) - 1)^{\text{th}}$ smallest element in the list $G$. \\
+    \\
+    Thus, $P(i + 1)$. \\
+    \\
+    \underline{Conclusion:} \\
+    Since the Base Case $P(1)$ holds, and $P(1), P(2), \dots, P(i) \implies P(i + 1)$, by the Principle of Complete Induction, $P(n)$ holds for all lists of length $n \geq 1$. \\
+    \\
+    \underline{Termination Proof:} \\
+    The above proof shows that each call to $extract(A, k)$ considers a sublist with a length less than the initial list passed to the function, from either a previous call up the stack or the initial call. \\
+    \\
+    In each recursive call case, either $L$ or $G$ is the sublist being passed. \\
+    \\
+    Notice that, excluding \texttt{pivot}, each of these lists are at most as long as $A$. \\
+    \\
+    Therefore, $len(G) \leq len(A) - 1$ and $len(L) \leq len(A) - 1$. \\
+    \\
+    As a note, the equalities hold when \texttt{pivot} is the smallest element in $A$ and when \texttt{pivot} is the greatest element in A, respectively. \\
+    \\
+    \underline{Citation:} \\
+    This proof is inspired by the Tutorial 5 slides for its Problem 1 from this CSC236 course. \\
 \end{proof}
 \leavevmode\\
 \textbf{(b):} Worst-Case Runtime \\
