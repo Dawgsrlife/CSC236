@@ -817,33 +817,164 @@ The worst-case runtime of the program is $\mathcal{O} (n^2)$. \\
 As follows below, VI, VII, XII, and XIV respectively represent questions 6, 7, 12, and 14 from pp. 46-48 of the course textbook. \\
 \\
 \textbf{VI} \\
-Let $T(n)$ be the number of binary strings of length $n$ in which there are no consecutive $1$'s. So, \(T(0) = 1, T(1) = 2, T(2) = 3, ...\), etc. \\
+Let $T(n)$ be the number of binary strings of length $n$ where every $1$ is immediately preceded by a $0$. \\
 \\
 \textbf{(a):} Recurrence for $T(n)$: \\
-recurrencehere \\
+\[
+    T(n) =
+    \begin{cases}
+        1 & \text{if } n = 0 \\
+        1 & \text{if } n = 1 \\
+        T(n - 1) + T(n - 2) & \text{if } n > 2
+    \end{cases}
+\]
 \\
 \textbf{(b):} Closed Form Expression for $T(n)$: \\
-closedformhere \\
+Notice that $T(n)$ is equivalent to the Fibonacci sequence, shifted left by one term. \\
+\\
+Therefore, $T(n) = F_{n + 1}$, where $F_n$ is the $n^{\text{th}}$ value of the Fibonacci sequence. \\
+\\
+Then, the closed form for $T(n)$ is as follows:
+\Large
+\[T(n) = \frac{(\frac{1 + \sqrt{5}}{2})^{n + 1} - (\frac{1 - \sqrt{5}}{2})^{n + 1}}{\sqrt{5}}\]
+\normalsize
 \\
 \textbf{(c):} Proof of Correctness of Closed Form Expression \\
-Denote the following predicate: \\
-\[P(n): somethinghere\]
-\textbf{\underline{Claim:}} expresshowthisiscorrect
+Denote the following predicate:
+\[P(n): T(n) \text{ represents the number of binary strings of length } n\]
+\[\text{ where every $1$ is immediately preceded by a $0$.}\]
+\textbf{\underline{Claim:}} $\forall n \in \mathbb{N}, T(n)$
 \begin{proof}
 \leavevmode\\
-    wordsgohere \\
+    \underline{Base Cases:} \\
+    Let $n = 0$. \\
+    \\
+    Then,
+    \large
+    \[
+        T(0) = \frac{(\frac{1 + \sqrt{5}}{2})^{\cancelto{1}{0 + 1}} - (\frac{1 - \sqrt{5}}{2})^{\cancelto{1}{0 + 1}}}{\sqrt{5}}
+        = \frac{\frac{1 + \sqrt{5}}{2} - \frac{1 - \sqrt{5}}{2}}{\sqrt{5}}
+        = \frac{\frac{\cancel{2} \sqrt{5}}{\cancel{2}}}{\sqrt{5}}
+        = \frac{\cancel{\sqrt{5}}}{\cancel{\sqrt{5}}}
+        = 1 \text{.}
+    \]
+    \normalsize
+    \\
+    Indeed, there is only one binary string (the empty string) with length $0$, there are simply no $1$'s. \\
+    \\
+    Thus, ``$0$ immediately precedes every $1$'' is vacuously true; $T(0)$. \\
+    \\
+    Let $n = 1$. \\
+    \\
+    Then,
+    \large
+    \[
+        T(1) = \frac{(\frac{1 + \sqrt{5}}{2})^{\cancelto{2}{1 + 1}} - (\frac{1 - \sqrt{5}}{2})^{\cancelto{2}{1 + 1}}}{\sqrt{5}}
+        = \frac{\frac{1 + 2 \sqrt{5} + 5}{4} - \frac{1 - 2 \sqrt{5} + 5}{4}}{\sqrt{5}}
+        = \frac{\frac{\cancel{4} \sqrt{5}}{\cancel{4}}}{\sqrt{5}}
+        = \frac{\cancel{\sqrt{5}}}{\cancel{\sqrt{5}}}
+        = 1 \text{.}
+    \]
+    \normalsize
+    If the string solely contains $0$, then there is simply no $1$ in the string; vacuously, this is a valid string. \\
+    \\ 
+    If the string solely contains $1$, then it is clearly not preceded by a $0$ which does not fit (string has length $1$).
+    \\
+    Therefore, there is only $1$ valid string of length $1$; $P(1)$ holds. \\
+    \\
+    \underline{Induction Hypothesis:} \\
+    Assume for some $k \in \mathbb{N}$, for all $m \in [0, k], P(m)$. \\
+    \\
+    This means for some natural $k$, for all strings of length $m \in [0, k]$, there are $T(m)$ binary strings where every $1$ is immediately preceded by a $0$. \\
+    \\
+    \underline{Induction Step:} \\
+    Evaluate $T(m + 1)$ as follows:
+    \large
+    \begin{equation*}
+        \begin{aligned}
+            T(m + 1) &= T((m + 1) - 1) + T((m + 1) - 2) \\
+            &= T(m) + T(m - 1) \\
+            &= \frac{(\frac{1 + \sqrt{5}}{2})^{m + 1} - (\frac{1 - \sqrt{5}}{2})^{m + 1}}{\sqrt{5}} + \frac{(\frac{1 + \sqrt{5}}{2})^{\cancelto{m}{(m - 1) + 1}} - (\frac{1 - \sqrt{5}}{2})^{\cancelto{m}{(m - 1) + 1}}}{\sqrt{5}} \\
+            &= \frac{(\frac{1 + \sqrt{5}}{2})^{m + 1} - (\frac{1 - \sqrt{5}}{2})^{m + 1} + (\frac{1 + \sqrt{5}}{2})^m - (\frac{1 - \sqrt{5}}{2})^m}{\sqrt{5}} \\
+            &= \frac{(\frac{1 + \sqrt{5}}{2})^{m + 1} [1 + \frac{2}{1 + \sqrt{5}}] - (\frac{1 - \sqrt{5}}{2})^{m + 1} [1 + \frac{2}{1 - \sqrt{5}}]}{\sqrt{5}} \\
+            &= \frac{(\frac{1 + \sqrt{5}}{2})^{m + 1} (\frac{1 + \sqrt{5}}{2}) - (\frac{1 - \sqrt{5}}{2})^{m + 1} (\frac{1 - \sqrt{5}}{2})}{\sqrt{5}} \\
+            &= \frac{(\frac{1 + \sqrt{5}}{2})^{(m + 1) + 1} - (\frac{1 - \sqrt{5}}{2})^{(m + 1) + 1}}{\sqrt{5}} \\
+        \end{aligned}
+    \end{equation*}
+    \normalsize
+    \\
+    Note that $1 + \frac{2}{1 + \sqrt{5}} = \frac{1 + \sqrt{5}}{2}$ and $1 + \frac{2}{1 - \sqrt{5}} = \frac{1 - \sqrt{5}}{2}$. \\
+    \\
+    Therefore, $T(m + 1)$ holds for the recurrence. \\
+    \\
+    \underline{Conclusion:} \\
+    By the Principle of Complete Induction, the $T(n)$ holds for all $n \in \mathbb{N}$. \\
 \end{proof}
 \leavevmode\\
 \textbf{VII} \\
 Let $T(n)$ denote the number of distinct full binary trees with $n$ nodes. For example, $T(1) = 1$, $T(3) = 1$, and $T(7) = 5$. Note that every full binary tree has an odd number of nodes. \\
+\\
 \textbf{\underline{Recurrence for $T(n)$:}} \\
-recurrencehere \\
-\[P(n): somethinghere\]
+The recursive part of the recurrence of $T(n)$ connects the number of nodes to the unique number of full binary trees. \\
+\\
+As well, the left and right subtrees can at most have $\frac{n - 3}{2}$ nodes. \\
+\\
+Finally, when the left subtree has $2k + 1$ nodes and the right subtree has $n - 1 - (2k + 1)$ nodes, there are $T(2k + 1)T(n - 1 - (2k + 1))$ full binary trees. \\
+\\
+Altogether, for particular numbers of nodes for the left and right subtree, the sum of all of these combinations is obtained. \\
+\\
+Therefore, denote the recurrence as follows:
+\Large
+\[
+    T(n) =
+    \begin{cases}
+        1 & \text{if } n = 1 \\
+        \sum_{k = 0}^{\frac{n - 3}{2}} T(2k + 1)T(n - 1 - (2k + 1)) & \text{if } n > 1 \\
+        0 & \text{if } n \text{ is even}
+    \end{cases}
+\]
+\normalsize
 \large \textbf{\underline {Claim:}} \(T(n) \geq (\frac{1}{n})(2)^{(n - 1) / 2}\)
 \normalsize
 \begin{proof}
 \leavevmode\\
-    wordsgohere \\
+    \underline{Base Case:} \\
+    Let $n = 1$. \\
+    \\
+    Then, $T(1) = 1$ by the recurrence. \\
+    \\
+    Notice that $(\frac{1}{1})(2)^{(1 - 1) / 2} = 2^0 = 1$. \\
+    \\
+    Indeed, $T(1) = 1 \leq 1$; $T(1)$. \\
+    \\
+    \underline{Induction Hypothesis:} \\
+    Assume for some odd $k \in \mathbb{N}$, for all odd $m \in [1, k] \cap \mathbb{N}, T(m)$. \\
+    \\
+    This means, for some odd natural number $k$, the number of distinct full binary trees with $m$ nodes is less than or equal to $(\frac{1}{n})(2)^{(n - 1) / 2}$, for all smaller natural numbers $m \in [1, k] \cap \mathbb{N}$ \\
+    \\
+    \underline{Induction Step:} \\
+    Consider $T(m + 2)$. \\
+    \\
+    By the recurrence definition,
+    \large
+    \begin{equation*}
+        \begin{aligned}
+            T(m + 2) &= \sum_{k = 0}^{\frac{(m + 2) - 3}{2}} T(2k + 1)T(n - 1 - (2k + 1)) \\
+            &= \sum_{k = 0}^{\frac{m - 1}{2}} T(2k + 1)T(n - 1 - (2k + 1)) \text{.}
+        \end{aligned}
+    \end{equation*}
+    \normalsize
+    By the Induction Hypothesis,
+    \large
+    \begin{equation*}
+        \begin{aligned}
+            &\;\;\;\; \sum_{k = 0}^{\frac{m - 1}{2}} T(2k + 1)T(n - 1 - (2k + 1)) \\
+            &\geq \sum_{k = 0}^{\frac{m - 1}{2}} ((\frac{1}{2k + 1})(2)^{((2k + 1) - 1) / 2})((\frac{1}{n - 1 - (2k + 1)})(2)^{((n - 1 - (2k + 1)) - 1) / 2}) \\
+            %&\geq \\
+        \end{aligned}
+    \end{equation*}
+    \normalsize
+    Therefore, by the Principle of Complete Induction, the claim holds. \\
 \end{proof}
 \leavevmode\\
 \textbf{XII} \\
