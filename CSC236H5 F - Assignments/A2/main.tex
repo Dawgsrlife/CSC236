@@ -741,8 +741,77 @@ Denote the following predicate:
 \end{proof}
 \leavevmode\\
 \textbf{(b):} Worst-Case Runtime \\
-wordsgohere \\
+Denote the size of the list $A$ by $n = len(A)$. \\
 \\
+To find the worst-case runtime of the program, consider the program's behaviour for its base and recursive cases. \\
+\\
+\underline{Base Case of Program:} \\
+Let n = 1. \\
+\\
+Then, the program reaches the $if$ block (for the reason as analysed in the above proof) and returns \texttt{pivot}. \\
+\\
+Exiting here, the program runs in constant time. \\
+\\
+\underline{Base Case of Program:} \\
+Let $n > 1$. \\
+\\
+In quicksort partitioning, the worst case occurs when one of the lists $L, G$ is empty. \\
+\\
+Then, the $else if$ and $else$ blocks run, making a function call on a sublist that is $1$ size smaller than the size of the current list. \\
+\\
+Also, the number of recursive steps depend on the size of the current list, $n$. \\
+\\
+This means, the recursive case has runtime $T(n - 1) + dn$. \\
+\\
+Define the recurrence:
+\[
+    T(n) =
+    \begin{cases}
+        c & \text{if } n \leq 1 \\
+        T(n - 1) + dn & \text{if } n > 1
+    \end{cases}
+\]
+\\
+For $n \leq 1$, $T(n) = c$, for some constant $c$, and the program runs in constant time with the tight bound $\Theta (1)$. \\
+\\
+Otherwise, $n > 1$; evaluate the closed form for $T(n)$ as follows:
+\begin{equation*}
+    \begin{aligned}
+        T(n) &= T(n - 1) + dn \\
+        &= T((n - 1) - 1) + [dn] \\
+        &= T((n - 2) - 1) + [dn] \\
+        &. \; \dots \\
+        &. \; \dots \\
+        &. \; \dots \\
+        &= c + d(\sum_{i = 0}^{k} (n - 1))
+    \end{aligned}
+\end{equation*}
+Through repeated substitution, $T(0)$ is eventually reached. \\
+\\
+Notice that every unique call of $T(n)$ has the form $T((n - k) - 1)$, for some natural $k$. \\
+\\
+Therefore, $T(0) = T((n - k) - 1) \implies 0 = (n - k) - 1 \implies k = n - 1$; the call of $T(0)$ occurs when $k = n - 1$. \\
+\\
+Continue evaluating $T(n)$ with $k = n - 1$:
+\begin{equation*}
+    \begin{aligned}
+        T(n) &= c + d(\sum_{i = 0}^{n - 1} (n - 1)) \\
+        &= d[(\sum_{i = 0}^{n - 1} n) - (n - 1)] + c \\
+        &= d[(\frac{((n - 1) + 1)(n - 1)}{2}) - (n - 1)] + c \\
+        &= d[(\frac{n^2 - n - 2n + 2}{2})] + c \\
+        &= \frac{dn^2 - 3dn + 2c}{2}
+    \end{aligned}
+\end{equation*}
+Thus, $T(n) = \frac{dn^2 - 3dn + 2c}{2}$ for $n > 1$. \\
+\\
+Notice that in this closed form, $n^2$ is the term with the highest degree, so it takes precedence. \\
+\\
+Therefore, the tight asymptotic bound on the runtime of the program is $\Theta (n^2)$. \\
+\\
+By definition, the worst-case runtime of the program is $\mathcal{O} (n^2)$. \\
+\\
+\underline{Final Answer:} \\
+The worst-case runtime of the program is $\mathcal{O} (n^2)$. \\
 \pagebreak
 \section*{Question \#4}
 As follows below, VI, VII, X, XII, and XIV respectively represent questions 6, 7, 10, 12, and 14 from pp. 46-48 of the course textbook. \\
@@ -893,8 +962,8 @@ Otherwise, for $n > 3$, evaluate the closed-form for $T(n)$ as follows:
         &. \; \dots \\
         &. \; \dots \\
         &. \; \dots \\
-        &= c + d(kn - \sum_{i = 0}^{\frac{n}{2}} 2i) + kc \\
-        &= d[kn - (2)(\frac{(\frac{n}{2} + 1)(\frac{n}{2})}{2})] + (k + 1)c
+        &= c + d(kn - \sum_{i = 0}^{k} 2i) + kc \\
+        &= d[kn - (2)(\frac{(k + 1)(k)}{2})] + (k + 1)c
     \end{aligned}
 \end{equation*}
 Through repeated substitution, $T(0)$ is eventually reached. \\
