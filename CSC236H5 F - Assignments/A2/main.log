@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.29)  30 OCT 2024 20:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.29)  30 OCT 2024 20:53
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2048,12 +2048,42 @@ Package fancyhdr Warning: \headheight is too small (30.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-3.40004pt}.
 
 [27]
-Underfull \hbox (badness 10000) in paragraph at lines 853--855
+Underfull \hbox (badness 10000) in paragraph at lines 867--887
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 861--866
+Underfull \hbox (badness 10000) in paragraph at lines 867--887
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 867--887
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 867--887
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 867--887
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 867--887
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 867--887
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 867--887
 
  []
 
@@ -2067,72 +2097,87 @@ Package fancyhdr Warning: \headheight is too small (30.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-3.40004pt}.
 
 [28]
-Underfull \hbox (badness 10000) in paragraph at lines 882--902
+Underfull \hbox (badness 10000) in paragraph at lines 893--909
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 882--902
+Underfull \hbox (badness 10000) in paragraph at lines 893--909
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 882--902
+Underfull \hbox (badness 10000) in paragraph at lines 893--909
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 882--902
+Underfull \hbox (badness 10000) in paragraph at lines 893--909
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 882--902
+Underfull \hbox (badness 10000) in paragraph at lines 893--909
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 882--902
+Underfull \hbox (badness 10000) in paragraph at lines 893--909
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 882--902
+Underfull \hbox (badness 10000) in paragraph at lines 914--942
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 882--902
+Underfull \hbox (badness 10000) in paragraph at lines 914--942
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 908--924
+Underfull \hbox (badness 10000) in paragraph at lines 914--942
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 908--924
+Underfull \hbox (badness 10000) in paragraph at lines 914--942
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 908--924
+Underfull \hbox (badness 10000) in paragraph at lines 914--942
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 908--924
+Underfull \hbox (badness 10000) in paragraph at lines 914--942
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 908--924
+Underfull \hbox (badness 10000) in paragraph at lines 914--942
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 908--924
+Underfull \hbox (badness 10000) in paragraph at lines 914--942
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 914--942
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 914--942
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 914--942
 
  []
 
@@ -2146,61 +2191,6 @@ Package fancyhdr Warning: \headheight is too small (30.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-3.40004pt}.
 
 [29]
-Underfull \hbox (badness 10000) in paragraph at lines 929--957
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 929--957
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 929--957
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 929--957
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 929--957
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 929--957
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 929--957
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 929--957
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 929--957
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 929--957
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 929--957
-
- []
-
-
 
 
 Package fancyhdr Warning: \headheight is too small (30.0pt): 
@@ -2210,17 +2200,37 @@ Package fancyhdr Warning: \headheight is too small (30.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-3.40004pt}.
 
 [30]
-Underfull \hbox (badness 10000) in paragraph at lines 968--976
+Underfull \hbox (badness 10000) in paragraph at lines 953--961
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 968--976
+Underfull \hbox (badness 10000) in paragraph at lines 953--961
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 968--976
+Underfull \hbox (badness 10000) in paragraph at lines 953--961
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 969--978
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 969--978
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 969--978
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 969--978
 
  []
 
@@ -2234,26 +2244,6 @@ Package fancyhdr Warning: \headheight is too small (30.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-3.40004pt}.
 
 [31]
-Underfull \hbox (badness 10000) in paragraph at lines 984--993
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 984--993
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 984--993
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 984--993
-
- []
-
-
 
 
 Package fancyhdr Warning: \headheight is too small (30.0pt): 
@@ -2274,13 +2264,13 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 Here is how much of TeX's memory you used:
  19542 strings out of 473578
  393723 string characters out of 5732242
- 1367079 words of memory out of 5000000
+ 1396079 words of memory out of 5000000
  42201 multiletter control sequences out of 15000+600000
  569627 words of font info for 81 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  94i,18n,107p,752b,1842s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/latxfont/line10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (33 pages, 284219 bytes).
+Output written on main.pdf (33 pages, 282218 bytes).
 PDF statistics:
  216 PDF objects out of 1000 (max. 8388607)
  137 compressed objects within 2 object streams
