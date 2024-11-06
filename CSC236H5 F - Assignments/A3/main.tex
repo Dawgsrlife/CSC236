@@ -54,17 +54,195 @@
 \pagebreak
 \normalsize
 
-\section*{Question \#X}
-wordsgohere
-
+\section*{Question \#1}
+% Notes:
+% - Use the Pumping Lemma to prove non-regularity when needed;
+% - Construct DFAs for languages that are regular, focusing on capturing patterns precisely (like binary multiples of 3);
+% - Review closure properties (e.g., regular languages are closed under subtraction) to tackle parts involving set differences.
+Let $\Sigma \in \{ 0, 1 \} $. \\
+\\
+\textbf{(a):} \\
+\textbf{\underline{Claim:}} $\Sigma*$ is a regular language.
 \begin{proof}
 \leavevmode\\
+    % Provide a DFA that accepts the language in the proof
+    % Notes:
+    % - It includes every possible string of 0s and 1s;
+    % - A DFA can be constructed that accepts any input by having a single accepting state with self-loops for both 0 and 1.
+    proofgoeshere \\
+\end{proof}
+\leavevmode\\
+\textbf{(b):} \\
+\textbf{\underline{Claim:}} $\Sigma* \setminus \{ K \}, K = \{ 01, 101, 010 \}$ is a regular language.
+\begin{proof}
+\leavevmode\\
+    % Provide a DFA that accepts the language in the proof
+    % Notes:
+    % - Regular languages are closed under finite set differences;
+    % - K is finite, so the difference \Sigma*\setminusK is also regular;
+    % - A DFA can be constructed that accepts all strings except specific patterns 01, 101, and 010.
+    proofgoeshere \\
+\end{proof}
+\leavevmode\\
+\textbf{(c):} \\
+\textbf{\underline{Claim:}} $\{ w | w \text{ is a palindrome} \}$ is NOT a regular language.
+\begin{proof}
+\leavevmode\\
+    % Notes:
+    % - Palindromes require matching symbols from opposite ends of the string, which requires memory beyond finite states;
+    % - The Pumping Lemma can be used here to show non-regularity (if that is taught).
+    proofgoeshere \\
+\end{proof}
+\leavevmode\\
+\textbf{(d):} \\
+\textbf{\underline{Claim:}} $\{ ww | w \in \Sigma* \}$ is NOT a regular language.
+\begin{proof}
+\leavevmode\\
+    % Notes:
+    % - Recognizing it would require counting to ensure that both halves are the same, but that is beyond a finite automation's capability;
+    % - The Pumping Lemma can also prove this non-regularity.
+    proofgoeshere \\
+\end{proof}
+\leavevmode\\
+\textbf{(e):} \\
+\textbf{\underline{Claim:}} $\{ w | ww \in \Sigma* \}$ is a regular language.
+\begin{proof}
+\leavevmode\\
+    % Notes:
+    % - Any string w such that its concatenation with itself (i.e. ww) is in \Sigma* means w can be any string over {0, 1};
+    % - This set includes all strings in \Sigma*, so it's equivalent to \Sigma*, which is regular.
+    proofgoeshere \\
+\end{proof}
+\leavevmode\\
+\textbf{(f):} \\
+\textbf{\underline{Claim:}} $\{ w | w \text{ is a binary representation of a multiple of 3} \}$ is a regular language.
+\begin{proof}
+\leavevmode\\
+    % Notes:
+    % - A DFA can be constructed to recognize binary representations of multiples of 3, as shown in formal language theory;
+    % - This DFA works by keeping track of remainders modulo 3, which requires only a finite number of states (three states, one for each possible remainder).
+    proofgoeshere \\
+\end{proof}
+\leavevmode\\
+\pagebreak
+
+\section*{Question \#2}
+\textbf{\underline{Claim:}} Regular expressions that also have access to complement can still only express the same class of languages (i.e. the class of regular langauges) as regular expressions without the complement operation.
+\begin{proof}
+\leavevmode\\
+    % Notes:
+    % - Argue that a regular language's closure properties (under union, intersection, and complement) enable the construction of an equivalent regular expression without changing the language class.
+    % - Construct examples to illustrate equivalency using De Morgan's laws and closure proofs.
     proofgoeshere \\
 \end{proof}
 \pagebreak
 
-\section*{Question \#X}
-wordsgohere
+\section*{Question \#3}
+\textbf{Counter-free languages} are a subset of languages that satisfy the condition:
+\[
+    (\exists n \in \mathbb{N})(\forall m \geq n)(xy^mz \in L \iff xy^nz \in L) \text{.}
+\]
+\textbf{Star-free regular expressions} are regular expressions without the Kleene star, but with complementation. \\
+\\
+It is known in formal language theory that counter-free languages are equivalent to the languages that can be expressed as \textbf{star-free regular expressions}. \\
+\\
+\textbf{(a):} \\
+\textbf{\underline{Claim:}} $(ab)*$ can be matched with a star-free regular expression, where $\Sigma = \{ a, b \}$.
+\begin{proof}
+\leavevmode\\
+    % Notes:
+    % - Find a star-free regular expression for (ab)*.
+    proofgoeshere \\
+\end{proof}
+\leavevmode\\
+\textbf{(b):} \\
+\textbf{\underline{Claim:}} $(ab)*$ is not a counter-free language, where $\Sigma = \{ a, b \} $. 
+\begin{proof}
+\leavevmode\\
+    % Notes:
+    % - Use the definition of counter-free langauges to show that (ab)* satisfies the condition for counter-freeness.
+    proofgoeshere \\
+\end{proof}
+\leavevmode\\
+\textbf{(c):} \\
+\textbf{\underline{Claim:}} $(aa)*$ is not a counter-free language, where $\Sigma = \{ a \} $. 
+\begin{proof}
+\leavevmode\\
+    % Notes:
+    % - Find a counterexample to the condition, demonstrating the need for counting.
+    proofgoeshere \\
+\end{proof}
+\pagebreak
+
+\section*{Question \#4}
+Consider the language $L = \{ w | \text{the third last character of $w$ is $1$} \} $. \\
+\\
+Let $k \in \mathbb{N}$ be arbitrary. \\
+\\
+% Notes (raw):
+% For part (a), apply state counting arguments using the DFA properties for strings of length kk.
+% Part (b) involves constructing a minimal NFA and proving it has kk states, focusing on non-deterministic behavior that simplifies the automaton.
+% The bonus in part (c) requires DFA minimization techniques; try to show the necessity of 2k+1−12k+1−1 states by reasoning about state distinguishability.
+\textbf{(a):} \\
+\textbf{\underline{Claim:}} A DFA that accepts $L$ has to have at least $2^k$ number of states.
+\begin{proof}
+\leavevmode\\
+    proofgoeshere \\
+\end{proof}
+\leavevmode\\
+\textbf{(b):} \\
+\textbf{\underline{Claim:}} The smallest NFA that accepts $L$ has to have exactly $k$ number of states.
+\begin{proof}
+\leavevmode\\
+    proofgoeshere \\
+\end{proof}
+\leavevmode\\
+\textbf{(c):} \\
+\textbf{\underline{Claim:}} The smallest DFA that accepts $L$ has to have exactly $2^{k + 1} - 1$ number of states.
+\begin{proof}
+\leavevmode\\
+    proofgoeshere \\
+\end{proof}
+\leavevmode\\
+\pagebreak
+
+\section*{Question \#5}
+\textbf{\underline{Claim:}} Every finite language can be represented by a regular expression (meaning all finite languages are regular).
+% Notes (raw):
+% To prove that every finite language can be represented by a regular expression, we can use structural induction on the size of the finite language. This will show that any finite language, no matter how many strings it contains, can indeed be represented by a regular expression. Here’s the proof setup:
+% Definitions and Approach
+
+%     A finite language LL over an alphabet ΣΣ is a set of strings where the number of strings in LL is finite.
+%     We want to prove that for any finite language LL, there exists a regular expression rr such that L(r)=LL(r)=L (i.e., rr represents LL).
+
+% Proof by Induction on the Number of Strings in LL
+
+% Let n=∣L∣n=∣L∣, the number of strings in the language LL. We’ll prove that for any finite language LL with nn strings, there exists a regular expression that represents LL.
+% Base Case: n=1n=1
+
+% If n=1n=1, then LL contains only a single string, say w∈Σ∗w∈Σ∗. We can represent L={w}L={w} using the regular expression r=wr=w, which matches exactly the string ww.
+
+% Thus, for n=1n=1, LL can be represented by a regular expression.
+% Inductive Step
+
+% Assume that any finite language with kk strings can be represented by a regular expression. That is, if ∣L∣=k∣L∣=k, then there exists a regular expression rr such that L(r)=LL(r)=L.
+
+% Now, we need to show that if ∣L∣=k+1∣L∣=k+1, then LL can also be represented by a regular expression.
+
+%     Let LL be a language with k+1k+1 strings. We can split LL into two parts:
+%         A subset L′⊂LL′⊂L with kk strings (by removing one string from LL).
+%         A single string ww not in L′L′ such that L=L′∪{w}L=L′∪{w}.
+
+%     By the inductive hypothesis, L′L′ (which has kk strings) can be represented by a regular expression, say r′r′.
+
+%     The single string ww can be represented by the regular expression ww.
+
+%     Since regular languages are closed under union, the language L=L′∪{w}L=L′∪{w} can be represented by the regular expression r=r′∣wr=r′∣w, where ∣∣ denotes union (alternation) in regular expressions.
+
+% Therefore, LL with k+1k+1 strings can be represented by the regular expression r=r′∣wr=r′∣w.
+% Conclusion
+
+% By induction, every finite language with any finite number of strings can be represented by a regular expression. This completes the proof that all finite languages are regular.
 
 \begin{proof}
 \leavevmode\\
