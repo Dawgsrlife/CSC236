@@ -1,13 +1,13 @@
 # Fdb version 4
-["biber main"] 1730851082.7108 "main.bcf" "main.bbl" "main" 1730851244.87453 0
-  "main.bcf" 1730851244 107186 eaaa4cd7e05e4b6c6a6fb3c31db72029 "pdflatex"
+["biber main"] 1731433716.81691 "main.bcf" "main.bbl" "main" 1731434374.66745 0
+  "main.bcf" 1731434374 107186 eaaa4cd7e05e4b6c6a6fb3c31db72029 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1730851243.25267 "c:/Users/33576/LaTeX Projects/CSC236H5 F - Assignments/A3/main.tex" "main.pdf" "main" 1730851244.87514 0
+["pdflatex"] 1731434373.23091 "c:/Users/33576/LaTeX Projects/CSC236H5 F - Assignments/A3/main.tex" "main.pdf" "main" 1731434374.66814 0
   "EngReport.sty" 1729697864 781 805ea08727a6b1ae905b91ce3a3df8be ""
-  "c:/Users/33576/LaTeX Projects/CSC236H5 F - Assignments/A3/main.tex" 1730851240 11143 cc41c7356cda425534ac5472290173f2 ""
+  "c:/Users/33576/LaTeX Projects/CSC236H5 F - Assignments/A3/main.tex" 1731434372 11778 10afc341ebbff078380f8499e17ab8e6 ""
   "c:/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1727287667 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1727196084 1004 54797486969f23fa377b128694d548df ""
   "c:/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1727196084 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -37,6 +37,7 @@
   "c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb" 1727196084 32362 bc3f3eec7ab7d65fe700963d4017d32c ""
   "c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1727196084 32726 39f0f9e62e84beb801509898a605dbd5 ""
   "c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1727196084 32569 5e5ddc8df908dea60932f3c484a54c0d ""
+  "c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1727196084 32626 5abc8bb2f28aa647d4c70f8ea38cc0d3 ""
   "c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb" 1727196084 36118 fad905eba93cff5bce1e185fe980a177 ""
   "c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb" 1727196085 34694 870c211f62cb72718a00e353f14f254d ""
   "c:/texlive/2024/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1727290634 71627 94eb9990bed73c364d7f53f960cc8c5b ""
@@ -129,10 +130,10 @@
   "c:/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1727296253 3325960 5fac605b348f32104185a90287f47418 ""
   "c:/texlive/2024/texmf.cnf" 1727296015 713 e69b156964470283e0530f5060668171 ""
   "headerfooter.tex" 1730847295 297 6aefe22e0a592c74b389f1432432a752 ""
-  "main.aux" 1730851244 149 af6e2370636d8f7e135c8470e3e76af9 "pdflatex"
-  "main.bbl" 1730851084 0 d41d8cd98f00b204e9800998ecf8427e "biber main"
-  "main.run.xml" 1730851244 2224 bc6149f5caee4074188e1b81a66978d0 "pdflatex"
-  "main.tex" 1730851240 11143 cc41c7356cda425534ac5472290173f2 ""
+  "main.aux" 1731434374 149 af6e2370636d8f7e135c8470e3e76af9 "pdflatex"
+  "main.bbl" 1731433718 0 d41d8cd98f00b204e9800998ecf8427e "biber main"
+  "main.run.xml" 1731434374 2224 bc6149f5caee4074188e1b81a66978d0 "pdflatex"
+  "main.tex" 1731434372 11778 10afc341ebbff078380f8499e17ab8e6 ""
   "titlepage.tex" 1730847274 513 86e52d7674b8ee0004c8916964d8b361 ""
   (generated)
   "main.aux"

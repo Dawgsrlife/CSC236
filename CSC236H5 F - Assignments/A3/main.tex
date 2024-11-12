@@ -59,7 +59,7 @@
 % - Use the Pumping Lemma to prove non-regularity when needed;
 % - Construct DFAs for languages that are regular, focusing on capturing patterns precisely (like binary multiples of 3);
 % - Review closure properties (e.g., regular languages are closed under subtraction) to tackle parts involving set differences.
-Let $\Sigma \in \{ 0, 1 \} $. \\
+Let $\Sigma = \{ 0, 1 \} $. \\
 \\
 \textbf{(a):} \\
 \textbf{\underline{Claim:}} $\Sigma*$ is a regular language.
@@ -69,7 +69,21 @@ Let $\Sigma \in \{ 0, 1 \} $. \\
     % Notes:
     % - It includes every possible string of 0s and 1s;
     % - A DFA can be constructed that accepts any input by having a single accepting state with self-loops for both 0 and 1.
-    proofgoeshere \\
+    Let $L_1 = \{0\}$ and $L_2 = \{1\}$ be regular languages of $\Sigma$. \\
+    Define $L_3 = L_1 \cup L_2 = \{ 0, 1 \}$ as the regular language obtained by the union of $L_1$ and $L_2$. \\
+    \\
+    By definition, ${L_3}^*$ is a regular language. Since ${L_3} = \Sigma$, $\Sigma*$ is also a regular language. \\
+    \\
+    Then, define $\mathcal{D} = (\mathcal{Q}, \Sigma, \delta, s, F)$, where
+    \[
+        \mathcal{Q} = \{ q_0, q_1 \} \text{ is the set of states in } \mathcal{D}
+    \]
+    \[
+        \Sigma = \{ 0, 1 \} \text{ is the alphabet}
+    \]
+    \[
+        \delta : \mathcal{Q} \times \Sigma \to \mathcal{Q} \text{ is}
+    \]
 \end{proof}
 \leavevmode\\
 \textbf{(b):} \\
