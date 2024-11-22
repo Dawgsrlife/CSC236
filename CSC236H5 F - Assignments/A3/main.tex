@@ -14,6 +14,8 @@
 \usepackage{setspace}
 \usepackage{geometry}
 \usepackage{xcolor}  % Required for coloring in listings
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning, arrows}
 
 \graphicspath{{Images/}}
 \onehalfspacing
@@ -62,7 +64,7 @@
 Let $\Sigma = \{ 0, 1 \} $. \\
 \\
 \textbf{(a):} \\
-\textbf{\underline{Claim:}} $\Sigma*$ is a regular language.
+\textbf{\underline{Claim:}} $\Sigma^*$ is a regular language.
 \begin{proof}
 \leavevmode\\
     % Provide a DFA that accepts the language in the proof
@@ -72,30 +74,127 @@ Let $\Sigma = \{ 0, 1 \} $. \\
     Let $L_1 = \{0\}$ and $L_2 = \{1\}$ be regular languages of $\Sigma$. \\
     Define $L_3 = L_1 \cup L_2 = \{ 0, 1 \}$ as the regular language obtained by the union of $L_1$ and $L_2$. \\
     \\
-    By definition, ${L_3}^*$ is a regular language. Since ${L_3} = \Sigma$, $\Sigma*$ is also a regular language. \\
+    By definition, ${L_3}^*$ is a regular language. Since ${L_3} = \Sigma$, $\Sigma^*$ is also a regular language. \\
     \\
-    Then, define $\mathcal{D} = (\mathcal{Q}, \Sigma, \delta, s, F)$, where
+    Next, denote the transition function $\delta$ by the following table:
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c|c|}
+            \hline
+            \textbf{Old State} & \textbf{Symbol} & \textbf{New State} \\
+            \hline
+            \( q_0 \) & 0 & \( q_0 \) \\
+            \( q_0 \) & 1 & \( q_0 \) \\
+            \hline
+        \end{tabular}
+        \caption{State Transition Table}
+    \end{table}
+    \\
+    Using $\delta$, define the deterministic finite automaton $\mathcal{D} = (\mathcal{Q}, \Sigma, \delta, s, F)$, where
     \[
-        \mathcal{Q} = \{ q_0, q_1 \} \text{ is the set of states in } \mathcal{D}
+        \mathcal{Q} = \{ q_0 \} \text{ is the set of states in } \mathcal{D}
     \]
     \[
-        \Sigma = \{ 0, 1 \} \text{ is the alphabet}
+        \Sigma = \{ 0, 1 \} \text{ is the alphabet of symbols used by } \mathcal{D} 
     \]
     \[
-        \delta : \mathcal{Q} \times \Sigma \to \mathcal{Q} \text{ is}
+        \delta : \mathcal{Q} \times \Sigma \to \mathcal{Q} \text{ is the transition function defined by Table 1}
+    \]
+    \[
+        s = q_0 \text{ is the initial state of } \mathcal{D}
+    \]
+    \[
+        F = \{ q_0 \} \subseteq \mathcal{Q} \text{ is the set of accepting states of } \mathcal{D} \text{.}
     \]
 \end{proof}
 \leavevmode\\
 \textbf{(b):} \\
-\textbf{\underline{Claim:}} $\Sigma* \setminus \{ K \}, K = \{ 01, 101, 010 \}$ is a regular language.
+\textbf{\underline{Claim:}} $\Sigma^* \setminus K, K = \{ 01, 101, 010 \}$ is a regular language.
 \begin{proof}
 \leavevmode\\
     % Provide a DFA that accepts the language in the proof
     % Notes:
     % - Regular languages are closed under finite set differences;
-    % - K is finite, so the difference \Sigma*\setminusK is also regular;
+    % - K is finite, so the difference \Sigma^*\setminus{K} is also regular;
     % - A DFA can be constructed that accepts all strings except specific patterns 01, 101, and 010.
-    proofgoeshere \\
+    This proof aims to show that the language $\Sigma^* \setminus K$ is a regular language by constructing a DFA that accepts all strings except the literal strings in $K = \{ 01, 101, 010 \}$. \\
+    \\
+    Denote the transition function $\delta$ by the following table:
+    \begin{table}[!h]
+        \centering
+        \begin{tabular}{|c|c|c|}
+            \hline
+            \textbf{Old State} & \textbf{Symbol} & \textbf{New State} \\
+            \hline
+            % had empty string (check prefix)
+            \( q_\epsilon \) & 0 & \( q_0 \) \\
+            \( q_\epsilon \) & 1 & \( q_1 \) \\
+            \hline
+            % had 0
+            \( q_0 \) & 0 & \( q_5 \) \\
+            \( q_0 \) & 1 & \( q_2 \) \\
+            \hline
+            % had 1
+            \( q_1 \) & 0 & \( q_4 \) \\
+            \( q_1 \) & 1 & \( q_5 \) \\
+            \hline
+            % had 01
+            \( q_2 \) & 0 & \( q_3 \) \\
+            \( q_2 \) & 1 & \( q_5 \) \\
+            \hline
+            % had 010 or 101 (accepts on next)
+            \( q_3 \) & 0 & \( q_5 \) \\
+            \( q_3 \) & 1 & \( q_5 \) \\
+            \hline
+            % had 10
+            \( q_4 \) & 0 & \( q_5 \) \\
+            \( q_4 \) & 1 & \( q_3\) \\
+            \hline
+            % guaranteed accepting
+            \( q_5 \) & 0 & \( q_5 \) \\
+            \( q_5 \) & 1 & \( q_5 \) \\
+            \hline
+        \end{tabular}
+        \caption{State Transition Table}
+    \end{table}
+    Using $\delta$, define the DFA $\mathcal{D} = (\mathcal{Q}, \Sigma, \delta, s, F)$, where
+    \[
+        \mathcal{Q} = \{ q_0 \} \text{ is the set of states in } \mathcal{D}
+    \]
+    \[
+        \Sigma = \{ 0, 1 \} \text{ is the alphabet of symbols used by } \mathcal{D}
+    \]
+    \[
+        \delta : \mathcal{Q} \times \Sigma \to \mathcal{Q} \text{ is the transition function define by Table 2}
+    \]
+    \[
+        s = q_0 \text{ is the initial state of } \mathcal{D} 
+    \]
+    \[
+        F = \{ q_2, q_3 \} \subseteq \mathcal{Q} \text{ is the set of accepting states of } \mathcal{D} \text{.}
+    \]
+    For each state in $\mathcal{D}$, define a state invariant $P_q(w)$, describing the property of any string $w \in \Sigma^*$ which leads $\mathcal{D}$ to state $q$:
+    \[
+        P_{q_\epsilon}(w): 
+    \]
+    \[
+        P_{q_0}(w): 
+    \]
+    \[
+        P_{q_1}(w): 
+    \]
+    \[
+        P_{q_2}(w): 
+    \]
+    \[
+        P_{q_3}(w): 
+    \]
+    \[
+        P_{q_4}(w): 
+    \]
+    \[
+        P_{q_5}(w): 
+    \]
 \end{proof}
 \leavevmode\\
 \textbf{(c):} \\
@@ -113,7 +212,7 @@ Let $\Sigma = \{ 0, 1 \} $. \\
 \begin{proof}
 \leavevmode\\
     % Notes:
-    % - Recognizing it would require counting to ensure that both halves are the same, but that is beyond a finite automation's capability;
+    % - Recognizing it would require counting to ensure that both halves are the same, but that is beyond a finite automaton's capability;
     % - The Pumping Lemma can also prove this non-regularity.
     proofgoeshere \\
 \end{proof}
@@ -147,7 +246,35 @@ Let $\Sigma = \{ 0, 1 \} $. \\
     % Notes:
     % - Argue that a regular language's closure properties (under union, intersection, and complement) enable the construction of an equivalent regular expression without changing the language class.
     % - Construct examples to illustrate equivalency using De Morgan's laws and closure proofs.
-    proofgoeshere \\
+    Suppose $r$ is an arbitrary regular expression with alphabet $\Sigma$ so that $L = \mathcal{L}(r)$ is a regular language. By definition, there exists a DFA $\mathcal{M}$ that accepts $L$. \\
+    \\
+    Construct $\mathcal{M}$: \\
+    \(\mathcal{M} = (Q, \Sigma, \delta, s, F)\), where
+    \begin{itemize}
+        \item Q is a set of finite states;
+        \item $\Sigma$ is the alphabet;
+        \item $\delta : Q \times \Sigma \to Q$ is the transition function;
+        \item $s$ is the start state;
+        \item $F \subseteq Q$ is the set of accepting states.
+    \end{itemize}
+    \leavevmode\\
+    Next, define $\overline{L} = \Sigma^* \setminus L$ as the regular language containing everything obtainable from the alphabet $\Sigma$ except members of $L$. \\
+    \\
+    Construct $\overline{M}$ to be identical to $M$, except for its accepting states:
+    \begin{itemize}
+        \item Q is a set of finite states;
+        \item $\Sigma$ is the alphabet;
+        \item $\delta : Q \times \Sigma \to Q$ is the transition function;
+        \item $s$ is the start state;
+        \item $Q \setminus F \subseteq Q$ is the set of accepting states.
+    \end{itemize}
+    \leavevmode\\
+    Notice that $\overline{M}$ share the same states, alphabet, transition function, and start state as those of $M$. The difference is the set of accepting states in $\overline{M}$, which is designed to be mutually exclusive from that of $M$. \\
+    \\
+    \textbf{Self-Note: now add the proof that $\overline{M}$ accepts $\overline{L}$, and connect it back to regexes.}
+    \\
+    Next, let $\overline{r}$ be some regular expression without the complement operation.
+
 \end{proof}
 \pagebreak
 
@@ -166,7 +293,16 @@ It is known in formal language theory that counter-free languages are equivalent
 \leavevmode\\
     % Notes:
     % - Find a star-free regular expression for (ab)*.
-    proofgoeshere \\
+    The expression $(ab)*$ represents strings in the set $\{ \epsilon, ab, abab, ababab, \dots\}$. \\
+    \\
+    This means matching strings are strings where every occurrence of $a$ is immediately followed by a $b$. \\
+    \\
+    Due to the definition of $\Sigma = \{ a, b \} $, an equivalent star-free regular expression can be written in terms of the complement. The complement definition is highlighted below:
+    \begin{itemize}
+        \item The string starts with $b$ if it is not empty;
+        \item The string contains an $a$ not immediately followed by a $b$.
+    \end{itemize}
+    
 \end{proof}
 \leavevmode\\
 \textbf{(b):} \\
