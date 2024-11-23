@@ -449,12 +449,25 @@ Consider the language $L = \{ w | \text{the $k^\text{th}$ to last character of $
     \underline{Induction Step:} \\
     Let $L_{k + 1} = \{ w_1, w_2, \dots, w_k, w_{k + 1} \}$, where $w_i \in \Sigma^*$ for $i \in [1, k + 1] \cap \mathbb{N}$. \\
     \\
-    By the Induction Hypothesis, the smaller language $L_k = L_{k + 1} \setminus \{ w_{k + 1} \} = \{ w_1, w_2, \dots, w_k \}$ has language has regular expression $r_k$ such that $L_k = \mathcal{L}(r_k)$. \\
+    By the Induction Hypothesis, $L_k = L_{k + 1} \setminus \{ w_{k + 1} \} = \{ w_1, w_2, \dots, w_k, w_{k + 1} \} \setminus \{ w_{k + 1} \} = \{ w_1, w_2, \dots, w_k \}$ has language has regular expression $r_k$ such that $L_k = \mathcal{L}(r_k)$. \\
     \\
-    This means 
+    Notice that:
+    \begin{itemize}
+        \item The regex $r_k$ represents the language $L_k$;
+        \item The regex $w_{k + 1}$ represents the language $\{ w_{k + 1} \}$.
+    \end{itemize}
+    Then, $L_{k + 1}$ can be constructed as a regex as follows:
+    \[
+        L_{k + 1} = L_k \cup \{ w_{k + 1} \}
+    \]
+    By definition, the union of two regexes is a regex. Construct $r_{k + 1}$:
+    \[
+        r_{k + 1} = r_k + w_{k + 1}
+    \]
+    As desired, the regex $r_{k + 1}$ represents the language $L_{k + 1}$. \\
     \\
-    Next, consider $L_{k + 1} = $
-
+    \underline{Conclusion:} \\
+    By the principle of simple induction, $P(n)$ holds for all $n \in \mathbb{N}$. It follows that all finite languages must be regular. \\
 \end{proof}
 \pagebreak
 
