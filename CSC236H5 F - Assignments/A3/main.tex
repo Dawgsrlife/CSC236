@@ -281,19 +281,19 @@ Let $\Sigma = \{ 0, 1 \} $. \\
 \section*{Question \#3}
 \textbf{Counter-free languages} are a subset of languages that satisfy the condition:
 \[
-    (\exists n \in \mathbb{N})(\forall m \geq n)(xy^mz \in L \iff xy^nz \in L) \text{.}
+    (\exists n \in \mathbb{N})(\forall x, y, z \in \Sigma^*)(\forall m \geq n)(xy^mz \in L \iff xy^nz \in L) \text{.}
 \]
 \textbf{Star-free regular expressions} are regular expressions without the Kleene star, but with complementation. \\
 \\
 It is known in formal language theory that counter-free languages are equivalent to the languages that can be expressed as \textbf{star-free regular expressions}. \\
 \\
 \textbf{(a):} \\
-\textbf{\underline{Claim:}} $(ab)*$ can be matched with a star-free regular expression, where $\Sigma = \{ a, b \}$.
+\textbf{\underline{Claim:}} $(ab)^*$ can be matched with a star-free regular expression, where $\Sigma = \{ a, b \}$.
 \begin{proof}
 \leavevmode\\
     % Notes:
     % - Find a star-free regular expression for (ab)*.
-    The expression $(ab)*$ represents strings in the set $\{ \epsilon, ab, abab, ababab, \dots\}$. \\
+    The expression $(ab)^*$ represents strings in the set $\{ \epsilon, ab, abab, ababab, \dots\}$. \\
     \\
     This means matching strings are strings where every occurrence of $a$ is immediately followed by a $b$. \\
     \\
@@ -302,20 +302,33 @@ It is known in formal language theory that counter-free languages are equivalent
         \item The string starts with $b$ if it is not empty;
         \item The string contains an $a$ not immediately followed by a $b$.
     \end{itemize}
-    
+    As a regular expression, this is $?$. \\
+
 \end{proof}
 \leavevmode\\
 \textbf{(b):} \\
-\textbf{\underline{Claim:}} $(ab)*$ is not a counter-free language, where $\Sigma = \{ a, b \} $. 
+\textbf{\underline{Claim:}} $(ab)^*$ is a counter-free language, where $\Sigma = \{ a, b \} $. 
 \begin{proof}
 \leavevmode\\
     % Notes:
     % - Use the definition of counter-free langauges to show that (ab)* satisfies the condition for counter-freeness.
-    proofgoeshere \\
+    By definition, if $(ab)^*$ is a counter-free language, there exists natural $n$ for all $x, y, z \in \{ a, b \}^*$ and for all $m \geq n$ such that $xy^mz \in (ab)^* \iff xy^nz \in (ab)^*$. \\
+    \\
+    Let $n \in \mathbb{N}$. Let $x, y, z \in \{ a, b \}^*$ and $m \geq n$ both be arbitrary. \\
+    \\
+    \underline{Show that $xy^mz \in (ab)^* \implies xy^nz \in (ab)^*$:} \\
+    Suppose $xy^mz \in (ab)^*$. \\
+    \\
+    Since $m \geq n$ is arbitrary,  \\
+    \\
+    a \\
+    \\
+    \underline{Show that $xy^mz \in (ab)^* \impliedby xy^nz \in (ab)^*$:} \\
+    \\
 \end{proof}
 \leavevmode\\
 \textbf{(c):} \\
-\textbf{\underline{Claim:}} $(aa)*$ is not a counter-free language, where $\Sigma = \{ a \} $. 
+\textbf{\underline{Claim:}} $(aa)^*$ is NOT a counter-free language, where $\Sigma = \{ a \} $. 
 \begin{proof}
 \leavevmode\\
     % Notes:
@@ -325,9 +338,9 @@ It is known in formal language theory that counter-free languages are equivalent
 \pagebreak
 
 \section*{Question \#4}
-Consider the language $L = \{ w | \text{the third last character of $w$ is $1$} \} $. \\
+Let $k \in \mathbb{N}$ be arbitrary. Let $w \in \Sigma^*$, where $|\Sigma| \geq 2$ and has $1$ as one of its symbols. \\
 \\
-Let $k \in \mathbb{N}$ be arbitrary. \\
+Consider the language $L = \{ w | \text{the $k^\text{th}$ to last character of $w$ is $1$} \}$. \\
 \\
 % Notes (raw):
 % For part (a), apply state counting arguments using the DFA properties for strings of length kk.
@@ -337,14 +350,27 @@ Let $k \in \mathbb{N}$ be arbitrary. \\
 \textbf{\underline{Claim:}} A DFA that accepts $L$ has to have at least $2^k$ number of states.
 \begin{proof}
 \leavevmode\\
-    proofgoeshere \\
+    \textbf{ACTUALLY, SHOW THIS BY CONTRADICTION: Suppose whatever... less than $2^k$ states.} \\
+    \\
+    A DFA is determinstic and requires states to remember the ``history'' of the input. For the language $L = \{ w | \text{the $k^\text{th}$ to last character of $w$ is $1$} \}$, the DFA must track the last $k$ characters of the input string. \\
+    \\
+    Notice that there are $2^k$ possible combinations of $k$-length binary substrings, and each of these combinations must map to a unique state in the DFA for accurate processing. \\
+    \\
+    Any DFA with fewer than $2^k$ states cannot differentiate between all possible $k$-length suffixes, causing the automaton to classify strings incorrectly. \\
+    \\
+    Any DFA with more than $2^k$ states either accepts $L$ with a larger alphabet with more than $2$ symbols, or is introducing repetitive and redundant states, but still works. \\
 \end{proof}
+
 \leavevmode\\
 \textbf{(b):} \\
 \textbf{\underline{Claim:}} The smallest NFA that accepts $L$ has to have exactly $k$ number of states.
 \begin{proof}
 \leavevmode\\
-    proofgoeshere \\
+    In an NFA, non-determinism allows the automaton to ``guess'' when it is $k$-steps away from the end of the string. \\
+    \\
+    The NFA for $L$ needs only $k$ states because:
+    - The start state (initial state) represents the starting position;
+    - The NFA transitions through $k - 1$ intermediate states to track progress. \\
 \end{proof}
 \leavevmode\\
 \textbf{(c):} \\
@@ -396,7 +422,39 @@ Let $k \in \mathbb{N}$ be arbitrary. \\
 
 \begin{proof}
 \leavevmode\\
-    proofgoeshere \\
+    Let $\Sigma$ be an arbitrary alphabet. Let $L$ be an arbitrary finite language over $\Sigma$. \\
+    \\
+    Let $n$ be an arbitrary natural number. \\
+    Denote the predicate:
+    \[
+        P(n) \coloneqq |L_n| = n \implies \text{$L_n$ can be represented as a regular expression.}
+    \]
+    \\
+    This proof uses the principle of simple induction to show $P(n)$ for all $n \in \mathbb{N}$. \\
+    \\
+    \underline{Base Cases:} \\
+    Let $n = 0$. \\
+    This means $|L_n| = 0$, so $L_n = \emptyset$. By definition, the empty set is a regular expression. \\
+    Thus, $P(0)$. \\
+    \\
+    Let $n = 1$. \\
+    Then $|L_n| = 1$, so $L_n = \{ w \}$ for some string $w \in \Sigma^*$. By definition, any single string over an alphabet is a regular expression. \\
+    Thus, $P(1)$. \\
+    \\
+    \underline{Induction Hypothesis} \\
+    Assume that $P(k)$ holds for some natural $k$. \\
+    \\
+    This means if $L_k$ has $k$ strings, then $L_k$ can be represented as a regular expression. \\
+    \\
+    \underline{Induction Step:} \\
+    Let $L_{k + 1} = \{ w_1, w_2, \dots, w_k, w_{k + 1} \}$, where $w_i \in \Sigma^*$ for $i \in [1, k + 1] \cap \mathbb{N}$. \\
+    \\
+    By the Induction Hypothesis, the smaller language $L_k = L_{k + 1} \setminus \{ w_{k + 1} \} = \{ w_1, w_2, \dots, w_k \}$ has language has regular expression $r_k$ such that $L_k = \mathcal{L}(r_k)$. \\
+    \\
+    This means 
+    \\
+    Next, consider $L_{k + 1} = $
+
 \end{proof}
 \pagebreak
 

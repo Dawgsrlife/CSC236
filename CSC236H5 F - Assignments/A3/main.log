@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.25)  21 NOV 2024 20:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.25)  22 NOV 2024 20:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1112,6 +1112,41 @@ Underfull \hbox (badness 10000) in paragraph at lines 293--301
  []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 305--306
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 312--328
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 312--328
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 312--328
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 312--328
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 312--328
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 312--328
+
+ []
+
+
 
 
 Package fancyhdr Warning: \headheight is too small (30.0pt): 
@@ -1130,12 +1165,37 @@ Package fancyhdr Warning: \headheight is too small (30.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-3.40004pt}.
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 328--339
+Underfull \hbox (badness 10000) in paragraph at lines 341--352
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 328--339
+Underfull \hbox (badness 10000) in paragraph at lines 341--352
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 352--362
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 352--362
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 352--362
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 352--362
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 368--374
 
  []
 
@@ -1157,7 +1217,65 @@ Package fancyhdr Warning: \headheight is too small (30.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-3.40004pt}.
 
-[10] (./main.aux)
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 424--429
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 431--457
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 431--457
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 431--457
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 431--457
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 431--457
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 431--457
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 431--457
+
+ []
+
+
+
+
+Package fancyhdr Warning: \headheight is too small (30.0pt): 
+(fancyhdr)                Make it at least 33.40004pt, for example:
+(fancyhdr)                \setlength{\headheight}{33.40004pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-3.40004pt}.
+
+[11]
+
+
+Package fancyhdr Warning: \headheight is too small (30.0pt): 
+(fancyhdr)                Make it at least 33.40004pt, for example:
+(fancyhdr)                \setlength{\headheight}{33.40004pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-3.40004pt}.
+
+[12] (./main.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-09-10>
@@ -1175,10 +1293,10 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  94i,13n,107p,753b,854s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on main.pdf (11 pages, 151425 bytes).
+Output written on main.pdf (13 pages, 159731 bytes).
 PDF statistics:
- 109 PDF objects out of 1000 (max. 8388607)
- 69 compressed objects within 1 object stream
+ 116 PDF objects out of 1000 (max. 8388607)
+ 74 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
