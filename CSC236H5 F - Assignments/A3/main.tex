@@ -48,6 +48,15 @@
     moredelim=[is][\color{myred}]{@@}{@@}, % Custom inline LaTeX coloring
 }
 
+% Configure the TikZ properties
+\tikzset{
+    ->,                                         % Make arrows appear directed
+    >=stealth,                                  % Make arrow heads bold
+    node distance = 3cm,                        % Set min distance between two nodes
+    every state/.style={thick, fill=gray!10},   % Configure appearance of nodes in the finite automata
+    initial text = $ $                          % Set the text that appears on the start node
+}
+
 \begin{document}
 \renewcommand{\familydefault}{\rmdefault}
 
@@ -76,7 +85,18 @@ Let $\Sigma = \{ 0, 1 \} $. \\
     \\
     By definition, ${L_3}^*$ is a regular language. Since ${L_3} = \Sigma$, $\Sigma^*$ is also a regular language. \\
     \\
-    Next, denote the transition function $\delta$ by the following table:
+    While this proof is complete, the assignment encourages DFA proofs to show that languages are regular. \\
+    \\
+    So, as an alternative to \textit{Part (a)}, and for all relevant subsequent parts, adopt a DFA proof. \\
+    \\
+    Denote the transition function $\delta$ by the following diagram:
+    \begin{center}
+        \begin{tikzpicture}[auto]
+            \node [state, initial, accepting] (q0) {$q_0$};
+
+            \draw (q0) edge [loop above] node {$0, 1$} (q0);
+        \end{tikzpicture}
+    \end{center}
     \begin{table}[h!]
         \centering
         \begin{tabular}{|c|c|c|}
@@ -89,23 +109,63 @@ Let $\Sigma = \{ 0, 1 \} $. \\
         \end{tabular}
         \caption{State Transition Table}
     \end{table}
-    \\
     Using $\delta$, define the deterministic finite automaton $\mathcal{D} = (\mathcal{Q}, \Sigma, \delta, s, F)$, where
     \[
-        \mathcal{Q} = \{ q_0 \} \text{ is the set of states in } \mathcal{D}
+        Q = \{ q_0 \} \text{ is the set of states in } \mathcal{D}
     \]
     \[
         \Sigma = \{ 0, 1 \} \text{ is the alphabet of symbols used by } \mathcal{D} 
     \]
     \[
-        \delta : \mathcal{Q} \times \Sigma \to \mathcal{Q} \text{ is the transition function defined by Table 1}
+        \delta : Q \times \Sigma \to Q \text{ is the transition function defined by Table 1}
     \]
     \[
         s = q_0 \text{ is the initial state of } \mathcal{D}
     \]
     \[
-        F = \{ q_0 \} \subseteq \mathcal{Q} \text{ is the set of accepting states of } \mathcal{D} \text{.}
+        F = \{ q_0 \} \subseteq Q \text{ is the set of accepting states of } \mathcal{D} \text{.}
     \]
+    For each state $q_i$, $i \in \{0\}$, in $\mathcal{D}$, define a state invariant $P_q(w)$:
+    \[
+        P_{q_0}(w): w \text{ is $\epsilon$ or consists of $0$s and $1$s.}
+    \]
+    As the only state, $q_0$ is trivially mutually exclusive. As well, every string in $\Sigma^* = \{0, 1\}^*$ is either $\epsilon$ or consists of some number of $0$s and $1$s, clearly satisfying $q_0$; exhaustivity is satisfied. \\
+    \\
+    Let $q \in Q = \{q_0\}$ and $w \in \Sigma^* = \{0, 1\}^*$ both be arbitrary (here, $q = q_0$ always). \\
+    Denote the predicate:
+    \[
+        P_{\delta(q_0, w)}(w) \coloneqq P_q(w) \text{ is the state invariant.}
+    \]
+    Perform structural induction as follows: \\
+    \\
+    \underline{Base Case:} \\
+    Let $q = q_0$ and $w = \epsilon$. \\
+    $P_q(w) = P_{q_0}(\epsilon)$ is true as $w = \epsilon$. \\
+    \\
+    \underline{Induction Hypothesis:} \\
+    Assume that $P_q(w)$ is true for all $q \in \{q_0\}$ and some $w \in \{0, 1\}^*$. \\
+    This means $w$ is either empty or consists of $0$s and $1$s. \\
+    \\
+    \underline{Induction Step}: \\
+    Demonstrate that all state invariants hold when processing strings from the $\Sigma = \{0, 1\}$. \\
+    This can be achieved by showing that $P_{\delta(q, z)}(wz)$ holds for all $q \in \{q_0\}$ and $z \in \{0, 1\}$. \\
+    \\
+    Let $w \in \{0, 1\}^*$ be arbitrary. \\
+    \\
+    Let $q = q_0$, $z \in \{0, 1\}$, and assume $P_{q_0}(w)$ is true. \\
+    Notice that $\delta(q, z) = \delta(q_0, 0) = q_0$. Conveniently, $P_{q_0}$ is already true by assumption. \\
+    \\
+    There are no other state invariants in $\mathcal{D}$. By the principle of structural induction, $P_{\delta(q_0, w)}$ is true for all $q \in Q = \{q_0\}$ and $w \in \Sigma^* = \{0, 1\}^*$. \\
+    \\
+    Finally, demonstrate that $\mathcal{D}$ accepts exactly the language $L = \Sigma^*$ over $\Sigma = \{0, 1\}$. \\
+    This is achievable by showing that if $w \in \Sigma^* = \{0, 1\}^*$ is arbitrary, $w$ is a member of $L$ if and only if there exists an accepting state $q \in F$ such that $P_q(w)$ holds. \\
+    \\
+    By the definition of $P_{q_0}(w): \text{$w$ is $\epsilon$ or consists of $0$s and $1$s}$. \\
+    If $w \in L$, then it is either an empty string or consists of $0$s and $1$s. Clearly, $P_{q_0}(w)$ must be true. \\
+    On the other hand, choose the accepting state $q_0 \in F$ and assume $P_{q_0}(w)$ is true. Clearly, $w \in L$, due to matching definitions. \\
+    \\
+    Therefore, while this DFA proof is redundant in nature, it is clear that $\mathcal{D}$ accepts $L = \Sigma^*$ over $\Sigma = \{0, 1\}$. \\
+    Again, $L = \Sigma^*$ is demonstrated to be a regular language. \\
 \end{proof}
 \leavevmode\\
 \textbf{(b):} \\
@@ -246,7 +306,13 @@ Let $\Sigma = \{ 0, 1 \} $. \\
     % Notes:
     % - Argue that a regular language's closure properties (under union, intersection, and complement) enable the construction of an equivalent regular expression without changing the language class.
     % - Construct examples to illustrate equivalency using De Morgan's laws and closure proofs.
-    Suppose $r$ is an arbitrary regular expression with alphabet $\Sigma$ so that $L = \mathcal{L}(r)$ is a regular language. By definition, there exists a DFA $\mathcal{M}$ that accepts $L$. \\
+    Suppose $r$ is an arbitrary regular expression with alphabet $\Sigma$ so that $L = \mathcal{L}(r)$ is a regular language. \\
+    Assume $r$ has access to the complement operation. \\
+    \\
+    Let $\overline{L} = \{ x \in \Sigma^* \mid x \notin L \}$ be the regular language representing the \textit{complement} of L. \\
+    Assume $\overline{r}$ is a regular expression, with $\mathcal{L}(\overline{r}) = \overline{\mathcal{L}(r)}$. \\
+    \\
+    By definition, there exists a DFA $\mathcal{M}$ that accepts $L$. \\
     \\
     Construct $\mathcal{M}$: \\
     \(\mathcal{M} = (Q, \Sigma, \delta, s, F)\), where
@@ -384,42 +450,6 @@ Consider the language $L = \{ w | \text{the $k^\text{th}$ to last character of $
 
 \section*{Question \#5}
 \textbf{\underline{Claim:}} Every finite language can be represented by a regular expression (meaning all finite languages are regular).
-% Notes (raw):
-% To prove that every finite language can be represented by a regular expression, we can use structural induction on the size of the finite language. This will show that any finite language, no matter how many strings it contains, can indeed be represented by a regular expression. Here’s the proof setup:
-% Definitions and Approach
-
-%     A finite language LL over an alphabet ΣΣ is a set of strings where the number of strings in LL is finite.
-%     We want to prove that for any finite language LL, there exists a regular expression rr such that L(r)=LL(r)=L (i.e., rr represents LL).
-
-% Proof by Induction on the Number of Strings in LL
-
-% Let n=∣L∣n=∣L∣, the number of strings in the language LL. We’ll prove that for any finite language LL with nn strings, there exists a regular expression that represents LL.
-% Base Case: n=1n=1
-
-% If n=1n=1, then LL contains only a single string, say w∈Σ∗w∈Σ∗. We can represent L={w}L={w} using the regular expression r=wr=w, which matches exactly the string ww.
-
-% Thus, for n=1n=1, LL can be represented by a regular expression.
-% Inductive Step
-
-% Assume that any finite language with kk strings can be represented by a regular expression. That is, if ∣L∣=k∣L∣=k, then there exists a regular expression rr such that L(r)=LL(r)=L.
-
-% Now, we need to show that if ∣L∣=k+1∣L∣=k+1, then LL can also be represented by a regular expression.
-
-%     Let LL be a language with k+1k+1 strings. We can split LL into two parts:
-%         A subset L′⊂LL′⊂L with kk strings (by removing one string from LL).
-%         A single string ww not in L′L′ such that L=L′∪{w}L=L′∪{w}.
-
-%     By the inductive hypothesis, L′L′ (which has kk strings) can be represented by a regular expression, say r′r′.
-
-%     The single string ww can be represented by the regular expression ww.
-
-%     Since regular languages are closed under union, the language L=L′∪{w}L=L′∪{w} can be represented by the regular expression r=r′∣wr=r′∣w, where ∣∣ denotes union (alternation) in regular expressions.
-
-% Therefore, LL with k+1k+1 strings can be represented by the regular expression r=r′∣wr=r′∣w.
-% Conclusion
-
-% By induction, every finite language with any finite number of strings can be represented by a regular expression. This completes the proof that all finite languages are regular.
-
 \begin{proof}
 \leavevmode\\
     Let $\Sigma$ be an arbitrary alphabet. Let $L$ be an arbitrary finite language over $\Sigma$. \\
