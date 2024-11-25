@@ -740,17 +740,21 @@ It is known in formal language theory that counter-free languages are equivalent
 \leavevmode\\
     % Notes:
     % - Find a star-free regular expression for (ab)*.
-    The expression $(ab)^*$ represents strings in the set $\{ \epsilon, ab, abab, ababab, \dots\}$. \\
+    The expression $(ab)^*$ represents strings in the set $\{ \epsilon, ab, abab, ababab, \dots\}$. In other words, strings in $(ab)^*$ consist of zero or more repetitions of the substring $ab$. This means matching strings are strings where every occurrence of $a$ is immediately followed by a $b$ and the string must not have any extraneous characters or mismatches. \\
     \\
-    This means matching strings are strings where every occurrence of $a$ is immediately followed by a $b$. \\
-    \\
-    Due to the definition of $\Sigma = \{ a, b \} $, an equivalent star-free regular expression can be written in terms of the complement. The complement definition is highlighted below:
+    Strings in $(ab)^*$ \textbf{must not}:
     \begin{itemize}
-        \item The string starts with $b$ if it is not empty;
-        \item The string contains an $a$ not immediately followed by a $b$.
+        \item Start with $b$,
+        \item End with $a$,
+        \item Contain adjacent $a$s ($aa$),
+        \item Contain adjacent $b$s ($bb$).
     \end{itemize}
-    As a regular expression, this is $?$. \\
-
+    Note that if $L$ is a language, then its \textit{complement} is the language $\overline{L} = \{x \in \Sigma^* \mid x \notin L\}$. For an equivalent notation in regular expressions, if $r$ is a regex matching $\mathcal{L}(r)$, then $\overline{r}$ is a regular expression such that $\mathcal{L}(\overline{r}) = \overline{\mathcal{L}(r)}$. This makes $\overline{\varnothing}$ is the star-free regex of $\Sigma^*$. \\
+    \\
+    Let the complement regex of $(ab)^*$ be \(\overline{(ab)^*} = b\overline{\varnothing} + \overline{\varnothing}a + \overline{\varnothing}aa\overline{\varnothing} + \overline{\varnothing}bb\overline{\varnothing}\). \\
+    Then, \((ab)^* = \overline{b\overline{\varnothing} + \overline{\varnothing}a + \overline{\varnothing}aa\overline{\varnothing} + \overline{\varnothing}bb\overline{\varnothing}}\). \\
+    \\
+    Clearly, $r = \overline{b\overline{\varnothing} + \overline{\varnothing}a + \overline{\varnothing}aa\overline{\varnothing} + \overline{\varnothing}bb\overline{\varnothing}}$ is a star-free regex. Thus, $(ab)^*$ can be expressed as a star-free regular expression by using complements to describe its constraints. \\
 \end{proof}
 \leavevmode\\
 \textbf{(b):} \\
