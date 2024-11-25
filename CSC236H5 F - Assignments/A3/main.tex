@@ -396,13 +396,29 @@ Let $\Sigma = \{ 0, 1 \} $. \\
 \end{proof}
 \leavevmode\\
 \textbf{(d):} \\
-\textbf{\underline{Claim:}} $\{ ww | w \in \Sigma* \}$ is NOT a regular language.
+\textbf{\underline{Claim:}} $\{ ww | w \in \Sigma^* \}$ is NOT a regular language.
 \begin{proof}
 \leavevmode\\
-    % Notes:
-    % - Recognizing it would require counting to ensure that both halves are the same, but that is beyond a finite automaton's capability;
-    % - The Pumping Lemma can also prove this non-regularity.
-    proofgoeshere \\
+    Seeking a contradiction, assume the language $L = \{ ww | w \in \Sigma^* \}$ is regular. Then, there exists a DFA $\mathcal{D} = (Q, \Sigma, \delta, s, F)$ that recognizes $L$, where $|Q| = k, k \in \mathbb{N}$ \\
+    \\
+    Next, choose a string $x \in L$ such that $|x| \geq k + 1$. \\
+    Let $x = 0^k1^k0^k1^k \in L$, which is of length $2k + 2 \geq k + 1$. This string is in $L$ because it has the form $ww$, where $w = 0^k1^k$. \\
+    \\
+    Since the DFA $\mathcal{D}$ has $k$ states, it must repeat (loop) at some state $q \in Q$ while processing the first $k + 1$ symbols of $x = 0^k1^k0^k1^k$. That is
+    \[
+        \delta(s, 0^i) = \delta(s, 0^{i + j}) \text{ for some $i \leq k$ and $j > 0$.}
+    \]
+    Now consider modifying $x$ by increasing the looped segment. Let $x' = 0^{k + j}1^k0^k1^k$, where $j > 0$. \\
+    The DFA will process $x'$ in the same way as $x$, because of the looping on state $q$. \\
+    \\
+    It follows that the string $x' = 0^{k + j}1^k0^k1^k \notin L$, because it does not have two identical halves. Specifically:
+    \begin{itemize}
+        \item $x$ splits evenly as $x = 0^k1^k0^k1^k = ww, w = 0^k1^k$, but
+        \item $x'$ splits as $x' = 0^{k + j}1^k0^k1^k$, where $0^{k + j}1^k \neq 0^k1^k$.
+    \end{itemize}
+    Yet, the DFA $\mathcal{D}$ cannot distinguish between $x$ and $x'$ (due to the loop), and will still accept $w$. This contradicts the assumption that $\mathcal{D}$ recognizes $L$, as $\mathcal{D}$ accepts $x' \notin L$. \\
+    \\
+    By reaching a contradiction, it follows that no DFA can recognize $L = \{ ww | w \in \Sigma^* \}$, because DFAs cannot ensure both halves of a string are identical. Thus, $L$ is not regular. \\
 \end{proof}
 \leavevmode\\
 \textbf{(e):} \\

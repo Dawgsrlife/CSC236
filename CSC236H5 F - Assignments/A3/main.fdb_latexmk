@@ -1,13 +1,13 @@
 # Fdb version 4
-["biber main"] 1732573276.83644 "main.bcf" "main.bbl" "main" 1732573992.77017 0
-  "main.bcf" 1732573992 107186 eaaa4cd7e05e4b6c6a6fb3c31db72029 "pdflatex"
+["biber main"] 1732575720.08894 "main.bcf" "main.bbl" "main" 1732576196.19312 0
+  "main.bcf" 1732576193 107186 eaaa4cd7e05e4b6c6a6fb3c31db72029 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1732573990.98656 "c:/Users/33576/CSC236/CSC236/CSC236H5 F - Assignments/A3/main.tex" "main.pdf" "main" 1732573992.77082 0
+["pdflatex"] 1732576191.69334 "c:/Users/33576/CSC236/CSC236/CSC236H5 F - Assignments/A3/main.tex" "main.pdf" "main" 1732576196.19385 0
   "EngReport.sty" 1732251826 781 805ea08727a6b1ae905b91ce3a3df8be ""
-  "c:/Users/33576/CSC236/CSC236/CSC236H5 F - Assignments/A3/main.tex" 1732573990 54183 b747e09764ed7582a492555b1a3493e6 ""
+  "c:/Users/33576/CSC236/CSC236/CSC236H5 F - Assignments/A3/main.tex" 1732576190 55279 d6144e15fb87aa9131de579982c32465 ""
   "c:/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1727661218 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "c:/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1727662439 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2024/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm" 1727661938 1536 74b7293ec3713bb7fdca8dd1bd1f469c ""
@@ -20,6 +20,8 @@
   "c:/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm" 1727660307 940 75ac932a52f80982a9f8ea75d03a34cf ""
   "c:/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm" 1727660307 940 228d6584342e91276bf566bcf9716b83 ""
   "c:/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1727661210 1324 c910af8c371558dc20f2d7822f66fe64 ""
+  "c:/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmbx6.tfm" 1727661210 1344 8a0be4fe4d376203000810ad4dc81558 ""
+  "c:/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmbx8.tfm" 1727661210 1332 1fde11373e221473104d6cc5993f046e ""
   "c:/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmex10.tfm" 1727661210 992 662f679a0b3d2d53c1b94050fdaa3f50 ""
   "c:/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm" 1727661210 1524 4414a8315f39513458b80dfc63bff03a ""
   "c:/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmmi6.tfm" 1727661210 1512 f21f83efb36853c0b70002322c1ab3ad ""
@@ -40,6 +42,7 @@
   "c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb" 1727660307 35469 dcf3a5f2fc1862f5952e3ee5eb1d98c4 ""
   "c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1727660307 32722 d7379af29a190c3f453aba36302ff5a9 ""
   "c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb" 1727660307 32362 bc3f3eec7ab7d65fe700963d4017d32c ""
+  "c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb" 1727660307 31809 8670ca339bf94e56da1fc21c80635e2a ""
   "c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb" 1727660307 32734 69e00a6b65cedb993666e42eedb3d48f ""
   "c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1727660307 32726 39f0f9e62e84beb801509898a605dbd5 ""
   "c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1727660307 32569 5e5ddc8df908dea60932f3c484a54c0d ""
@@ -128,6 +131,7 @@
   "c:/texlive/2024/texmf-dist/tex/latex/base/article.cls" 1727663463 20144 67a5f8e0f9e445e8ec6834e595cebdc9 ""
   "c:/texlive/2024/texmf-dist/tex/latex/base/ifthen.sty" 1727663463 5525 3792dcd5bc92158cfaf00cc591e557cf ""
   "c:/texlive/2024/texmf-dist/tex/latex/base/inputenc.sty" 1727663463 5048 7ebf0f2edf1ef6783e8fe2201a95d0e8 ""
+  "c:/texlive/2024/texmf-dist/tex/latex/base/omscmr.fd" 1727663463 2469 74341109f164f230581718c66211c718 ""
   "c:/texlive/2024/texmf-dist/tex/latex/base/size12.clo" 1727663463 8449 30d84ec2eac77409e31fe51403c1ed64 ""
   "c:/texlive/2024/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx" 1727660720 1818 9ed166ac0a9204a8ebe450ca09db5dde ""
   "c:/texlive/2024/texmf-dist/tex/latex/biblatex/bbx/standard.bbx" 1727660720 25680 409c3f3d570418bc545e8065bebd0688 ""
@@ -206,10 +210,10 @@
   "c:/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1727667508 3326000 e50a3050267ae49201883b1e00fe5837 ""
   "c:/texlive/2024/texmf.cnf" 1727667323 713 e69b156964470283e0530f5060668171 ""
   "headerfooter.tex" 1732251826 297 6aefe22e0a592c74b389f1432432a752 ""
-  "main.aux" 1732573992 648 10b2881a3e5cdfaeaac98c172d48819a "pdflatex"
-  "main.bbl" 1732573278 0 d41d8cd98f00b204e9800998ecf8427e "biber main"
-  "main.run.xml" 1732573992 2224 bc6149f5caee4074188e1b81a66978d0 "pdflatex"
-  "main.tex" 1732573990 54183 b747e09764ed7582a492555b1a3493e6 ""
+  "main.aux" 1732576193 648 02886501bc75a4b6865216862a4c3383 "pdflatex"
+  "main.bbl" 1732575721 0 d41d8cd98f00b204e9800998ecf8427e "biber main"
+  "main.run.xml" 1732576193 2224 bc6149f5caee4074188e1b81a66978d0 "pdflatex"
+  "main.tex" 1732576190 55279 d6144e15fb87aa9131de579982c32465 ""
   "titlepage.tex" 1732549606 504 30a108940d89ed3370ca6e4be56a7c91 ""
   (generated)
   "main.aux"
