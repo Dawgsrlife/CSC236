@@ -350,6 +350,7 @@ Let $\Sigma = \{ 0, 1 \} $. \\
     \\
     Since $w$ consists of $0$s and $1$s and $w \notin \{0, 1, 10, 01, 010, 101\}$ by $P_{q_5}(w)$, concatenating $z$ (which is either $0$ or $1$) to $w$ does not result in $wz \in \{0, 1, 10, 01, 010, 101\}$. This is because $w \neq \epsilon$ (as $q_5$ does not process $\epsilon$), so $wz \notin \{0, 1\}$, which implies $wz \notin \{10, 01\}$ (as $q_5$ will not process $10$ and $01$ if does not process $1$ and $0$, respectively), which also implies $wz \notin \{010, 101\}$ (as $q_5$ will not process $010$ and $101$ if it does not process $01$ and $10$, respectively). \\
     \\
+    \underline{End of Cases:} \\
     Hence, it is demonstrated that if $P_q(w)$ is true for all $q \in \{q_{\epsilon}, q_0, q_1, q_2, q_3, q_4, q_5\}$ and some $w \in \{0, 1\}^*$, then $P_{\delta(q, z)}(wz)$ holds for all $z \in \{0, 1\}$. By the principle of structural induction, $P_{\delta(q, x)}$ is true for all $q \in Q = \{q_{\epsilon}, q_0, q_1, q_2, q_3, q_4, q_5\}$ and $x \in \Sigma^* = \{0, 1\}^*$. \\
     \\
     Finally, demonstrate that $\mathcal{D}$ accepts exactly the language $L = \Sigma^* \setminus \{01, 101, 010\}$ over $\Sigma = \{0, 1\}$. \\
@@ -578,54 +579,77 @@ Let $\Sigma = \{ 0, 1 \} $. \\
     Demonstrate that all state invariants hold when processing strings from $\Sigma = \{0, 1\}$. \\
     This can be achieved by showing that $P_{\delta(q, z)}(wz)$ holds for all $z \in \{0, 1\}$. \\
     \\
-    Let $w \in \{0, 1\}^*$ be arbitrary. Then, consider the following cases. \\
+    Let $w \in \{0, 1\}^*$ be arbitrary. Let $W$ be the integer representation of the string $w$. Then, consider the following cases. \\
     \\
     \underline{Case $(q = q_0, z = 0)$:} \\
-    Assume $P_{q_0}(w)$ is true. Then, $0 \equiv w \mod{3}$. \\
-    It follows that $P_{\delta(q, z)}(wz) = P_{\delta(q_0, 0)}(w0) = P_{q_0}(w0)$. Notice that, in treating the string $wz = w0$ as a binary integer representation, concatenating $0$ to $w$ performs a logical left shift (a multiplication by 2). Let $W$ be the integer representation of the string $w$; $2W$ shall be the integer representation of the string $wz$. By $P_{q_0}(w)$, $3 \mid W$, so $\exists n \in \mathbb{N}$ such that $W = 3n$. Perform the multiplication by $2$ and notice, $2W = 2 \times 3n = 3(2n)$. Declare that $\exists m \in \mathbb{N}$ such that $2W = 3(2n) = 3m$, meaning $3 \mid 2W$. It has been clearly demonstrated that $0 \equiv 2W \mod{3}$, where $2W$ is the integer representation of $wz$. Thus, $P_{\delta(q, z)}(wz) = P_{q_0}(w0)$ is true. \\
+    Assume $P_{q_0}(w)$ is true. Then, $0 \equiv W \pmod{3}$. \\
+    It follows that $P_{\delta(q, z)}(wz) = P_{\delta(q_0, 0)}(w0) = P_{q_0}(w0)$. Notice that, in treating the string $wz = w0$ as a binary integer representation, concatenating $0$ to $w$ performs a logical left shift (a multiplication by 2). \\
+    \\
+    Recall that $W$ is the integer representation of the string $w$; $2W$ shall be the integer representation of the string $wz = w0$ (due to the logical left shift). Since $0 \equiv W \pmod{3}$, it follows that $3 \mid W$, meaning $\exists n \in \mathbb{N}^+$ such that $W = 3n$. \\
+    \\
+    Perform the multiplication by $2$ and notice, $2W = 2 \times 3n = 3(2n)$. Declare that $\exists m \in \mathbb{N}^+$ such that $2W = 3(2n) = 3m$, meaning $3 \mid 2W$. It has been clearly demonstrated that $0 \equiv 2W \pmod{3}$, where $2W$ is the integer representation of $wz = w0$. Thus, $P_{\delta(q, z)}(wz) = P_{q_0}(w0)$ is true. \\
     \\
     \underline{Case $(q = q_0, z = 1)$:} \\
-    Likewise, assume $P_{q_0}(w)$ is true. Then, $w = 0$. \\
-    It follows that $P_{\delta(q, z)}(wz) = P_{\delta(q_0, 1)}(01) = P_{q_2}(01)$, which is clearly true by definition. \\
+    Likewise, assume $P_{q_0}(w)$ is true. Then, $0 \equiv W \pmod{3}$. \\
+    It follows that $P_{\delta(q, z)}(wz) = P_{\delta(q_0, 1)}(w1) = P_{q_1}(w1)$. \\
+    \\
+    Declare $2W + 1$ as the integer representation of the string $wz = w1$, due to a logical left shift and addition by 1 (the result of concatenating $1$ to $w$ instead of $0$). Since $0 \equiv \pmod{3}$, there exists $n \in \mathbb{N}^+$ such that $W = 3n$. \\
+    \\
+    Perform the multiplication by 2, followed by an addition of 1, and notice that $2W + 1 = 2 \times 3n + 1 = 3(2n) + 1$. Declare that $\exists m \in \mathbb{N}^+$ such that $2W = 3(2n) + 1 = 3m + 1$, meaning $2W$ yields a remainder of $1$ after division by $3$. \\
+    \\
+    It follows that $1 \equiv 2W + 1 \pmod{3}$. This means $P_{\delta(q, z)}(wz) = P_{q_1}(w1)$ holds, as $2W + 1$ is the integer representation of $wz = w1$. \\
     \\
     \underline{Case $(q = q_1, z = 0)$:} \\
-    Assume $P_{q_1}(w)$ is true. Then, $w = 1$. \\
-    It follows that $P_{\delta(q, z)}(wz) = P_{\delta(q_1, 0)}(10) = P_{q_3}(10)$, which is clearly true by definition. \\
+    Assume $P_{q_1}(w)$ is true. Then, $1 \equiv W \pmod{3}$. \\
+    It follows that $P_{\delta(q, z)}(wz) = P_{\delta(q_1, 0)}(w0) = P_{q_2}(w0)$. \\
+    \\
+    Declare $2W$ to be the integer representation of the string $wz = w0$, due to a logical left shift in concatenating $0$ to $w$. Since $1 \equiv W \pmod{3}$, it follows that $\exists n \in \mathbb{N}^+$ such that $W = 3n + 1$. \\
+    \\
+    Perform the multiplication by $2$ and notice, $2W = 2 \times (3n + 1) = 3(2n) + 2$. Declare that $\exists m \in \mathbb{N}^+$ such that $2W = 3(2n) + 2 = 3m + 2$, meaning $2W$ yields a remainder of $2$ after division by $3$. It has been clearly demonstrated that $2 \equiv 2W \pmod{3}$, where $2W$ is the integer representation of $wz = w0$. Thus, $P_{\delta(q, z)}(wz) = P_{q_2}(w0)$ is true. \\
     \\
     \underline{Case $(q = q_1, z = 1)$:} \\
-    Likewise, assume $P_{q_1}(w)$ is true. Then, $w = 1$. \\
-    It follows that $P_{\delta(q, z)}(wz) = P_{\delta(q_1, 1)}(11) = P_{q_5}(11)$, which is true as $w = 11$ indeed consists of $0$s and $1s$ and $w \notin \{0, 1, 10, 01, 010, 101\}$. \\
+    Likewise, assume $P_{q_1}(w)$ is true. Then, $1 \equiv W \pmod{3}$. \\
+    It follows that $P_{\delta(q, z)}(wz) = P_{\delta(q_1, 1)}(w1) = P_{q_0}(w1)$. Note that, in treating $wz = w1$ as a binary integer representation, concatenating $1$ to $w$ performs a logical left shift (a multiplication by 2) followed by an addition by $1$. \\
+    \\
+    Declare $2W + 1$ to be the integer representation of the string $wz = w1$. Since $1 \equiv W \pmod{3}$, it follows that $\exists n \in \mathbb{N}^+$ such that $W = 3n + 1$. \\
+    \\
+    Perform the multiplication by 2, followed by an addition of 1, and notice that $2W + 1 = 2 \times (3n + 1) + 1 = 3(2n) + 2 + 1 = 3(2n) + 3 = 3(2n + 1)$. Declare that $\exists m \in \mathbb{N}^+$ such that $2W + 1 = 3(2n + 1) = 3m$, meaning $3 \mid 2W + 1$. \\
+    \\
+    It follows that $0 \equiv 2W + 1 \pmod{3}$. This means, $P_{\delta(q, z)}(wz) = P_{q_0}(w1)$ holds, as $2W + 1$ is the integer representation of $wz = w1$. \\
     \\
     \underline{Case $(q = q_2, z = 0)$:} \\
-    Assume $P_{q_2}(w)$ is true. Then, $w = 01$. \\
-    It follows that $P_{\delta(q, z)}(wz) = P_{\delta(q_2, 0)}(010) = P_{q_4}(010)$, which is true as $w = 010$ is indeed either $101$ or $010$. \\
+    Assume $P_{q_2}(w)$ is true. Then, $2 \equiv W \pmod{3}$. \\
+    It follows that $P_{\delta(q, z)}(wz) = P_{\delta(q_2, 0)}(w0) = P_{q_1}(w0)$. \\
+    \\
+    Declare $2W$ as the integer representation of the string $wz = w0$, due to the logical left shift. Since $2 \equiv W \pmod{3}$, it follows that $\exists n \in \mathbb{N}^+$ such that $W = 3n + 2$. \\
+    \\
+    Perform the multiplication by $2$ and notice, $2W = 2 \times (3n + 2) = 3(2n) + 4 = 3(2n) + 3 + 1 = 3(2n + 1) + 1$. Declare that $\exists m \in \mathbb{N}^+$ such that $2W = 3(2n + 1) + 1 = 3m + 1$, meaning $2W$ yields a remainder of $1$ after division by 3. It has been demonstrated that $1 \equiv 2W \pmod{3}$, where $2W$ is the integer represesntation of $wz = w0$. Thus, $P_{\delta(q, z)}(wz) = P_{q_1}(w0)$ is true. \\
     \\
     \underline{Case $(q = q_2, z = 1)$:} \\
-    Likewise, assume $P_{q_2}(w)$ is true. Then, $w = 01$. \\
-    It follows that $P_{\delta(q, z)}(wz) = P_{\delta(q_2, 1)}(011) = P_{q_5}(011)$, which is true as $w = 011$ indeed consists of $0$s and $1s$ and $w \notin \{0, 1, 10, 01, 010, 101\}$. \\
+    Likewise, assume $P_{q_2}(w)$ is true. Then, $2 \equiv W \pmod{3}$. \\
+    It follows that $P_{\delta(q, z)}(wz) = P_{\delta(q_2, 1)}(w1) = P_{q_2}(w1)$. \\
     \\
-    Hence, it is demonstrated that if $P_q(w)$ is true for all $q \in \{q_{\epsilon}, q_0, q_1, q_2, q_3, q_4, q_5\}$ and some $w \in \{0, 1\}^*$, then $P_{\delta(q, z)}(wz)$ holds for all $z \in \{0, 1\}$. By the principle of structural induction, $P_{\delta(q, x)}$ is true for all $q \in Q = \{q_{\epsilon}, q_0, q_1, q_2, q_3, q_4, q_5\}$ and $x \in \Sigma^* = \{0, 1\}^*$. \\
+    Declare $2W + 1$ to be the integer representation of the string $wz = w1$ (one shift logically left yields multiplication by $2$, add $1$ as $z = 1$). Since $2 \equiv W \pmod{3}$, it follows that $\exists n \in \mathbb{N}^*$ such that $W = 3n + 2$. \\
     \\
-    Finally, demonstrate that $\mathcal{D}$ accepts exactly the language $L = \Sigma^* \setminus \{01, 101, 010\}$ over $\Sigma = \{0, 1\}$. \\
+    Perform the multiplication by 2, followed by an addition of 1, and notice that $2W + 1 = 2 \times(3n + 2) + 1 = 3(2n) + 4 + 1 = 3(2n) + 3 + 2 = 3(2n + 1) + 2$. Declare that $\exists m \in \mathbb{N}^+$ such that $2W + 1 = 3(2n + 1) + 2 = 3m + 2$, meaning $2W + 1$ yields a remainder of $2$ after division by $3$. \\
+    \\
+    It follows that $1 \equiv 2W + 1 \pmod{3}$. This means $P_{\delta(q, z)}(wz) = P_{q_2}(w1)$ holds, as $2W + 1$ is the integer representation of $wz = w1$. \\
+    \\
+    \underline{End of Cases:} \\
+    Hence, it is demonstrated that if $P_q(w)$ is true for all $q \in \{q_0, q_1, q_2\}$ and some $w \in \{0, 1\}^*$, then $P_{\delta(q, z)}(wz)$ holds for all $z \in \{0, 1\}$. By the principle of structural induction, $P_{\delta(q, x)}$ is true for all $q \in Q = \{q_0, q_1, q_2\}$ and $x \in \Sigma^* = \{0, 1\}^*$. \\
+    \\
+    Finally, demonstrate that $\mathcal{D}$ accepts exactly the language \[L = \{ w \mid w \text{ is a binary representation of a multiple of 3} \}\] over $\Sigma = \{0, 1\}$. \\
     This is achievable by showing that if $x \in \Sigma^* = \{0, 1\}^*$ is arbitrary, $x$ is a member of $L$ if and only if there exists an accepting state $q \in F$ such that $P_q(x)$ holds. \\
     \\
-    Recall the invariants of the accepting states, $q_i \in F \mid_{i \in \{\epsilon, 0, 1, 3, 5\}}$:
-    \begin{equation*}
-        \begin{aligned}
-            P_{q_\epsilon}(x)&: \text{$x$ is the empty string, } \epsilon \\
-            P_{q_0}(x)&: \text{$x$ is $0$} \\
-            P_{q_1}(x)&: \text{$x$ is $1$} \\
-            P_{q_3}(x)&: \text{$x$ is $10$} \\
-            P_{q_5}(x)&: \text{$x$ consists of $0$s and $1$s but $x \notin \{0, 1, 10, 01, 010, 101\}$} \\
-        \end{aligned}
-    \end{equation*}
+    Recall the sole accepting state invariant, \[P_{q_0}(x): (0 \equiv (\text{integer representation of } x) \pmod{3}) \text{ or } (x = \epsilon) \text{.}\] \\
+    \\
     \underline{\textit{Implication}} \\
-    If an arbitrary string $x \in L = \Sigma^* \setminus \{01, 101, 010\}$, then $x$ is either an empty string or consists of $0$s and $1$s, but must not be either of $01$, $101$, nor $010$. Choose $q_{\epsilon}$ to cover the empty string case, and $q_5$ to cover all cases \textbf{except} $x \in \{0, 1, 10, 01, 010, 101\}$. Since $x$ must not be a member of $\{01, 010, 101\}$, it remains to account for $x \in \{0, 1, 10\}$. Conveniently, these cases are covered by $q_0$, $q_1$, and $q_3$. Thus, no matter which string $x \in L = \Sigma^* \setminus \{01, 101, 010\}$, there exists accepting states $q \in F$ such that $P_q(x)$ holds. \\
+    If $x \in L$ is arbitrary, then $x$ can be interpreted as a binary representation of a multiple of $3$. Notice that the definition of $P_{q_0}(x)$ directly fits the definition of $L$, so $P_{q_0}(x)$ is indeed true for $q_0 \in F$. \\
     \\
     \underline{\textit{Implied-by}} \\
-    Conversely, $L = \Sigma^* \setminus \{01, 101, 010\}$ can be constructed by the same choices of accepting states. Choose from the accepting states $q_i \in F \mid_{i \in \{\epsilon, 0, 1, 3, 5\}}$ and assume $P_{q_i}(x)$ are true. Likewise, as demonstrated in the \textit{implication} proof, reconstruct $L = \Sigma^* \setminus \{01, 101, 010\}$ using the accepting states $P_{q_i}(x)$, similarly. It is clear that the accepting state's invariants build a language consisting of the empty string ($P_{q_{\epsilon}}$), and any combination of $0$s and $1$s, excluding the specific strings $01$, $101$, and $010$ ($P_{q_0}, P_{q_1}, P_{q_3}, P_{q_5}$). Thus, if there are accepting states $q \in F$ such that $P_q(x) \mid_{x \in \Sigma^* = \{0, 1\}^*}$ holds, then $x \in L = \Sigma^* \setminus \{01, 101, 010\}$. \\
+    Consider $q_0 \in F$ and assume $P_{q_0}(x)$ is true for arbitrary $x \in \Sigma^* = \{0, 1\}^*$. Clearly, $x$ is also a member of $L$ as $P_{q_0}(x)$ suggests that the integer representation of $x$ is indeed a multiple of 3. \\
     \\
-    Therefore, $\mathcal{D}$ accepts $L = \Sigma^* \setminus \{01, 101, 010\}$ over $\Sigma = \{0, 1\}$. This means $L$ is a regular language. \\
+    Therefore, $\mathcal{D}$ accepts \(L = \{ w \mid w \text{ is a binary representation of a multiple of 3} \}\) over $\Sigma = \{0, 1\}$. This means $L$ is a regular language. \\
 \end{proof}
 \leavevmode\\
 \pagebreak
