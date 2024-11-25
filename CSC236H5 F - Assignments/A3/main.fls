@@ -1,8 +1,8 @@
-PWD c:/Users/33576/LaTeX Projects/CSC236H5 F - Assignments/A3
+PWD c:/Users/33576/CSC236/CSC236/CSC236H5 F - Assignments/A3
 INPUT c:/texlive/2024/texmf.cnf
 INPUT c:/texlive/2024/texmf-dist/web2c/texmf.cnf
 INPUT c:/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT c:/Users/33576/LaTeX Projects/CSC236H5 F - Assignments/A3/main.tex
+INPUT c:/Users/33576/CSC236/CSC236/CSC236H5 F - Assignments/A3/main.tex
 OUTPUT main.log
 INPUT c:/texlive/2024/texmf-dist/tex/latex/base/article.cls
 INPUT c:/texlive/2024/texmf-dist/tex/latex/base/article.cls
