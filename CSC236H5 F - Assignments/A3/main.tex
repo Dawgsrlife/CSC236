@@ -109,7 +109,7 @@ Let $\Sigma = \{ 0, 1 \} $. \\
         \end{tabular}
         \textit{\caption{State Transition Table}}
     \end{table}
-    Using $\delta$, define the DFA $\mathcal{D} = (\mathcal{Q}, \Sigma, \delta, s, F)$, where
+    Using $\delta$, define the DFA $\mathcal{D} = (Q, \Sigma, \delta, s, F)$, where
     \[
         Q = \{ q_0 \} \text{ is the set of states in } \mathcal{D}
     \]
@@ -180,7 +180,7 @@ Let $\Sigma = \{ 0, 1 \} $. \\
     % - Regular languages are closed under finite set differences;
     % - K is finite, so the difference \Sigma^*\setminus{K} is also regular;
     % - A DFA can be constructed that accepts all strings except specific patterns 01, 101, and 010.
-    This proof aims to show that the language $\Sigma^* \setminus K$ is a regular language by constructing a DFA that accepts all strings over $\Sigma^* = \{0, 1\}^*$ except the literal strings in $K = \{ 01, 101, 010 \}$. \\
+    This proof aims to show that the language $\Sigma^* \setminus K$ is a regular language, by constructing a DFA (with proof) that accepts all strings over $\Sigma^* = \{0, 1\}^*$ except the literal strings in $K = \{ 01, 101, 010 \}$. \\
     \\
     Consider the \textbf{transition function} $\delta$ associated with the following DFA:
     \begin{center}
@@ -247,21 +247,21 @@ Let $\Sigma = \{ 0, 1 \} $. \\
         \textit{\caption{State Transition Table}}
     \end{table}
     
-    Using $\delta$, define the DFA $\mathcal{D} = (\mathcal{Q}, \Sigma, \delta, s, F)$, where
+    Using $\delta$, define the DFA $\mathcal{D} = (Q, \Sigma, \delta, s, F)$, where
     \[
-        \mathcal{Q} = \{ q_{\epsilon}, q_0, q_1, q_2, q_3, q_4, q_5 \} \text{ is the set of states in } \mathcal{D}
+        Q = \{ q_{\epsilon}, q_0, q_1, q_2, q_3, q_4, q_5 \} \text{ is the set of states in } \mathcal{D}
     \]
     \[
         \Sigma = \{ 0, 1 \} \text{ is the alphabet of symbols used by } \mathcal{D}
     \]
     \[
-        \delta : \mathcal{Q} \times \Sigma \to \mathcal{Q} \text{ is the transition function define by \textit{Table 2}}
+        \delta : Q \times \Sigma \to Q \text{ is the transition function define by \textit{Table 2}}
     \]
     \[
         s = q_{\epsilon} \text{ is the initial state of } \mathcal{D} 
     \]
     \[
-        F = \{ q_{\epsilon}, q_0, q_1, q_3, q_5 \} \subseteq \mathcal{Q} \text{ is the set of accepting states of } \mathcal{D} \text{.}
+        F = \{ q_{\epsilon}, q_0, q_1, q_3, q_5 \} \subseteq Q \text{ is the set of accepting states of } \mathcal{D} \text{.}
     \]
     For each state $q_i \mid_{i \in \{\epsilon, 0, 1, 2, 3, 4, 5\}}$ in $\mathcal{D}$, define a \textbf{state invariant} $P_q(x)$ for strings $x \in \Sigma^* = \{0, 1\}^*$:
     \begin{equation*}
@@ -396,23 +396,126 @@ Let $\Sigma = \{ 0, 1 \} $. \\
 \end{proof}
 \leavevmode\\
 \textbf{(e):} \\
-\textbf{\underline{Claim:}} $\{ w | ww \in \Sigma* \}$ is a regular language.
+\textbf{\underline{Claim:}} $\{ w \mid ww \in \Sigma^* \}$ is a regular language.
 \begin{proof}
 \leavevmode\\
     % Notes:
     % - Any string w such that its concatenation with itself (i.e. ww) is in \Sigma* means w can be any string over {0, 1};
     % - This set includes all strings in \Sigma*, so it's equivalent to \Sigma*, which is regular.
-    proofgoeshere \\
+    This proof aims to show that the language $\{ w \mid ww \in \Sigma^* \}$ is a regular language, by constructing a DFA (with proof) that accepts all strings with its self-concatenation obtainable over the alphabet $\Sigma = \{0, 1\}$. \\
+    \\
+    Moreover, this proof recycles the DFA which was suggested in \textit{Part (a)}, but with an adjustment to the state invariant. While it suffices to provide a double-subset inclusion proof to show an equivalence between $\{ w \mid ww \in \Sigma^* \}$ and $\Sigma^*$ (from \textit{Part (a)}), proceed with the modified DFA proof nonetheless. \\
+    \\
+    Consider the \textbf{transition function} $\delta$ with the following DFA:
+    \begin{center}
+        \begin{tikzpicture}[auto]
+            \node [state, initial, accepting] (q0) {$q_0$};
+
+            \draw (q0) edge [loop above] node {$0, 1$} (q0);
+        \end{tikzpicture}
+    \end{center}
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c|c|}
+            \hline
+            \textbf{Old State} & \textbf{Symbol} & \textbf{New State} \\
+            \hline
+            \( q_0 \) & 0 & \( q_0 \) \\
+            \( q_0 \) & 1 & \( q_0 \) \\
+            \hline
+        \end{tabular}
+        \textit{\caption{State Transition Table}}
+    \end{table}
+    Using $\delta$, define the DFA $\mathcal{D} = (Q, \Sigma, \delta, s, F)$, where
+    \[
+        Q = \{ q_0 \} \text{ is the set of states in } \mathcal{D}
+    \]
+    \[
+        \Sigma = \{ 0, 1 \} \text{ is the alphabet of symbols used by } \mathcal{D} 
+    \]
+    \[
+        \delta : Q \times \Sigma \to Q \text{ is the transition function defined by \textit{Table 1}}
+    \]
+    \[
+        s = q_0 \text{ is the initial state of } \mathcal{D}
+    \]
+    \[
+        F = \{ q_0 \} \subseteq Q \text{ is the set of accepting states of } \mathcal{D} \text{.}
+    \]
+    For the sole state $q_0$ in $\mathcal{D}$, define its \textbf{invariant} for strings $x \in \Sigma^* = \{0, 1\}^*$:
+    \[
+        P_{q_0}(x): xx \in \Sigma^* = \{0, 1\}^*
+    \]
+    As the only state, $q_0$ is trivially \textbf{mutually exclusive}. As well, every string in $\Sigma^* = \{0, 1\}^*$ is either $\epsilon$ or consists of some number of $0$s and $1$s. Concatenate the empty string, $\epsilon$, to itself and $\epsilon$ is the result. Concatenate a string consisting of $0$s and $1$s to itself, and the result is still a string consisting of $0$s and $1$s. There are no other strings in $\{0, 1\}^*$ to test against this state invariant. Thus, $q_0$ satisfies \textbf{exhaustivity}. \\
+    \\
+    Let $q \in Q = \{q_0\}$ and $x \in \Sigma^* = \{0, 1\}^*$ both be arbitrary (here, $q = q_0$ always). \\
+    Denote the predicate:
+    \[
+        P_{\delta(q_0, x)}(x) \coloneqq P_q(x) \text{ is the state invariant.}
+    \]
+    Perform structural induction on $P_{\delta(q_0, x)}(x)$ for all strings $x \in \Sigma^* = \{0, 1\}^*$, as follows: \\
+    \\
+    \underline{Base Case:} \\
+    Let $q = q_0$ and $w = \epsilon$. \\
+    $P_q(w) = P_{q_0}(\epsilon)$ is true as $\epsilon \epsilon = \epsilon \in \Sigma^* = \{0, 1\}^*$. \\
+    \\
+    \underline{Induction Hypothesis:} \\
+    Assume that $P_q(w)$ is true for all $q \in \{q_0\}$ and some $w \in \{0, 1\}^*$. \\
+    This means $ww \in \Sigma^* = \{0, 1\}^*$. \\
+    \\
+    \underline{Induction Step}: \\
+    By the Induction Hypothesis, $P_q(w)$ is true for arbitrary $q \in \{q_0\}$ and some $w \in \{0, 1\}^*$. \\
+    \\
+    Demonstrate that the invariant of $q_0$ holds when processing all possible strings from $\Sigma^*$. \\
+    This can be achieved by showing that $P_{\delta(q, z)}(wz)$ holds for some $z \in \{0, 1\}$. \\
+    \\
+    Let $w \in \{0, 1\}^*$ be arbitrary. \\
+    \\
+    Let $q = q_0$, $z \in \{0, 1\}$, and assume $P_{q_0}(w)$ is true. \\
+    Consider that $P_{\delta(q, z)}(wz) = P_{\delta(q_0, z)}(wz) = P_{q_0}(wz)$. Since $ww \in \Sigma^* = \{0, 1\}^*$ and $z \in \{0, 1\}$, it follows that $wzwz \in \Sigma^* = \{0, 1\}^*$ as well. Namely, this is because strings consisting of $0$s and $1$s are members of $\Sigma^* = \{0, 1\}^*$, and $wzwz$ matches this description as $w \in \{\epsilon, 0, 1\}$ while $z \in \{0, 1\}$. By definition, $P_{q_0}(wz)$ holds. Thus, $P_{\delta(q, z)}(wz)$ holds. \\
+    \\
+    There are no other state invariants in $\mathcal{D}$. By the principle of structural induction, $P_{\delta(q, x)}$ is true for all $q \in Q = \{q_0\}$ and $x \in \Sigma^* = \{0, 1\}^*$. \\
+    \\
+    Finally, demonstrate that $\mathcal{D}$ accepts exactly the language $L = \{ w \mid ww \in \Sigma^* \}$ over $\Sigma = \{0, 1\}$. \\
+    This is achievable by showing that if $x \in \Sigma^* = \{0, 1\}^*$ is arbitrary, $x$ is a member of $L$ if and only if there exists an accepting state $q \in F$ such that $P_q(x)$ holds. \\
+    \\
+    Recall the sole state invariant, $P_{q_0}(x): xx \in \Sigma^* = \{0, 1\}^*$. \\
+    If $x \in L$, then $xx \in \Sigma^*$. Clearly, $P_{q_0}(x)$ is true, due to matching definitions. \\
+    On the other hand, choose the accepting state $q_0 \in F$ and assume $P_{q_0}(x)$ is true. Then $xx \in \Sigma^*$, and $x \in L$ is, likewise, true due to matching definitions. \\
+    \\
+    Therefore, $P_{\delta(q_0, x)}(x)$ is true for all strings $x \in \Sigma^* = \{0, 1\}^*$. It has been demonstrated that $L = \{ w \mid ww \in \Sigma^* \}$ is a regular language. \\
 \end{proof}
 \leavevmode\\
 \textbf{(f):} \\
-\textbf{\underline{Claim:}} $\{ w | w \text{ is a binary representation of a multiple of 3} \}$ is a regular language.
+\textbf{\underline{Claim:}} $\{ w \mid w \text{ is a binary representation of a multiple of 3} \}$ is a regular language.
 \begin{proof}
 \leavevmode\\
     % Notes:
     % - A DFA can be constructed to recognize binary representations of multiples of 3, as shown in formal language theory;
     % - This DFA works by keeping track of remainders modulo 3, which requires only a finite number of states (three states, one for each possible remainder).
-    proofgoeshere \\
+    This proof aims to show that the language $\{ w \mid w \text{ is a binary representation of a multiple of 3} \}$ is a regular language, by constructing a DFA (with proof) that accepts all strings over $\Sigma^* = \{0, 1\}^*$ that are also a binary representation of multiples of $3$. \\
+    \\
+    Consider the \textbf{transition function} $\delta$ associated with the following DFA:
+    \begin{center}
+        \begin{tikzpicture}[auto]
+            \node [state, initial, accepting] (q0) {$q_0$};
+
+            \draw (q0) edge [loop above] node {$0, 1$} (q0);
+        \end{tikzpicture}
+    \end{center}
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c|c|}
+            \hline
+            \textbf{Old State} & \textbf{Symbol} & \textbf{New State} \\
+            \hline
+            \( q_0 \) & 0 & \( q_0 \) \\
+            \( q_0 \) & 1 & \( q_0 \) \\
+            \hline
+        \end{tabular}
+        \textit{\caption{State Transition Table}}
+    \end{table}
+    
 \end{proof}
 \leavevmode\\
 \pagebreak
