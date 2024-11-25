@@ -85,11 +85,11 @@ Let $\Sigma = \{ 0, 1 \} $. \\
     \\
     By definition, ${L_3}^*$ is a regular language. Since ${L_3} = \Sigma$, $\Sigma^*$ is also a regular language. \\
     \\
-    While this proof is complete, the assignment encourages DFA proofs to show that languages are regular. \\
+    While this proof now is complete, the assignment encourages the use of determinstic finite automaton (or DFA) proofs to show that languages are regular. \\
     \\
-    So, as an alternative to \textit{Part (a)}, and for all relevant subsequent parts, adopt a DFA proof. \\
+    So, as an alternative to \textit{Part (a)} (this part's proof), and for all relevant subsequent parts, adopt a DFA proof. \\
     \\
-    Denote the transition function $\delta$ by the following diagram:
+    Consider the \textbf{transition function} $\delta$ associated with the following DFA:
     \begin{center}
         \begin{tikzpicture}[auto]
             \node [state, initial, accepting] (q0) {$q_0$};
@@ -107,9 +107,9 @@ Let $\Sigma = \{ 0, 1 \} $. \\
             \( q_0 \) & 1 & \( q_0 \) \\
             \hline
         \end{tabular}
-        \caption{State Transition Table}
+        \textit{\caption{State Transition Table}}
     \end{table}
-    Using $\delta$, define the deterministic finite automaton $\mathcal{D} = (\mathcal{Q}, \Sigma, \delta, s, F)$, where
+    Using $\delta$, define the DFA $\mathcal{D} = (\mathcal{Q}, \Sigma, \delta, s, F)$, where
     \[
         Q = \{ q_0 \} \text{ is the set of states in } \mathcal{D}
     \]
@@ -117,7 +117,7 @@ Let $\Sigma = \{ 0, 1 \} $. \\
         \Sigma = \{ 0, 1 \} \text{ is the alphabet of symbols used by } \mathcal{D} 
     \]
     \[
-        \delta : Q \times \Sigma \to Q \text{ is the transition function defined by Table 1}
+        \delta : Q \times \Sigma \to Q \text{ is the transition function defined by \textit{Table 1}}
     \]
     \[
         s = q_0 \text{ is the initial state of } \mathcal{D}
@@ -125,11 +125,11 @@ Let $\Sigma = \{ 0, 1 \} $. \\
     \[
         F = \{ q_0 \} \subseteq Q \text{ is the set of accepting states of } \mathcal{D} \text{.}
     \]
-    For each state $q_i$, $i \in \{0\}$, in $\mathcal{D}$, define a state invariant $P_q(x)$, for strings $x \in \Sigma^* = \{0, 1\}^*$:
+    For the sole state $q_0$ in $\mathcal{D}$, define its \textbf{invariant} for strings $x \in \Sigma^* = \{0, 1\}^*$:
     \[
         P_{q_0}(x): x \text{ is $\epsilon$ or consists of $0$s and $1$s.}
     \]
-    As the only state, $q_0$ is trivially mutually exclusive. As well, every string in $\Sigma^* = \{0, 1\}^*$ is either $\epsilon$ or consists of some number of $0$s and $1$s, clearly satisfying $q_0$; exhaustivity is satisfied. \\
+    As the only state, $q_0$ is trivially \textbf{mutually exclusive}. As well, every string in $\Sigma^* = \{0, 1\}^*$ is either $\epsilon$ or consists of some number of $0$s and $1$s, which $q_0$ clearly satisfies; \textbf{exhaustivity} is satisfied. \\
     \\
     Let $q \in Q = \{q_0\}$ and $x \in \Sigma^* = \{0, 1\}^*$ both be arbitrary (here, $q = q_0$ always). \\
     Denote the predicate:
@@ -144,30 +144,31 @@ Let $\Sigma = \{ 0, 1 \} $. \\
     \\
     \underline{Induction Hypothesis:} \\
     Assume that $P_q(w)$ is true for all $q \in \{q_0\}$ and some $w \in \{0, 1\}^*$. \\
-    This means $w$ is either empty or consists of $0$s and $1$s. \\
+    This means $w$ is either the empty string or consists of $0$s and $1$s. \\
     \\
     \underline{Induction Step}: \\
     By the Induction Hypothesis, $P_q(w)$ is true for arbitrary $q \in \{q_0\}$ and some $w \in \{0, 1\}^*$. \\
     \\
-    Demonstrate that all state invariants hold when processing strings from the alphabet $\Sigma = \{0, 1\}$. \\
+    Demonstrate that the invariant of $q_0$ holds when processing all possible strings from $\Sigma^*$. \\
     This can be achieved by showing that $P_{\delta(q, z)}(wz)$ holds for some $z \in \{0, 1\}$. \\
     \\
     Let $w \in \{0, 1\}^*$ be arbitrary. \\
     \\
     Let $q = q_0$, $z \in \{0, 1\}$, and assume $P_{q_0}(w)$ is true. \\
-    Notice that $\delta(q, z) = \delta(q_0, 0) = q_0$. Conveniently, $P_{q_0}$ is already true by assumption. \\
+    Consider that $P_{\delta(q, z)}(wz) = P_{\delta(q_0, z)}(wz) = P_{q_0}(wz)$. Since $w$ is either the empty string or consists of $0$s and $1$s, while $z \in \{0, 1\}$, $wz$ remains to consist of $0$s and $1$s. This matches the definition of $P_{q_0}(wz)$. Thus, $P_{\delta(q, z)}(wz)$ holds. \\
     \\
     There are no other state invariants in $\mathcal{D}$. By the principle of structural induction, $P_{\delta(q, x)}$ is true for all $q \in Q = \{q_0\}$ and $x \in \Sigma^* = \{0, 1\}^*$. \\
     \\
     Finally, demonstrate that $\mathcal{D}$ accepts exactly the language $L = \Sigma^*$ over $\Sigma = \{0, 1\}$. \\
     This is achievable by showing that if $x \in \Sigma^* = \{0, 1\}^*$ is arbitrary, $x$ is a member of $L$ if and only if there exists an accepting state $q \in F$ such that $P_q(x)$ holds. \\
     \\
-    By definition, $P_{q_0}(x): \text{$x$ is $\epsilon$ or consists of $0$s and $1$s}$. \\
-    If $x \in L$, then it is either an empty string or consists of $0$s and $1$s. Clearly, $P_{q_0}(x)$ must be true. \\
+    Recall the sole state invariant, $P_{q_0}(x): \text{$x$ is $\epsilon$ or consists of $0$s and $1$s}$. \\
+    If $x \in L$, then $x$ is either the empty string or consists of $0$s and $1$s. Clearly, $P_{q_0}(x)$ is true. \\
     On the other hand, choose the accepting state $q_0 \in F$ and assume $P_{q_0}(x)$ is true. Clearly, $x \in L$, due to matching definitions. \\
     \\
-    Therefore, while this DFA proof is redundant in nature, it is clear that $\mathcal{D}$ accepts $L = \Sigma^*$ over $\Sigma = \{0, 1\}$. \\
-    Again, $L = \Sigma^*$ is demonstrated to be a regular language. \\
+    Therefore, $P_{\delta(q_0, x)}(x)$ is true for all strings $x \in \Sigma^* = \{0, 1\}^*$. \\
+    \\
+    While this DFA proof is redundant in nature, it is clear that $\mathcal{D}$ accepts $L = \Sigma^*$ over $\Sigma = \{0, 1\}$. Again, it has been demonstrated that $L$ is a regular language. \\
 \end{proof}
 \leavevmode\\
 \textbf{(b):} \\
@@ -179,9 +180,9 @@ Let $\Sigma = \{ 0, 1 \} $. \\
     % - Regular languages are closed under finite set differences;
     % - K is finite, so the difference \Sigma^*\setminus{K} is also regular;
     % - A DFA can be constructed that accepts all strings except specific patterns 01, 101, and 010.
-    This proof aims to show that the language $\Sigma^* \setminus K$ is a regular language by constructing a DFA that accepts all strings except the literal strings in $K = \{ 01, 101, 010 \}$. \\
+    This proof aims to show that the language $\Sigma^* \setminus K$ is a regular language by constructing a DFA that accepts all strings over $\Sigma^* = \{0, 1\}^*$ except the literal strings in $K = \{ 01, 101, 010 \}$. \\
     \\
-    Denote the transition function $\delta$ by the following diagram:
+    Consider the \textbf{transition function} $\delta$ associated with the following DFA:
     \begin{center}
         \begin{tikzpicture}[auto]
             % Define nodes
@@ -243,7 +244,7 @@ Let $\Sigma = \{ 0, 1 \} $. \\
             \( q_5 \) & 1 & \( q_5 \) \\
             \hline
         \end{tabular}
-        \caption{State Transition Table}
+        \textit{\caption{State Transition Table}}
     \end{table}
     
     Using $\delta$, define the DFA $\mathcal{D} = (\mathcal{Q}, \Sigma, \delta, s, F)$, where
@@ -254,7 +255,7 @@ Let $\Sigma = \{ 0, 1 \} $. \\
         \Sigma = \{ 0, 1 \} \text{ is the alphabet of symbols used by } \mathcal{D}
     \]
     \[
-        \delta : \mathcal{Q} \times \Sigma \to \mathcal{Q} \text{ is the transition function define by Table 2}
+        \delta : \mathcal{Q} \times \Sigma \to \mathcal{Q} \text{ is the transition function define by \textit{Table 2}}
     \]
     \[
         s = q_{\epsilon} \text{ is the initial state of } \mathcal{D} 
@@ -262,7 +263,7 @@ Let $\Sigma = \{ 0, 1 \} $. \\
     \[
         F = \{ q_{\epsilon}, q_0, q_1, q_3, q_5 \} \subseteq \mathcal{Q} \text{ is the set of accepting states of } \mathcal{D} \text{.}
     \]
-    For each state $q_i$, $i \in \{\epsilon, 0, 1, 2, 3, 4, 5\}$, in $\mathcal{D}$, define a state invariant $P_q(x)$ for strings $x \in \Sigma^* = \{0, 1\}^*$:
+    For each state $q_i \mid_{i \in \{\epsilon, 0, 1, 2, 3, 4, 5\}}$ in $\mathcal{D}$, define a \textbf{state invariant} $P_q(x)$ for strings $x \in \Sigma^* = \{0, 1\}^*$:
     \begin{equation*}
             \begin{aligned}
                 P_{q_\epsilon}(x)&: \text{$x$ is the empty string, } \epsilon \\
@@ -274,8 +275,8 @@ Let $\Sigma = \{ 0, 1 \} $. \\
                 P_{q_5}(x)&: \text{$x$ consists of $0$s and $1$s but $x \notin \{0, 1, 10, 01, 010, 101\}$} \\
             \end{aligned}
     \end{equation*}
-    It is clear that $q_i$ for $i \in \{\epsilon, 0, 1, 2, 3, 4\}$ are mutually exclusive by their definitions. The state, $q_5$, is the direct complement of the union of the other states, so $q_5$ mutually exclusive as well. Thus, all states in $\mathcal{D}$ are mutually exclusive. \\
-    For exhaustivity, notice that every string in $\Sigma^* = \{0, 1\}^*$ is either $\epsilon$ or consists of some number of $0$s and $1$s. $q_\epsilon$ accounts for the empty string case, $q_i$ for $i \in \{0, 1, 2, 3, 4\}$ account for specific strings of $0$s and $1$s, and $q_5$ accounts for all the remaining cases of $0$s and $1$s not covered by the $q_i$. Thus, the states in $\mathcal{D}$ are exhaustive. \\
+    It is clear that $q_i$ for $i \in \{\epsilon, 0, 1, 2, 3, 4\}$ are mutually exclusive by their unique definitions. Moreover, the $q_5$ state is the direct complement of the \textbf{union of the previous $q_i$ states} (as a non-initial state, $q_5$ shall never process $\epsilon$), so $q_5$ must be mutually exclusive as well. Thus, all states in $\mathcal{D}$ are mutually exclusive. \\
+    For exhaustivity, notice that every string in $\Sigma^* = \{0, 1\}^*$ is either $\epsilon$ or consists of some number of $0$s and $1$s. The $q_\epsilon$ state accounts for the empty string case, $q_i$ for $i \in \{0, 1, 2, 3, 4\}$ account for specific strings of $0$s and $1$s, and $q_5$ accounts for all the remaining cases of $0$s and $1$s not covered by the $q_i$. Thus, the states in $\mathcal{D}$ are exhaustive. \\
     \\
     Let $q \in Q = \{q_{\epsilon}, q_0, q_1, q_2, q_3, q_4, q_5\}$ and $w \in \Sigma^* = \{0, 1\}^*$ both be arbitrary. \\
     Denote the predicate:
@@ -287,7 +288,7 @@ Let $\Sigma = \{ 0, 1 \} $. \\
     \underline{Base Cases:} \\
     Let $w = \epsilon$. \\
     Let $q = q_{\epsilon}$. $P_q(w) = P_{q_{\epsilon}}(\epsilon)$ is true as $w = \epsilon$, matching the definition of $P_{q_{\epsilon}}(w)$. \\
-    Let $q \neq q_0$. $P_q(w) = P_{q_i}(\epsilon) \mid_{i \in \{0, 1, 2, 3, 4, 5\}}$ are trivially true as these corresponding states have not yet been reached. \\
+    Let $q \neq q_{\epsilon}$. $P_q(w) = P_{q_i}(\epsilon) \mid_{i \in \{0, 1, 2, 3, 4, 5\}}$ are vacuously true as these corresponding states are non-initial and do not process $\epsilon$. \\
     \\
     \underline{Induction Hypothesis:} \\
     Assume that $P_q(w)$ is true for all $q \in \{q_{\epsilon}, q_0, q_1, q_2, q_3, q_4, q_5\}$ and some $w \in \{0, 1\}^*$. \\
@@ -343,16 +344,19 @@ Let $\Sigma = \{ 0, 1 \} $. \\
     \underline{Case $(q = q_4, z \in \{0, 1\})$:} \\
     Assume $P_{q_4}(w)$ is true. Then, $w \in \{101, 010\}$. \\
     It follows that $P_{\delta(q, z)}(wz) = P_{\delta(q_4, z)}(wz) = P_{q_5}(wz)$. Notice that $wz$ is a string with $4$ symbols, because $w$ and $z$ are strings with $3$ symbols and $1$ symbol, respectively. As well, $wz$ is constructed using only $0$s and $1$s. Thus, $wz$ consists of $0$s and $1$s and $w \notin \{0, 1, 10, 01, 010, 101\}$; $P_{\delta(q, z)}(wz)$ holds. \\
-    \underline{Case $(q = q_5, z = \{0, 1\})$:} \\
+    \\
+    \underline{Case $(q = q_5, z \in \{0, 1\})$:} \\
     Assume $P_{q_5}(w)$ is true. \\
-    It follows that $P_{\delta(q, z)}(wz) = P_{\delta(q_5, z)}(wz) = P_{q_5}(wz)$. Recall that $z \in \{0, 1\}$. Since $w$ consists of $0$s and $1$s and $w \notin \{0, 1, 10, 01, 010, 101\}$, by $P_{q_5}(w)$, concatenating $z$ (which is either $0$ or $1$) to $w$ does not result in $wz \in \{0, 1, 10, 01, 010, 101\}$. This is because $w \neq \epsilon$, so $wz \notin \{0, 1\}$, which implies $wz \notin \{10, 01\}$, which also implies $wz \notin \{010, 101\}.$ \\
+    It follows that $P_{\delta(q, z)}(wz) = P_{\delta(q_5, z)}(wz) = P_{q_5}(wz)$. Recall that $z \in \{0, 1\}$. \\
+    \\
+    Since $w$ consists of $0$s and $1$s and $w \notin \{0, 1, 10, 01, 010, 101\}$ by $P_{q_5}(w)$, concatenating $z$ (which is either $0$ or $1$) to $w$ does not result in $wz \in \{0, 1, 10, 01, 010, 101\}$. This is because $w \neq \epsilon$ (as $q_5$ does not process $\epsilon$), so $wz \notin \{0, 1\}$, which implies $wz \notin \{10, 01\}$ (as $q_5$ will not process $10$ and $01$ if does not process $1$ and $0$, respectively), which also implies $wz \notin \{010, 101\}$ (as $q_5$ will not process $010$ and $101$ if it does not process $01$ and $10$, respectively). \\
     \\
     Hence, it is demonstrated that if $P_q(w)$ is true for all $q \in \{q_{\epsilon}, q_0, q_1, q_2, q_3, q_4, q_5\}$ and some $w \in \{0, 1\}^*$, then $P_{\delta(q, z)}(wz)$ holds for some $z \in \{0, 1\}$. By the principle of structural induction, $P_{\delta(q, x)}$ is true for all $q \in Q = \{q_{\epsilon}, q_0, q_1, q_2, q_3, q_4, q_5\}$ and $x \in \Sigma^* = \{0, 1\}^*$. \\
     \\
     Finally, demonstrate that $\mathcal{D}$ accepts exactly the language $L = \Sigma^* \setminus \{01, 101, 010\}$ over $\Sigma = \{0, 1\}$. \\
     This is achievable by showing that if $x \in \Sigma^* = \{0, 1\}^*$ is arbitrary, $x$ is a member of $L$ if and only if there exists an accepting state $q \in F$ such that $P_q(x)$ holds. \\
     \\
-    By the invariants of the accepting states:
+    Recall the invariants of the accepting states, $q_i \in F \mid_{i \in \{\epsilon, 0, 1, 3, 5\}}$:
     \begin{equation*}
         \begin{aligned}
             P_{q_\epsilon}(x)&: \text{$x$ is the empty string, } \epsilon \\
@@ -362,8 +366,11 @@ Let $\Sigma = \{ 0, 1 \} $. \\
             P_{q_5}(x)&: \text{$x$ consists of $0$s and $1$s but $x \notin \{0, 1, 10, 01, 010, 101\}$} \\
         \end{aligned}
     \end{equation*}
-    If $x \in L = \Sigma^* \setminus \{01, 101, 010\}$, then it is either an empty string or consists of $0$s and $1$s, but must not be either of $01$, $101$, nor $010$. Choose $q_{\epsilon}$ to cover the empty string case, and $q_5$ to cover all cases \textbf{except} $x \in \{0, 1, 10, 01, 010, 101\}$ Since $x$ must not be a member of $\{01, 010, 101\}$, it remains to account for $x \in \{0, 1, 10\}$. Conveniently, these cases are covered by $P_0$, $P_1$, and $P_3$. Thus, no matter which $x \in L = \Sigma^* \setminus \{01, 101, 010\}$, there exists accepting states $q \in F$ such that $P_q(x)$ holds. \\
-    Conversely, $L = \Sigma^* \setminus \{01, 101, 010\}$ can be constructed by the same choices of accepting states. Choose the accepting states $q_i \in F, i \in \{\epsilon, 0, 1, 3, 5\}$ and assume $P_{q_i}(x)$ are true. Likewise as provided in the \textit{implication} proof, reconstruct $L = \Sigma^* \setminus \{01, 101, 010\}$ using the accepting states $P_{q_i}(x)$ for this \textit{implied-by} proof. It is clear that the accepting state's invariants build a language consisting of the empty string, and any combination of $0$s and $1$s, excluding the specific strings $01$, $101$, and $010$. Thus, if there are accepting states $q \in F$ such that $P_q(x), x \in \Sigma^* = \{0, 1\}^*$ holds, $x \in L = \Sigma^* \setminus \{01, 101, 010\}$. \\
+    \underline{\textit{Implication}} \\
+    If an arbitrary string $x \in L = \Sigma^* \setminus \{01, 101, 010\}$, then $x$ is either an empty string or consists of $0$s and $1$s, but must not be either of $01$, $101$, nor $010$. Choose $q_{\epsilon}$ to cover the empty string case, and $q_5$ to cover all cases \textbf{except} $x \in \{0, 1, 10, 01, 010, 101\}$. Since $x$ must not be a member of $\{01, 010, 101\}$, it remains to account for $x \in \{0, 1, 10\}$. Conveniently, these cases are covered by $q_0$, $q_1$, and $q_3$. Thus, no matter which string $x \in L = \Sigma^* \setminus \{01, 101, 010\}$, there exists accepting states $q \in F$ such that $P_q(x)$ holds. \\
+    \\
+    \underline{\textit{Implied-by}} \\
+    Conversely, $L = \Sigma^* \setminus \{01, 101, 010\}$ can be constructed by the same choices of accepting states. Choose from the accepting states $q_i \in F \mid_{i \in \{\epsilon, 0, 1, 3, 5\}}$ and assume $P_{q_i}(x)$ are true. Likewise, as demonstrated in the \textit{implication} proof, reconstruct $L = \Sigma^* \setminus \{01, 101, 010\}$ using the accepting states $P_{q_i}(x)$, similarly. It is clear that the accepting state's invariants build a language consisting of the empty string ($P_{q_{\epsilon}}$), and any combination of $0$s and $1$s, excluding the specific strings $01$, $101$, and $010$ ($P_{q_0}, P_{q_1}, P_{q_3}, P_{q_5}$). Thus, if there are accepting states $q \in F$ such that $P_q(x) \mid_{x \in \Sigma^* = \{0, 1\}^*}$ holds, then $x \in L = \Sigma^* \setminus \{01, 101, 010\}$. \\
     \\
     Therefore, $\mathcal{D}$ accepts $L = \Sigma^* \setminus \{01, 101, 010\}$ over $\Sigma = \{0, 1\}$. This means $L$ is a regular language. \\
 \end{proof}
