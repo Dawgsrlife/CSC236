@@ -376,13 +376,23 @@ Let $\Sigma = \{ 0, 1 \} $. \\
 \end{proof}
 \leavevmode\\
 \textbf{(c):} \\
-\textbf{\underline{Claim:}} $\{ w | w \text{ is a palindrome} \}$ is NOT a regular language.
+\textbf{\underline{Claim:}} $\{ w | w \text{ is a palindrome} \}$ is NOT a regular language. \\
 \begin{proof}
 \leavevmode\\
-    % Notes:
-    % - Palindromes require matching symbols from opposite ends of the string, which requires memory beyond finite states;
-    % - The Pumping Lemma can be used here to show non-regularity (if that is taught).
-    proofgoeshere \\
+    Seeking a contradiction, assume the language $L = \{ w | w \text{ is a palindrome} \}$ is regular. Then, there exists a DFA $\mathcal{D} = (Q, \Sigma, \delta, s, F)$ that recognizes $L$, where $|Q| = k, k \in \mathbb{N}$ \\
+    \\
+    Next, choose a string $w \in L$ such that $|w| \geq k + 1$. \\
+    Let $w = 0^k1^10^k \in L$. Notice that $|W| = 2k + 1 \geq k + 1$, and that the DFA must accept $w$. \\
+    \\
+    As $\mathcal{D}$ processes the first $k$ symbols of $w = 0^k1^10^k$, some state $q \in Q$ must repeat, because the DFA only has $k$ states, but processes more than $k$ symbols. This repetition implies that $\mathcal{D}$ transitions into a loop at state $q$ while reading the initial segment $0^k$. \\
+    \\
+    Let this loop correspond to some repeated substring $s$ of $0^k$. Because the DFA cannot remember how many $0$s it has processed within this loop, it treats strings with any number of repetitions of $s$ the same way. \\
+    \\
+    Now construct a string $w' = 0^{k + 1}1^10^k$, where $0^{k + 1}$ has one more $0$ than $0^k$. Since DFA processes $w'$ exactly as it processes $w$, then $\mathcal{D}$ must also accept $w'$. \\
+    \\
+    However, $w'$ is not a palindrome: the number of $0$s on the left $(k + 1)$ does not match the number of $0$s on the right $(k)$. This contradicts the assumption that $\mathcal{D}$ recognizes $L$, as $\mathcal{D}$ accepts $w' \notin L$. \\
+    \\
+    By reaching a contradiction, the language $L = \{ w | w \text{ is a palindrome} \}$ cannot be recognized by a DFA. Thus, $L$ is not a regular language. \\
 \end{proof}
 \leavevmode\\
 \textbf{(d):} \\
@@ -750,6 +760,7 @@ It is known in formal language theory that counter-free languages are equivalent
 \leavevmode\\
 \textbf{(c):} \\
 \textbf{\underline{Claim:}} $(aa)^*$ is NOT a counter-free language, where $\Sigma = \{ a \} $. 
+\textit{Counterexample.} \\
 \begin{proof}
 \leavevmode\\
     % Notes:
