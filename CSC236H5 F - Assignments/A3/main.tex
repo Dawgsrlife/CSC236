@@ -770,12 +770,41 @@ It is known in formal language theory that counter-free languages are equivalent
     \underline{Show that $xy^mz \in (ab)^* \implies xy^nz \in (ab)^*$:} \\
     Suppose $xy^mz \in (ab)^*$. \\
     \\
-    Since $m \geq n$ is arbitrary,  \\
+    The following cases may arise. \\
     \\
-    a \\
+    \underline{Case ($x = a$)} \\
+    Assume $x = a$. Then, $xy^mz \in (ab)^*$ implies $z = b$, as strings that start with $a$ must end with $b$. This makes $y = ba$ so that $y^m = (ba)^m$ is a sequence of $ba$. It follows that $y^n$ is also a sequence of $ba$. \\
+    \\
+    Therefore, the string $xy^nz$ starts with $a$, follows with a sequence of $ba$, and ends with $b$. Collectively, this string is indeed some number of concatenations of $ab$, so $xy^nz \in (ab)^*$. \\
+    \\
+    \underline{Case ($x = ab$)} \\
+    Assume $x = ab$. Then, $xy^mz \in (ab)^*$ implies $z = ab$ as well, where $y = ab$ so that $y^m = (ab)^m$ is a sequence of $ab$. It follows that $y^n$ is also a sequence of $ab$. \\
+    \\
+    Therefore, the string $xy^nz$ starts with $ab$, follows with a sequence of $ab$, and ends with $ab$. Collectively, this string is indeed some number of concatenations of $ab$, so $xy^nz \in (ab)^*$. \\
+    \\
+    \underline{Altogether:} \\
+    Thus, $xy^nz \in (ab)^*$. \\
     \\
     \underline{Show that $xy^mz \in (ab)^* \impliedby xy^nz \in (ab)^*$:} \\
+    Suppose $xy^nz in (ab)^*$. \\
     \\
+    Consider the same cases as previously noted. \\
+    \\
+    \underline{Case ($x = a$)} \\
+    Assume $x = a$. Then, $xy^nz \in (ab)^*$ implies $z = b$, as strings that start with $a$ must end with $b$. This makes $y = ba$ so that $y^n = (ba)^n$ is a sequence of $ba$. It follows that $y^m$ is also a sequence of $ba$ (having only a greater number of concatenations of $ba$). \\
+    \\
+    Therefore, the string $xy^mz$ starts with $a$, follows with a sequence of $ba$, and ends with $b$. Collectively, this string is indeed some number of concatenations of $ab$, so $xy^mz \in (ab)^*$. \\
+    \\
+    \underline{Case ($x = ab$)} \\
+    Assume $x = ab$. Then, $xy^nz \in (ab)^*$ implies $z = ab$ as well, where $y = ab$ so that $y^n = (ab)^m$ is a sequence of $ab$. It follows that $y^m$ is also a sequence of $ab$ (having only a greater number of concatenations of $ab$). \\
+    \\
+    Therefore, the string $xy^mz$ starts with $ab$, follows with a sequence of $ab$, and ends with $ab$. Collectively, this string is indeed some number of concatenations of $ab$, so $xy^mz \in (ab)^*$. \\
+    \\
+    \underline{Altogether:} \\
+    Thus, $xy^mz \in (ab)^*$. \\
+    \\
+    \underline{Conclusion:} \\
+    It has been demonstrated that $xy^mz \in (ab)^* \implies xy^nz \in (ab)^*$ and $xy^mz \in (ab)^* \impliedby xy^nz \in (ab)^*$. Therefore, $xy^mz \in (ab)^* \iff xy^nz \in (ab)^*$. This makes $(ab)^*$ a counter-free language over $\Sigma = \{a, b\}$. \\
 \end{proof}
 \leavevmode\\
 \textbf{(c):} \\
