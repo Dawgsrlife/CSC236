@@ -683,45 +683,74 @@ Let $\Sigma = \{ 0, 1 \} $. \\
 \section*{Question \#2}
 \textbf{\underline{Claim:}} Regular expressions that also have access to complement can still only express the same class of languages (i.e. the class of regular langauges) as regular expressions without the complement operation.
 \begin{proof}
-\leavevmode\\
-    % Notes:
-    % - Argue that a regular language's closure properties (under union, intersection, and complement) enable the construction of an equivalent regular expression without changing the language class.
-    % - Construct examples to illustrate equivalency using De Morgan's laws and closure proofs.
-    Suppose $r$ is an arbitrary regular expression with alphabet $\Sigma$ so that $L = \mathcal{L}(r)$ is a regular language. \\
-    Assume $r$ has access to the complement operation. \\
-    \\
-    Let $\overline{L} = \{ x \in \Sigma^* \mid x \notin L \}$ be the regular language representing the \textit{complement} of L. \\
-    Assume $\overline{r}$ is a regular expression, with $\mathcal{L}(\overline{r}) = \overline{\mathcal{L}(r)}$. \\
-    \\
-    By definition, there exists a DFA $\mathcal{M}$ that accepts $L$. \\
-    \\
-    Construct $\mathcal{M}$: \\
-    \(\mathcal{M} = (Q, \Sigma, \delta, s, F)\), where
-    \begin{itemize}
-        \item Q is a set of finite states;
-        \item $\Sigma$ is the alphabet;
-        \item $\delta : Q \times \Sigma \to Q$ is the transition function;
-        \item $s$ is the start state;
-        \item $F \subseteq Q$ is the set of accepting states.
-    \end{itemize}
     \leavevmode\\
-    Next, define $\overline{L} = \Sigma^* \setminus L$ as the regular language containing everything obtainable from $\Sigma$ except members of $L$. \\
-    \\
-    Construct $\overline{M}$ to be identical to $M$, except for its accepting states:
-    \begin{itemize}
-        \item Q is a set of finite states;
-        \item $\Sigma$ is the alphabet;
-        \item $\delta : Q \times \Sigma \to Q$ is the transition function;
-        \item $s$ is the start state;
-        \item $Q \setminus F \subseteq Q$ is the set of accepting states.
-    \end{itemize}
-    \leavevmode\\
-    Notice that $\overline{M}$ share the same states, alphabet, transition function, and start state as those of $M$. The difference is the set of accepting states in $\overline{M}$, which is designed to be mutually exclusive from that of $M$. \\
-    \\
-    \textbf{Self-Note: now add the proof that $\overline{M}$ accepts $\overline{L}$, and connect it back to regexes.}
-    \\
-    Next, let $\overline{r}$ be some regular expression without the complement operation.
-
+        \underline{\textbf{Remarks}} \\
+        The proof proceeds by demonstrating that the addition of the complement operation to regular expressions does not expand their expressive power beyond the class of regular languages. \\
+        The argument is structured as follows:
+        \begin{itemize}
+            \item First, establish the foundational setup and definitions;
+            \item Second, use structural induction to show that regular expressions with complement can be transformed into equivalent regular expressions without complement;
+            \item Finally, conclude that regular expressions with complement describe no more than the regular languages, the same class that regular expressions without complement describe. 
+        \end{itemize}
+        \underline{\textbf{Definitions and Setup}} \\
+        Suppose \( r \) is an arbitrary regular expression over the alphabet \( \Sigma \), so that \( L = \mathcal{L}(r) \) is the language described by \( r \). Assume \( r \) has access to the complement operation. \\
+        \\
+        Let \( \overline{L} = \{ x \in \Sigma^* \mid x \notin L \} \) represent the \textit{complement} of \( L \). By assumption, there exists a regular expression \( \overline{r} \) such that \( \mathcal{L}(\overline{r}) = \overline{\mathcal{L}(r)} \). The goal is to show that \( \overline{r} \) and any regular expression containing complement can be rewritten as a regular expression without complement. \\
+        \\
+        By definition, there exists a DFA \( \mathcal{M} \) that accepts \( L \). Let:
+        \[
+        \mathcal{M} = (Q, \Sigma, \delta, s, F),
+        \]
+        where
+        \begin{itemize}
+            \item \( Q \) is the set of finite states;
+            \item \( \Sigma \) is the alphabet;
+            \item \( \delta : Q \times \Sigma \to Q \) is the transition function;
+            \item \( s \) is the initial state;
+            \item \( F \subseteq Q \) is the set of accepting states.
+        \end{itemize}
+        \leavevmode\\
+        Define \( \overline{L} = \Sigma^* \setminus L \), which contains all strings over \( \Sigma \) not in \( L \). Construct a new DFA \( \overline{\mathcal{M}} \) to accept \( \overline{L} \). This DFA \( \overline{\mathcal{M}} \) is identical to \( \mathcal{M} \) except for the set of accepting states:
+        \begin{itemize}
+            \item \( Q \), \( \Sigma \), \( \delta \), and \( s \) remain the same.
+            \item The accepting states are now \( Q \setminus F \subseteq Q \), i.e., all states not in \( F \).
+        \end{itemize}
+        Notice that \( \overline{\mathcal{M}} \) and \( \mathcal{M} \) share the same structure but differ in their set of accepting states. \\
+        \\
+        \textbf{Claim:} \( \overline{\mathcal{M}} \) recognizes \( \overline{L} \). This follows from the definition of complementation: any string \( x \in \Sigma^* \) that is rejected by \( \mathcal{M} \) (i.e., \( x \notin L \)) is accepted by \( \overline{\mathcal{M}} \), and vice versa. Since \( \overline{\mathcal{M}} \) is a DFA, \( \overline{L} \) is regular, and there exists a regular expression \( \overline{r}' \) (without complement) that describes \( \overline{L} \). \\
+        \\
+        \underline{\textbf{Structural Induction on Regular Expressions}} \\
+        Now generalize this result to show that any regular expression \( r \) with complement can be rewritten as a regular expression \( r' \) without complement, using structural induction on the form of \( r \). \\
+        \\
+        \underline{Predicate} \\
+        Let \( P(r) \) denote the property: ``Any regular expression \( r \), possibly with complement, describes a regular language and can be rewritten as a regular expression \( r' \) without complement." \\
+        \\
+        \underline{Base Cases:} \\
+        If \( r \) is a basic regular expression (\( \epsilon, \emptyset, a \) for \( a \in \Sigma \)), it does not use complement and is already a regular expression without complement. Thus, \( P(r) \) holds for the base cases. \\
+        \\
+        \underline{Induction Hypothesis:} \\
+        Assume \( P(r_1) \) and \( P(r_2) \) hold for some regular expressions \( r_1 \) and \( r_2 \) (i.e., \( r_1 \) and \( r_2 \) can be rewritten without complement). \\
+        \\
+        \underline{Inductive Step:} \\
+        By the Induction Hypothesis, there exist regular expressions $r_1, r_2$ which can be rewritten without complement. \\
+        \\
+        Proceed to demonstrate that \( P(r) \) holds for any regular expression \( r \) formed using the operations union (\( r_1 + r_2 \)), concatenation (\( r_1r_2 \)), Kleene star (\( r_1^* \)), or complement (\( \overline{r_1} \)):
+        \begin{itemize}
+            \item If \( r = r_1 + r_2 \) (union) or \( r = r_1r_2 \) (concatenation), \( r \) can be rewritten using the Induction Hypothesis, as union and concatenation do not introduce complement.
+            \item If \( r = r_1^* \), \( r \) can also be rewritten directly using the Induction Hypothesis, as Kleene star does not introduce complement.
+            \item If \( r = \overline{r_1} \), the complement of \( r_1 \) can be represented by the DFA \( \overline{\mathcal{M}_1} \), as shown in \textit{Definitions and Setup}. Since \( \overline{\mathcal{M}_1} \) describes a regular language, there exists a regular expression \( r_1' \) without complement such that \( \mathcal{L}(r_1') = \overline{\mathcal{L}(r_1)} \).
+            \begin{itemize}
+                \small
+                \item[$\blacksquare$] Note that the regex \( r' \) that describes \( \overline{L} \) does not need to use the complement operation explicitly. Instead, it is derived from the structure of the DFA \( \overline{\mathcal{M}} \), which was obtained by swapping accepting and non-accepting states in \( \mathcal{M} \).
+                \item[$\blacksquare$] This means the complement operation at the language level (i.e. going from \( L \) to \( \overline{L} \)) is reflected in the DFA construction, but the resulting regular expression \( r' \) for \( \overline{L} \) is still a standard regular expression without explicit use of complement.
+                \normalsize
+            \end{itemize}
+        \end{itemize}
+        By structural induction, \( P(r) \) holds for all regular expressions \( r \). \\
+        \\
+        \underline{\textbf{Conclusion}} \\
+        Since any regular expression \( r \) with complement can be rewritten as an equivalent regular expression \( r' \) without complement, the addition of the complement operation does not increase the expressive power of regular expressions. \\
+        Therefore, regular expressions with complement describe the same class of languages as regular expressions without complement: the class of regular languages. \\
 \end{proof}
 \pagebreak
 
