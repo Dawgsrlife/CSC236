@@ -863,16 +863,45 @@ Consider the language $L = \{ w \mid \text{the $k^\text{th}$ last character of $
 \end{proof}
 \leavevmode\\
 \textbf{(b):} \\
-\textbf{\underline{Claim:}} The smallest NFA that accepts $L$ has to have exactly $k$ number of states.
+\textbf{\underline{Claim:}} The smallest NFA that accepts $L$ has exactly $k + 1$ states.
 \begin{proof}
 \leavevmode\\
-    In an NFA, non-determinism allows the automaton to ``guess'' when it is $k$-steps away from the end of the string. \\
+    Proceed by constructing an NFA with $k + 1$ states that accepts $L$, followed by arguing why no NFA with fewer than $k + 1$ states can correctly accept $L$. \\
     \\
-    The NFA for $L$ needs only $k$ states because:
+    \underline{\textbf{Construction of the NFA:}} \\
+    Consider the following NFA:
     \begin{itemize}
-    \item The start state (initial state) represents the starting position;
-    \item The NFA transitions through $k - 1$ intermediate states to track progress. \\
+        \item The NFA has $k + 1$ states, labeled $q_0, q_1, q_2, \dots, q_k$.
+        \item The start state is $q_0$.
+        \item For each character in the input string, the NFA transitions nondeterministically to either:
+        \begin{itemize}
+            \item Remain in the current state (to ignore the current character), or
+            \item Move to the next state (to "count" the character).
+        \end{itemize}
+        \item Once the NFA reaches $q_k$, it checks if the current character is $1$ (the $k^\text{th}$ last character) and transitions to an accept state.
     \end{itemize}
+    This NFA uses nondeterminism to track all possible positions in the string where the $k^\text{th}$ last character might be $1$. It is minimal because it uses exactly $k + 1$ states, one for each possible position from $0$ to $k$. Thus, this NFA accepts precisely the language $L$. \\
+    \\
+    \underline{\textbf{Contradiction Argument:}} \\
+    Seeking a contradiction, assume that there exists an NFA with fewer than $k + 1$ states that accepts $L$. Such an NFA would need to:
+    \begin{itemize}
+        \item Track whether the $k^\text{th}$ last character is $1$, and
+        \item Ensure exactly $k - 1$ characters follow the $k^\text{th}$ last character.
+    \end{itemize}
+    However, with fewer than $k + 1$ states, the NFA cannot distinguish between all possible scenarios where the $k^\text{th}$ last character occurs, as it would lose track of the required position information. \\
+    \\
+    Specifically, any NFA with fewer than $k + 1$ states would necessarily involve a loop in the portion of the state space responsible for verifying the $k^\text{th}$ last character. This loop would cause the NFA to lose track of whether it has correctly counted $k - 1$ characters after the candidate $k^\text{th}$ last character. Consequently, the NFA would incorrectly accept or reject certain strings. \\
+    \\
+    \underline{\textbf{Counterexample:}} \\
+    Consider $k = 3$ and the alphabet $\Sigma = \{0, 1\}$. The language $L$ includes strings such as $w = 1101$ (where the $3^\text{rd}$ last character is $1$) and excludes strings such as $w = 1001$ (where the $3^\text{rd}$ last character is $0$). An NFA with fewer than $k + 1 = 4$ states cannot distinguish between these strings:
+    \begin{itemize}
+        \item If the NFA has a loop to reduce its state count, it cannot reliably count the number of characters following the candidate $3^\text{rd}$ last character.
+        \item As a result, the NFA might erroneously accept $w = 1001$ or reject $w = 1101$, violating the definition of $L$.
+    \end{itemize}
+    This shows that fewer than $k + 1$ states are insufficient. \\
+    \\
+    \underline{\textbf{Conclusion:}} \\
+    The assumption that an NFA with fewer than $k + 1$ states can accept $L$ leads to a contradiction. Thus, the smallest NFA that accepts $L$ must have exactly $k + 1$ states. \\
 \end{proof}
 \leavevmode\\
 \textbf{(c):} \\
