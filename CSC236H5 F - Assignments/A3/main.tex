@@ -388,9 +388,9 @@ Let $\Sigma = \{ 0, 1 \} $. \\
     \\
     Let this loop correspond to some repeated substring $s$ of $0^k$. Because the DFA cannot remember how many $0$s it has processed within this loop, it treats strings with any number of repetitions of $s$ the same way. \\
     \\
-    Now construct a string $w' = 0^{k + 1}1^10^k$, where $0^{k + 1}$ has one more $0$ than $0^k$. Since DFA processes $w'$ exactly as it processes $w$, then $\mathcal{D}$ must also accept $w'$. \\
+    Now construct a string $w' = 0^{k - s}1^10^k$, where $0^{k - s}$ has $s$ less $0$s than $0^k$. Since DFA processes $w'$ exactly as it processes $w$, then $\mathcal{D}$ must also accept $w'$. \\
     \\
-    However, $w'$ is not a palindrome: the number of $0$s on the left $(k + 1)$ does not match the number of $0$s on the right $(k)$. This contradicts the assumption that $\mathcal{D}$ recognizes $L$, as $\mathcal{D}$ accepts $w' \notin L$. \\
+    However, $w'$ is not a palindrome: the number of $0$s on the left $(k - s)$ does not match the number of $0$s on the right $(k)$. This contradicts the assumption that $\mathcal{D}$ recognizes $L$, as $\mathcal{D}$ accepts $w' \notin L$. \\
     \\
     By reaching a contradiction, the language $L = \{ w | w \text{ is a palindrome} \}$ cannot be recognized by a DFA. Thus, $L$ is not a regular language. \\
 \end{proof}
@@ -794,22 +794,25 @@ It is known in formal language theory that counter-free languages are equivalent
     % - Use the definition of counter-free langauges to show that (ab)* satisfies the condition for counter-freeness.
     By definition, if $(ab)^*$ is a counter-free language over $\Sigma = \{a, b\}$, there exists natural $n$ for all $x, y, z \in \{ a, b \}^*$ and for all $m \geq n$ such that $xy^mz \in (ab)^* \iff xy^nz \in (ab)^*$. \\
     \\
-    Let $n \in \mathbb{N}$. Let $x, y, z \in \{ a, b \}^*$ and $m \geq n$ both be arbitrary. \\
+    Let $n = 2 \in \mathbb{N}$. Let $x, y, z \in \{ a, b \}^*$ and $m \geq n$ both be arbitrary. \\
     \\
     \underline{Show that $xy^mz \in (ab)^* \implies xy^nz \in (ab)^*$:} \\
     Suppose $xy^mz \in (ab)^*$. \\
     \\
     The following cases may arise. \\
     \\
-    \underline{Case ($x = a$)} \\
-    Assume $x = a$. Then, $xy^mz \in (ab)^*$ implies $z = b$, as strings that start with $a$ must end with $b$. This makes $y = ba$ so that $y^m = (ba)^m$ is a sequence of $ba$. It follows that $y^n$ is also a sequence of $ba$. \\
+    \underline{Case ($xy^mz = \epsilon$)} \\
+    Then, $x, y, z = \epsilon$, so $y^m = y^n = \epsilon$. Clearly, $xy^nz \in (ab)^*$. \\
     \\
-    Therefore, the string $xy^nz$ starts with $a$, follows with a sequence of $ba$, and ends with $b$. Collectively, this string is indeed some number of concatenations of $ab$, so $xy^nz \in (ab)^*$. \\
+    \underline{Case ($x$ ends with $a$)} \\
+    Assume $x$ ends with $a$. If $x$ is not solely $a$, then it must be some sequence of $ab$ followed by $a$. Then, $xy^mz \in (ab)^*$ implies $z = b$, as strings in $(ab)^*$ must end with $b$, if not empty. This makes $y = ba$ so that $y^m = (ba)^m$ is a sequence of $ba$. It follows that $y^n$ is also a sequence of $ba$. \\
     \\
-    \underline{Case ($x = ab$)} \\
-    Assume $x = ab$. Then, $xy^mz \in (ab)^*$ implies $z = ab$ as well, where $y = ab$ so that $y^m = (ab)^m$ is a sequence of $ab$. It follows that $y^n$ is also a sequence of $ab$. \\
+    Therefore, the string $xy^nz$ starts with some sequence (if any) of $ab$ followed by $a$, continues with a sequence of $ba$, and ends with $b$. Collectively, this string is indeed some number of concatenations of $ab$, so $xy^nz \in (ab)^*$. \\
     \\
-    Therefore, the string $xy^nz$ starts with $ab$, follows with a sequence of $ab$, and ends with $ab$. Collectively, this string is indeed some number of concatenations of $ab$, so $xy^nz \in (ab)^*$. \\
+    \underline{Case ($x$ ends with $b$)} \\
+    Assume $x$ ends with $b$. If $x$ is not solely $b$, then it must be $a$ concatenated with some sequence $ba$ then concatenated with $b$. Then, $xy^mz \in (ab)^*$ implies $z = ab$ as well, where $y = ab$ so that $y^m = (ab)^m$ is a sequence of $ab$. It follows that $y^n$ is also a sequence of $ab$. \\
+    \\
+    Therefore, the string $xy^nz$ starts with $a$ concatenated with some sequence (if any) of $ba$ then concatenated by $b$, continues with a sequence of $ab$, and ends with $ab$. Collectively, this string is indeed some number of concatenations of $ab$, so $xy^nz \in (ab)^*$. \\
     \\
     \underline{Altogether:} \\
     Thus, $xy^nz \in (ab)^*$. \\
@@ -819,15 +822,19 @@ It is known in formal language theory that counter-free languages are equivalent
     \\
     Consider the same cases as previously noted. \\
     \\
-    \underline{Case ($x = a$)} \\
-    Assume $x = a$. Then, $xy^nz \in (ab)^*$ implies $z = b$, as strings that start with $a$ must end with $b$. This makes $y = ba$ so that $y^n = (ba)^n$ is a sequence of $ba$. It follows that $y^m$ is also a sequence of $ba$ (having only a greater number of concatenations of $ba$). \\
+    \underline{Case ($xy^nz = \epsilon$)} \\
+    Then, $x, y, z = \epsilon$, so $y^n = y^m = \epsilon$. Clearly, $xy^mz \in (ab)^*$. \\
     \\
-    Therefore, the string $xy^mz$ starts with $a$, follows with a sequence of $ba$, and ends with $b$. Collectively, this string is indeed some number of concatenations of $ab$, so $xy^mz \in (ab)^*$. \\
+    \underline{Case ($x$ ends with $a$)} \\
+    Assume $x$ ends with $a$. If $x$ is not solely $a$, then it must be some sequence of $ab$ followed by $a$. Then, $xy^nz \in (ab)^*$ implies $z = b$, as strings in $(ab)^*$ must end with $b$, if not empty. This makes $y = ba$ so that $y^m = (ba)^m$ is a sequence of $ba$. It follows that $y^m$ is also a sequence of $ba$ (having only a greater number of concatenations of $ba$). \\
     \\
-    \underline{Case ($x = ab$)} \\
-    Assume $x = ab$. Then, $xy^nz \in (ab)^*$ implies $z = ab$ as well, where $y = ab$ so that $y^n = (ab)^m$ is a sequence of $ab$. It follows that $y^m$ is also a sequence of $ab$ (having only a greater number of concatenations of $ab$). \\
+    Therefore, the string $xy^mz$ starts with some sequence (if any) of $ab$ followed by $a$, continues with a sequence of $ba$, and ends with $b$. Collectively, this string is indeed some number of concatenations of $ab$, so $xy^mz \in (ab)^*$. \\
     \\
-    Therefore, the string $xy^mz$ starts with $ab$, follows with a sequence of $ab$, and ends with $ab$. Collectively, this string is indeed some number of concatenations of $ab$, so $xy^mz \in (ab)^*$. \\
+    \underline{Case ($x$ ends with $b$)} \\
+    Assume $x$ ends with $b$. If $x$ is not solely $b$, then it must be $a$ concatenated with some sequence $ba$ then concatenated with $b$. Then, $xy^nz \in (ab)^*$ implies $z = ab$ as well, where $y = ab$ so that $y^n = (ab)^m$ is a sequence of $ab$. It follows that $y^m$ is also a sequence of $ab$ (having only a greater number
+    of concatenations of $ab$). \\
+    \\
+    Therefore, the string $xy^mz$ starts with $a$ concatenated with some sequence (if any) of $ba$ then concatenated by $b$, continues with a sequence of $ab$, and ends with $ab$. Collectively, this string is indeed some number of concatenations of $ab$, so $xy^mz \in (ab)^*$. \\
     \\
     \underline{Altogether:} \\
     Thus, $xy^mz \in (ab)^*$. \\
@@ -931,13 +938,6 @@ Consider the language $L = \{ w \mid \text{the $k^\text{th}$ last character of $
     \\
     \underline{\textbf{Conclusion:}} \\
     The assumption that an NFA with fewer than $k + 1$ states can accept $L$ leads to a contradiction. Thus, the smallest NFA that accepts $L$ must have exactly $k + 1$ states. \\
-\end{proof}
-\leavevmode\\
-\textbf{(c):} \\
-\textbf{\underline{Claim:}} The smallest DFA that accepts $L$ has to have exactly $2^{k + 1} - 1$ number of states.
-\begin{proof}
-\leavevmode\\
-    proofgoeshere \\
 \end{proof}
 \leavevmode\\
 \pagebreak
