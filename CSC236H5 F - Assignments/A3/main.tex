@@ -825,10 +825,10 @@ It is known in formal language theory that counter-free languages are equivalent
     \underline{Case ($n$ is odd)} \\
     Assume $n$ is odd. Consider $xy^nz \mid_{x = \epsilon, y^n = a^n, z = a} = \epsilon a^na = a^na$. \\
     \\
-    By assumption, $xy^mz \in (aa)^*$ for arbitrary $m \geq n$. However, notice when $x = \epsilon, y^m \mid_{m = n + 1} = a^{n + 1}, z = a$, it follows that $xy^mz = \epsilon a^{n + 1} a = a^{n + 2}$. This means there are $n + 2$ substrings $a$, which is an odd quantity of substrings $a$ as $n$ is odd. Thus, $xy^mz \notin (aa)^*$, contradicting the assumption that $xy^mz \in (aa)^*$.
+    By assumption, $xy^mz \in (aa)^*$ for arbitrary $m \geq n$. However, notice when $x = \epsilon, y^m \mid_{m = n + 1} = a^{n + 1}, z = a$, it follows that $xy^mz = \epsilon a^{n + 1} a = a^{n + 2}$. This means there are $n + 2$ substrings $a$, which is an odd quantity of substrings $a$ as $n$ is odd. Thus, $xy^mz \notin (aa)^*$, contradicting the assumption that $xy^mz \in (aa)^*$. \\
     \\
     \underline{Altogether:} \\
-    Regardless of the parity of $n$, $xy^mz \in (aa)^* \not\impliedby xy^nz \in (aa)^*$, by contradiction. It follows that $xy^mz \in (aa)^* \not\iff xy^nz \in (aa)^*$. \\
+    Regardless of the parity of $n$, $xy^mz \in (aa)^* \impliedby xy^nz \in (aa)^*$ is \textbf{false}, by contradiction. It follows that $xy^mz \in (aa)^* \iff xy^nz \in (aa)^*$ is \textbf{false} as well. \\
     \\
     Therefore, $(aa)^*$ is \textbf{not} a counter-free language over $\Sigma = \{a\}$. \\
 \end{proof}
@@ -837,7 +837,7 @@ It is known in formal language theory that counter-free languages are equivalent
 \section*{Question \#4}
 Let $k \in \mathbb{N}$ be arbitrary. Let $w \in \Sigma^*$, where $|\Sigma| \geq 2$ and has $1$ as one of its symbols. \\
 \\
-Consider the language $L = \{ w | \text{the $k^\text{th}$ to last character of $w$ is $1$} \}$. \\
+Consider the language $L = \{ w \mid \text{the $k^\text{th}$ last character of $w$ is $1$} \}$. \\
 \\
 % Notes (raw):
 % For part (a), apply state counting arguments using the DFA properties for strings of length kk.
@@ -847,17 +847,20 @@ Consider the language $L = \{ w | \text{the $k^\text{th}$ to last character of $
 \textbf{\underline{Claim:}} A DFA that accepts $L$ has to have at least $2^k$ number of states.
 \begin{proof}
 \leavevmode\\
-    \textbf{ACTUALLY, SHOW THIS BY CONTRADICTION: Suppose whatever... less than $2^k$ states.} \\
+    Seeking a contradiction, assume there exists a DFA that accepts $L$ with less than $2^k$ states. \\
     \\
-    A DFA is determinstic and requires states to remember the ``history'' of the input. For the language $L = \{ w | \text{the $k^\text{th}$ to last character of $w$ is $1$} \}$, the DFA must track the last $k$ characters of the input string. \\
+    Now consider $w \in L = \{ w \mid \text{the $k^\text{th}$ last character of $w$ is $1$} \}$ such that $|w| = k$. Then, there would be at least $2^k$ unique strings with length $k$, as $|\Sigma| \geq 2$. For simplicitly, consider only $|\Sigma| = 2$ to proceed with exactly $2^k$ unique strings of length $k$. \\
     \\
-    Notice that there are $2^k$ possible combinations of $k$-length binary substrings, and each of these combinations must map to a unique state in the DFA for accurate processing. \\
+    By the pigeonhole principle, since the DFA has fewer than $2^k$ states, at least two distinct strings $u, v \in \Sigma^k$ must end up in the same state after being processed by the DFA. \\
     \\
-    Any DFA with fewer than $2^k$ states cannot differentiate between all possible $k$-length suffixes, causing the automaton to classify strings incorrectly. \\
+    Let $u$ and $v$ differ at some position $i$, where the $i^\text{th}$ symbol of $u$ is $1$, and the $i^\text{th}$ symbol of $v$ is $s \neq 1$. Since the DFA is in the same state after processing $u$ and $v$, it cannot distinguish between suffixes appended to $u$ and $v$. \\
     \\
-    Any DFA with more than $2^k$ states either accepts $L$ with a larger alphabet with more than $2$ symbols, or is introducing repetitive and redundant states, but still works. \\
+    Consider the strings $u'$ and $v'$, where $u' = ux$ and $v' = vx$, with $x \in \Sigma^*$. Let $x$ be a string of length $k - i$ consisting of only the symbol $1$. Then, for $u'$, the $k^\text{th}$ last character is $1$, so $u' \in L$. For $v'$, the $k^\text{th}$ last character is $s \neq 1$, so $v' \notin L$. \\
+    \\
+    However, since the DFA reaches the same state after processing $u$ and $v$, it must accept or reject both $u'$ and $v'$, leading to a contradiction. Thus, the DFA cannot correctly recognize $L$ with fewer than $2^k$ states. \\
+    \\
+    Therefore, a DFA that accepts $L$ must have at least $2^k$ states. \\
 \end{proof}
-
 \leavevmode\\
 \textbf{(b):} \\
 \textbf{\underline{Claim:}} The smallest NFA that accepts $L$ has to have exactly $k$ number of states.
@@ -866,8 +869,10 @@ Consider the language $L = \{ w | \text{the $k^\text{th}$ to last character of $
     In an NFA, non-determinism allows the automaton to ``guess'' when it is $k$-steps away from the end of the string. \\
     \\
     The NFA for $L$ needs only $k$ states because:
-    - The start state (initial state) represents the starting position;
-    - The NFA transitions through $k - 1$ intermediate states to track progress. \\
+    \begin{itemize}
+    \item The start state (initial state) represents the starting position;
+    \item The NFA transitions through $k - 1$ intermediate states to track progress. \\
+    \end{itemize}
 \end{proof}
 \leavevmode\\
 \textbf{(c):} \\
