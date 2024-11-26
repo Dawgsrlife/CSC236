@@ -763,7 +763,7 @@ It is known in formal language theory that counter-free languages are equivalent
 \leavevmode\\
     % Notes:
     % - Use the definition of counter-free langauges to show that (ab)* satisfies the condition for counter-freeness.
-    By definition, if $(ab)^*$ is a counter-free language, there exists natural $n$ for all $x, y, z \in \{ a, b \}^*$ and for all $m \geq n$ such that $xy^mz \in (ab)^* \iff xy^nz \in (ab)^*$. \\
+    By definition, if $(ab)^*$ is a counter-free language over $\Sigma = \{a, b\}$, there exists natural $n$ for all $x, y, z \in \{ a, b \}^*$ and for all $m \geq n$ such that $xy^mz \in (ab)^* \iff xy^nz \in (ab)^*$. \\
     \\
     Let $n \in \mathbb{N}$. Let $x, y, z \in \{ a, b \}^*$ and $m \geq n$ both be arbitrary. \\
     \\
@@ -786,7 +786,7 @@ It is known in formal language theory that counter-free languages are equivalent
     Thus, $xy^nz \in (ab)^*$. \\
     \\
     \underline{Show that $xy^mz \in (ab)^* \impliedby xy^nz \in (ab)^*$:} \\
-    Suppose $xy^nz in (ab)^*$. \\
+    Suppose $xy^nz \in (ab)^*$. \\
     \\
     Consider the same cases as previously noted. \\
     \\
@@ -808,13 +808,29 @@ It is known in formal language theory that counter-free languages are equivalent
 \end{proof}
 \leavevmode\\
 \textbf{(c):} \\
-\textbf{\underline{Claim:}} $(aa)^*$ is NOT a counter-free language, where $\Sigma = \{ a \} $. 
-\textit{Counterexample.} \\
+\textbf{\underline{Claim:}} $(aa)^*$ is NOT a counter-free language, where $\Sigma = \{ a \}$.
 \begin{proof}
 \leavevmode\\
-    % Notes:
-    % - Find a counterexample to the condition, demonstrating the need for counting.
-    proofgoeshere \\
+    Seeking a contradiction, assume $(aa)^*$ is a counter-free language, where $\Sigma = \{a\}$. \\
+    \\
+    Then, by definition, there exists natural $n$ for all $x, y, z \in \{a\}^*$ and for all $m \geq n$ such that $xy^mz \in (aa)^* \iff xy^nz \in (aa)^*$. Moreover, note that strings in $(aa)^*$ must have an even number of substrings $a$. \\
+    \\
+    Evaluate the parity of $n$ for $xy^mz \in (aa)^* \impliedby xy^nz \in (aa)^*$. \\
+    \\
+    \underline{Case ($n$ is even)} \\
+    Assume $n$ is even. Consider $xy^nz \mid_{x, y, z = a} = aa^na$. \\
+    \\
+    By assumption, $xy^mz \in (aa)^*$ for arbitrary $m \geq n$. However, notice when $x, z = a$ and $y^m \mid_{m = n + 1} = a^{n + 1}$, it follows that $xy^mz = aa^{n + 1}a = a^{n + 3}$. This means there are $n + 3$ substrings $a$, which is an odd quantity of substrings $a$ as $n$ is even. Thus, $xy^mz \notin (aa)^*$, contradicting the assumption that $xy^mz \in (aa)^*$. \\
+    \\
+    \underline{Case ($n$ is odd)} \\
+    Assume $n$ is odd. Consider $xy^nz \mid_{x = \epsilon, y^n = a^n, z = a} = \epsilon a^na = a^na$. \\
+    \\
+    By assumption, $xy^mz \in (aa)^*$ for arbitrary $m \geq n$. However, notice when $x = \epsilon, y^m \mid_{m = n + 1} = a^{n + 1}, z = a$, it follows that $xy^mz = \epsilon a^{n + 1} a = a^{n + 2}$. This means there are $n + 2$ substrings $a$, which is an odd quantity of substrings $a$ as $n$ is odd. Thus, $xy^mz \notin (aa)^*$, contradicting the assumption that $xy^mz \in (aa)^*$.
+    \\
+    \underline{Altogether:} \\
+    Regardless of the parity of $n$, $xy^mz \in (aa)^* \not\impliedby xy^nz \in (aa)^*$, by contradiction. It follows that $xy^mz \in (aa)^* \not\iff xy^nz \in (aa)^*$. \\
+    \\
+    Therefore, $(aa)^*$ is \textbf{not} a counter-free language over $\Sigma = \{a\}$. \\
 \end{proof}
 \pagebreak
 
