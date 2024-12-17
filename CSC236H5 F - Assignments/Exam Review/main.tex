@@ -132,11 +132,11 @@ Prove that \( f(n) = \lceil \sqrt(n) \rceil - \lfloor \sqrt(n) - 4 \rfloor\) is 
 \end{proof}
 \pagebreak
 
-\section*{Showing that a DFA does not accept a language}
+\section*{Steps to show that a DFA does not accept a language}
 \begin{enumerate}
     \item Show that there exists \( x, y \in \Sigma ^* \) such that \( \hat{\delta}(q_0, x) = \hat{\delta}(q_0, y) \).
     \item Show that there exists \( z \in \Sigma^* \) such that \( xz \in L \iff yz \notin L \).
-    \item Clarify the contradiction that \( \hat{\delta}(q_0, xz) = \hat{\delta}(q_0, yz) \implies \hat{\delta}(q_0, xz) \in F \).
+    \item Clarify the contradiction that \( \hat{\delta}(q_0, xz) = \hat{\delta}(q_0, yz) \implies \hat{\delta}(q_0, xz) \in L \).
 \end{enumerate}
 \pagebreak
 
@@ -144,18 +144,56 @@ Prove that \( f(n) = \lceil \sqrt(n) \rceil - \lfloor \sqrt(n) - 4 \rfloor\) is 
 Prove that \( L = \{ a^{n^2} \mid n \in \mathbb{N} \} \) is \textbf{not} a regular language.
 \begin{proof}
 \leavevmode\\
-    Seeking a contradiction, assume there exists a DFA \( \mathcal{D} = \{ Q, \Sigma, \delta, s, F \} \) that accepts \( L = \{ a^{n^2} \mid n \in \mathbb{N} \} \). \\
-    Let \( |Q| = k \). \\
+    Assume, for contradiction, that \( L = \{ a^{n^2} \mid n \in \mathbb{N} \} \) is regular. Then there exists a deterministic finite automata (DFA) \( \mathcal{D} = \{ Q, \Sigma, \delta, s, F \} \) that accepts \( L \). \\
+    Let \( |Q| = k \), where \( k \) is the number of states in \( \mathcal{D} \). \\
     \\
-    Then, choose \( w \in L \) such that \( |w| \geq k + 1 \). For instance, let \( w = a^{j^2} \). \\
+    Since \( L \) contains strings of the form \( a^{n^2} \), choose \( w = a^{j^2} \), where \( j \) is large enough such that \( j^2 > k \). Clearly \( w \in L \). \\
     \\
-    Notice that through processing the first \( k + 1 \) symbols in \( w \), some state \( q \)  must repeat by the Pigeonhole principle. Namely, \( \hat{\delta}(q_0, a^{\beta} = q)\) and \( \hat{\delta}(q, a^{\beta}) = q \), where \( \beta \geq 1 \). \\
+    As the DFA processes \( w \), which has \( j^2 > k \) symbols, it must visit more states then there are in \( Q \). By the Pigeonhole Principle, at least one state must repeat. \\
+    Namely, while processing \( w \), there exist integers \( \alpha \) and \( \beta \) such that:
+    \[ \hat{\delta}(s, a^{\alpha}) = \hat{\delta}(s, a^{\alpha + \beta}) \text{,} \]
+    where \( \beta \geq 1 \). \\
+    This means that after reading the first \( \alpha \) symbols, the DFA enters some state \( q \), and reading \( \beta \) additional symbols loops back to \( q \). \\
     \\
-    Since \( \mathcal{D} \) accepts \( w = a^{j^2} \), it follows that \( \hat{\delta}(q_0, a^{j^2}) \in F \). Notice that \( \hat{\delta}(q_0, a^{j^2 + \beta}) = \hat{\delta}(q_0, a^{\alpha + \beta + \gamma + \beta}) = \hat{\delta}(\hat{\delta}(q_0, a^{\alpha}), a^{\beta + \beta + \gamma}) = \hat{\delta}(q, a^{\beta + \beta + \gamma}) = \hat{\delta}(\hat{\delta}(q, a^{\beta}), a^{\beta + \gamma}) = \hat{\delta}(q, a^{\beta + \gamma}) = \hat{\delta}(\hat{\delta}(q_0, a^{alpha}), a^{\beta + \gamma}) = \hat{\delta}(q_0, a^{\alpha + \beta + \gamma}) \in F \). \\
+    Because \( \mathcal{D} \) accepts \( w = a^{j^2} \), it follows that:
+    \[
+        \hat{\delta}(s, a^{j^2}) \in L \text{.}
+    \]
+    Now consider the strings \( a^{j^2 + \beta} \), \( a^{j^2 + 2\beta} \), and so on. Since the DFA loops at state \( q \), adding multiples of \( \beta \) symbols to \( w \) does not change the final state. \\
+    Therefore:
+    \[
+        \hat{\delta}(s, a^{j^2 + \beta}) \in L \;\;\; \text{and} \;\;\; \hat{\delta}(s, a^{j^2 + 2\beta}) \in L
+    \]
+    Thus, the DFA also accepts these strings. \\
     \\
-    This equivalence shows that \( \mathcal{D} \) accepts \( w = a^{j^2 + \beta} \). By the same argument, \( \mathcal{D}  \) also accepts \( a^{j^2 + 2\beta}, a^{j^2 + 3\beta} \). \\
+    Recall that with \( k \) states processing the first \( k + 1 \) symbols of \( w \) must cause a state to repeat (the Pigeonhole Principle).
+    \begin{itemize}
+        \item Let \( \alpha \) be the number of symbols leading up to the first occurrence of a repeated state \( q \).
+        \item Let \( \beta \) be the number of states causing the DFA to loop back to \( q \).
+        \item Let \( \gamma \) account for any remaining symbols to reach the end of \( w = a^{j^2} \).
+    \end{itemize}
+    Thus, \( j^2 = \alpha + \beta + \gamma \). Note that \( \hat{\delta}(s, a^{\alpha}) = \hat{\delta}(q, a^{\beta}) = q \); denote this as \textit{Corollary 1}. \\
     \\
-    However, notice that one of \( a^{j^2 + 2\beta}, a^{j^2 + 3\beta} \) is not a square, which is a contradiction. Therefore, \( L = \{ a^{n^2} \mid n \in \mathbb{N} \} \) must not be regular. \\
+    It is now possible to show explicitly the strings which the DFA accepts. \\
+    Consider that:
+    \begin{equation*}
+        \begin{aligned}
+            \hat{\delta}(s, a^{j^2 + \beta}) &= \hat{\delta}(s, a^{(\alpha + \beta + \gamma) + \beta}) \\
+            &= \hat{\delta}(\hat{\delta}(s, a^{\alpha}), a^{\beta + \beta + \gamma}) \\
+            &= \hat{\delta}(q, a^{\beta + \beta + \gamma}) \text{, by \textit{Corollary 1}} \\
+            &= \hat{\delta}(\hat{\delta}(q, a^{\beta}), a^{\beta + \gamma}) \\
+            &= \hat{\delta}(q, a^{\beta + \gamma}) \text{, by \textit{Corollary 1}} \\
+            &= \hat{\delta}(\hat{\delta}(s, a^{\alpha}), a^{\beta + \gamma}) \text{, by \textit{Corollary 1}} \\
+            &= \hat{\delta}(s, a^{\alpha + \beta + \gamma}) \\
+            &= \hat{\delta}(s, a^{j^2})
+        \end{aligned}
+    \end{equation*}
+    \\
+    This equivalence shows that \( \mathcal{D} \) accepts \( w = a^{j^2 + \beta} \). By continually applying \textit{Corollary 1} in the same argument, \( \mathcal{D} \) also accepts \( a^{j^2 + 2\beta}, a^{j^2 + 3\beta} \). \\
+    \\
+    However, notice that one of \( a^{j^2 + 2\beta}, a^{j^2 + 3\beta} \) is not a square and, thus, not a member of \( L \). Yet, \( \mathcal{D}  \) accepts both strings. This is a contradiction. \\
+    \\
+    Therefore, \( L = \{ a^{n^2} \mid n \in \mathbb{N} \} \) must not be regular. \\
 \end{proof}
 \leavevmode\\
 \textit{Here's an alternative proof by using the \textbf{Pumping Lemma}.}
