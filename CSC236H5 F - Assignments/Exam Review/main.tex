@@ -76,38 +76,92 @@ def optimalschedule(intervals):
     \item All optimal schedules have the same size.
     \item In general, \( \texttt{intervals} = [[\texttt{start}_1, \texttt{end}_1], \dots, [\texttt{start}_n, \texttt{end}_n]] \) for some \( n \in \mathbb{N}^+ \) and \( \texttt{start}_i, \texttt{end}_i \in \mathbb{R}^+ \).
     \item The length of \texttt{intervals} is at least $1$ (\texttt{intervals} is non-empty).
-    \item If \( S \) is the subarray (in the program) at the \( j^{\text{th}} \) iteration and there exists some optimal schedule \( Opt \) such that \( [\texttt{start}_i, \texttt{end}_i] \in Opt \iff [\texttt{start}_i, \texttt{end}_i] \in S \), then \( S \) is looking good.
-    \item Let \( S \) be the subarray on the \( j^{\text{th}} \) iteration of the program. Define the predicate, \( P(S): S \) is looking good.
+    \item If \( S \) is the subarray (in the program) at the \( j^{\text{th}} \) iteration and there exists some optimal schedule \( Opt \) such that \( [\texttt{start}_i, \texttt{end}_i] \in Opt \iff [\texttt{start}_i, \texttt{end}_i] \in S \), then \( S \) is \textbf{looking good}.
+    \item Let \( S \) be the subarray on the \( j^{\text{th}} \) iteration of the program. Define the predicate, \( P(S): S \) is \textbf{looking good}.
 \end{itemize}
 \leavevmode\\
-\underline{\textbf{Claim:}} something \\
+\underline{\textbf{Claim:}} The \texttt{optimalschedule()} program terminates.
 \begin{proof}
 \leavevmode\\
-    proofgoeshere \\
+    Consider the loop variant \( Var = n - i \) in the \( i^{\text{th}} \) iteration. Denote \( \widetilde{Var} \) as the loop variant in the subsequent (\( (i + 1)^{\text{th}} \)) iteration. \\
+    \\
+    Then, notice that \( \widetilde{Var} = n - (i + 1) < n - i = Var \), where \( n, i \in \mathbb{N} \) and \( i \leq n \); \( (n - i) \in \mathbb{N} \). \\
+    \\
+    Therefore, the loop variant decreases in every subsequent iteration. With \( n \) iterations and a step to return the result, the program terminates after \( n + 1 \) iterations. \\ 
 \end{proof}
 \leavevmode\\
-\underline{\textbf{Claim:}} something \\
+\underline{\textbf{Claim:}} \( S \) is \textbf{looking good} at the beginning of the first iteration.
 \begin{proof}
 \leavevmode\\
-    proofgoeshere \\
+    At the start of the first iteration, \( S = \texttt{[]} \), which is trivially a subset of every optimal schedule \( Opt \). Indeed, \( S \) satisfies the definition of \textbf{looking good}. \\
+    \\
+    Namely, there are no positive integers \( i < j = 1 \), making \( P(n) \) trivially hold. \\
 \end{proof}
 \leavevmode\\
-\underline{\textbf{Claim:}} something \\
+\underline{\textbf{Claim:}} If \( S \) is \textbf{looking good} at the beginning of the first iteration, then the first iteration executes, and \( S \) is looking \textbf{looking good} at the beginning of the second iteration.
 \begin{proof}
 \leavevmode\\
-    proofgoeshere \\
+    Assume \( S \) is \textbf{looking good} at the beginning of the first iteration. \\
+    \\
+    Since \( i = 1 \), the first iteration of the loop executes. \\
+    As well, the if-statement on \textit{Line 6} of the program evaluates to \texttt{true} as \( \texttt{f} = \texttt{-infty} \). \\
+    \\
+    Then, \textit{Line 7} appends \( [\texttt{start}_1, \texttt{end}_1] \) to \( S \) and \textit{Line 8} updates \texttt{f} to become \( \texttt{end}_i \). \\
+    \\
+    This completes the first iteration. \\
+    \\
+    For the second iteration of the loop, consider an arbitrary optimal schedule \( Opt \). Construct a new schedule \( Opt' \) (of the same size) obtained by replacing the first interval with \( [\texttt{start}_1, \texttt{end}_1] \). \\
+    \\
+    The \texttt{intervals} list is sorted, so \( Opt' \) is a schedule with no overlaps. Namely, \( \texttt{end}_1 \leq \texttt{end}_a \), where \( \texttt{end}_a \) is the first endpoint of \( Opt \). \\
+    \\
+    \( Opt' \) agrees with \( S \) on the first \( j - 1 = 1 \) interval. Thus, \( Opt' \) must be an optimal schedule. \\
+    \\
+    Therefore, \( S \) is \textbf{looking good} at the start of the second iteration. \\
 \end{proof}
 \leavevmode\\
-\underline{\textbf{Claim:}} something \\
+\underline{\textbf{Claim:}} If \( S \) is \textbf{looking good} at the beginning of every iteration, including the iteration after the last that fails to be executed, then \( S \) is an optimal schedule.
 \begin{proof}
 \leavevmode\\
-    proofgoeshere \\
+    Assume \( S \) is \textbf{looking good} at the beginning of every iteration, including the iteration after the last that fails to be executed. Then, there exists an optimal schedule \( Opt \) such that for all \( i < n + 1 \) (\( n \) is the last iteration number),
+    \[
+        [\texttt{start}_i, \texttt{end}_i] \in Opt \iff [\texttt{start}_i, \texttt{end}_i] \in S \text{.}
+    \]
+    By definition, \( Opt \) is a maximal size subarray of intervals that are non-overlapping. Notice that \( S \) is constructed to be in the same way, through greedily selecting intervals based on the nearest start time (\textit{Line 6} of the program). Thus, \( Opt \) and \( S \) are subarrays of the same size. \\
+    \\
+    Since all intervals in \( Opt \) and \( S \) are in common, it follows that \( S \) is equivalent to \( Opt \). This makes \( S \) an optimal schedule. \\
 \end{proof}
 \leavevmode\\
-\underline{\textbf{Claim:}} something \\
+\underline{\textbf{Claim:}} If \( S \) is \textbf{looking good} at the beginning of the \( j^{\text{th}} \) iteration implies \( S \) is \textbf{looking good} at the beginning of the \( (j + 1)^{\text{th}} \) iteration, then \texttt{optimalschedule()} is correct.
 \begin{proof}
 \leavevmode\\
-    proofgoeshere \\
+    Denote the loop invariant:
+    \[
+        Q(k): P(s) \text{ holds at the beginning of the \( k ^{\text{th}} \) iteration.}
+    \]
+    To show that \texttt{optimalschedule()} is correct—that is, \texttt{optimalschedule()} returns an optimal schedule, show that \( Q(k) \) is true for all \( k \in \mathbb{N} \). \\
+    \\
+    Proceed using the principle of simple induction on \( Q(k) \) over \( k \in \mathbb{N} \). \\
+    \\
+    \underline{Base Case:} \\
+    Let \( i = 0 \). \\
+    The claim that \( S \) is \textbf{looking good} at the beginning of the first iteration has been proved above. \\
+    \\
+    \underline{Induction Hypothesis:} \\
+    Assume for some \( k \in \mathbb{N} \), \( Q(k) \) is holds. \\
+    \\
+    This means \( S \) is \textbf{looking good} at the beginning of the \( k^{\text{th}} \) iteration. \\
+    \\
+    \underline{Induction Step:} \\
+    By the induction hypothesis and the assumption, \( S \) is also \textbf{looking good} at the beginning of the \( (j + 1)^{\text{th}} \) iteration. \\
+    \\
+    \underline{Induction Conclusion:} \\
+    Therefore, \( Q(k) \) holds for all \( k \in \mathbb{N} \). \\
+    \\
+    Next, the claim that the \texttt{optimalschedule()} program terminates has also already been proved. Namely, the program's loop terminates at the beginning of the \( (n + 1)^{\text{th}} \) iteration. \\
+    \\
+    The last claim proved guarantees that if \( S \) is \textbf{looking good} at the beginning of every iteration, including the iteration after the last that fails to be executed, then \( S \) is an optimal schedule. This means \( S \) is constructed to be an optimal schedule after the program's loop terminates. \\
+    \\
+    By finally returning \( S \), the program satisfies its postcondition of returning an optimal schedule. Therefore, the program is correct. \\
 \end{proof}
 \pagebreak
 
