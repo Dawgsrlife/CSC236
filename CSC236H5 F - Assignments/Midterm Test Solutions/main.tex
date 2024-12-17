@@ -54,12 +54,57 @@
 \pagebreak
 \normalsize
 
-\section*{Question \#X}
-wordsgohere
-
+\section*{Question \#1}
+Let \( \mathcal{F} \) be the collection of all functions with domain \( \mathbb{N} \) and co-domain \( \mathbb{R} \). \\
+Given \( A, B \in \mathcal{P}(\mathcal{F}) \), define addition on \( \mathcal{P}(\mathcal{F}) \) by
+\[
+    A + B \coloneq \{ f + g: f \in A, g \in B \} \text{.}
+\]
+Recall that \( f + g \) is the function with domain \( \mathbb{N} \) and co-domain \( \mathbb{R} \) such that
+\[
+    (f + g)(n) = f(n) + g(n) \text{.}
+\]
+Also recall that, if \( h \in \mathcal{F} \), then
+\[
+    O(h) = \{ q \in \mathcal{F}: (\exists n_0, c \in \mathbb{N})(\forall n \geq n_0)[|q(n)| \leq c|h(n)|] \} \text{.}
+\]
+\textbf{\underline{Claim:}} For arbitrary nonnegative \( u, v \in \mathcal{F} \), it follows that \( O(u) + O(v) = O(u + v) \).
 \begin{proof}
 \leavevmode\\
-    proofgoeshere \\
+    This proof demonstrates a double-subset inclusion to show equality. \\
+    \\
+    \underline{Forward Inclusion — \(O(u) + O(v) \subseteq O(u + v)\):} \\
+    Let \( h \in [O(u) + O(v)] \). Then, \( h = f + g \), where \( f \in O(u) \) and \( g \in O(v) \). \\
+    \\
+    By definition, there exists \( c_1, c_2, n_1, n_2 > 0 \) such that
+    \begin{itemize}
+        \item \( |f(n)| \leq c_1|u(n)| \text{ for all } n \geq n_1 \);
+        \item \( |g(n)| \leq c_2|v(n)| \text{ for all } n \geq n_2 \).
+    \end{itemize}
+    \leavevmode\\
+    Choose \( n_0 = max(n_1, n_2) \) and \( c = max(c_1, c_2) \). \\
+    Using the definition, triangle inequality, and assumption that \( u, v \) are nonnegative functions, it follows that
+    \begin{equation*}
+        \begin{aligned}
+            |h(n)| &= |f(n) + g(n)| \leq |f(n)| + |g(n)| \leq c_1|u(n)| + c_2|v(n)| \\
+            &\leq c|u(n)| + c|v(n)| \\
+            &\leq c(|u(n)| + |v(n)|) \\
+            &= c(u(n) + v(n)) = c(|u(n) + v(n)|) = c(|(u + v)(n)|) \text{.}
+        \end{aligned}
+    \end{equation*}
+    Thus, \( |h(n)| \leq c|(u + v)(n)| \). \\
+    \\
+    By definition, \( h \in O(u + v) \). Therefore, \( O(u) + O(v) \subseteq O(u + v) \). \\
+    \\
+    \underline{Backward Inclusion — \(O(u) + O(v) \supseteq O(u + v)\):} \\
+    Let \( h \in O(u + v) \). \\
+    \\
+    By definition, there exists \( c, n_0 > 0 \) such that \( |h(n)| \leq c|(u + v)(n)| \) for all \( n \geq n_0 \). \\
+    \\
+    It follows that \( |h(n)| \leq c|u(n) + v(n)| = c(u(n) + v(n)) \), as \( u, v\) are nonnegative functions. \\
+    \\
+    \underline{Case:}
+
 \end{proof}
 \pagebreak
 
