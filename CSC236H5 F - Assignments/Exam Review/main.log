@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.29)  16 DEC 2024 01:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.25)  17 DEC 2024 09:18
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"c:/Users/33576/CSC236/CSC236/CSC236H5 F - Assignments/Exam Review/main.tex"
-(c:/Users/33576/CSC236/CSC236/CSC236H5 F - Assignments/Exam Review/main.tex
+**"c:/Users/33576/LaTeX Projects/CSC236H5 F - Assignments/Exam Review/main.tex"
+(c:/Users/33576/LaTeX Projects/CSC236H5 F - Assignments/Exam Review/main.tex
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-09-10>
 (c:/texlive/2024/texmf-dist/tex/latex/base/article.cls
@@ -852,22 +852,27 @@ Package fancyhdr Warning: \headheight is too small (30.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-3.40004pt}.
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 118--129
+Underfull \hbox (badness 10000) in paragraph at lines 118--132
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 118--129
+Underfull \hbox (badness 10000) in paragraph at lines 118--132
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 118--129
+Underfull \hbox (badness 10000) in paragraph at lines 118--132
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 118--129
+Underfull \hbox (badness 10000) in paragraph at lines 118--132
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--132
 
  []
 
@@ -890,62 +895,62 @@ Package fancyhdr Warning: \headheight is too small (30.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-3.40004pt}.
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 143--156
+Underfull \hbox (badness 10000) in paragraph at lines 146--159
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 143--156
+Underfull \hbox (badness 10000) in paragraph at lines 146--159
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 143--156
+Underfull \hbox (badness 10000) in paragraph at lines 146--159
 
  []
 
 
-Overfull \hbox (27.40912pt too wide) in paragraph at lines 143--156
+Overfull \hbox (27.40912pt too wide) in paragraph at lines 146--159
 \OT1/cmr/m/n/12 Since $\OMS/cmsy/m/n/12 D$ \OT1/cmr/m/n/12 ac-cepts $\OML/cmm/m/it/12 w \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 a[]$\OT1/cmr/m/n/12 , it fol-lows that $[](\OML/cmm/m/it/12 q[]; a[]\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 2 \OML/cmm/m/it/12 F$\OT1/cmr/m/n/12 . No-tice that $[](\OML/cmm/m/it/12 q[]; a[]\OT1/cmr/m/n/12 ) = [](\OML/cmm/m/it/12 q[]; a[]\OT1/cmr/m/n/12 ) =
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 143--156
+Underfull \hbox (badness 10000) in paragraph at lines 146--159
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 143--156
+Underfull \hbox (badness 10000) in paragraph at lines 146--159
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 164--179
+Underfull \hbox (badness 10000) in paragraph at lines 167--182
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 164--179
+Underfull \hbox (badness 10000) in paragraph at lines 167--182
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 164--179
+Underfull \hbox (badness 10000) in paragraph at lines 167--182
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 164--179
+Underfull \hbox (badness 10000) in paragraph at lines 167--182
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 164--179
+Underfull \hbox (badness 10000) in paragraph at lines 167--182
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 164--179
+Underfull \hbox (badness 10000) in paragraph at lines 167--182
 
  []
 
@@ -968,12 +973,12 @@ Package fancyhdr Warning: \headheight is too small (30.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-3.40004pt}.
 
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 184--190
+Underfull \hbox (badness 10000) in paragraph at lines 187--193
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 184--190
+Underfull \hbox (badness 10000) in paragraph at lines 187--193
 
  []
 
@@ -996,15 +1001,15 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 19510 strings out of 473578
- 393410 string characters out of 5732242
+ 19510 strings out of 473579
+ 393413 string characters out of 5732263
  1321077 words of memory out of 5000000
- 42169 multiletter control sequences out of 15000+600000
+ 42168 multiletter control sequences out of 15000+600000
  567153 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 94i,12n,107p,761b,1273s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 94i,12n,107p,762b,1273s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/latxfont/line10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on main.pdf (9 pages, 193736 bytes).
+Output written on main.pdf (9 pages, 194157 bytes).
 PDF statistics:
  125 PDF objects out of 1000 (max. 8388607)
  77 compressed objects within 1 object stream

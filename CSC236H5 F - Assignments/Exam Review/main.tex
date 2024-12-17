@@ -125,7 +125,10 @@ Prove that \( f(n) = \lceil \sqrt(n) \rceil - \lfloor \sqrt(n) - 4 \rfloor\) is 
     \\
     This means \( x - y \leq \lceil x \rceil - \lfloor y \rfloor < x - y + 2 \implies 4 \leq f(n) < 4 + 2 \implies 4 \leq f(n) < 6 \). \\
     \\
-    Let \( n_0 = 0, c = 4, d = 6 \) and notice that \( f(n) \in \Theta(1) \). \\
+    Let \( n_0 = 0, c = 4, d = 6 \). Let \( g(n) = 1 \). \\
+    Notice that \( 4 \leq f(n) < 6 \implies cg(n) \leq f(n) \leq dg(n) \), for all \( n \geq n_0 = 0 \) with \( c = 4, d = 6 \). \\
+    \\
+    Therefore, \( f(n) \in \Theta(g(n)) \implies f(n) \in \Theta(1) \). Indeed, \( f(n) \) is asymptotically constant. \\
 \end{proof}
 \pagebreak
 
