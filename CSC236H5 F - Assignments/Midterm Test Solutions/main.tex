@@ -103,8 +103,46 @@ Also recall that, if \( h \in \mathcal{F} \), then
     \\
     It follows that \( |h(n)| \leq c|u(n) + v(n)| = c(u(n) + v(n)) \), as \( u, v\) are nonnegative functions. \\
     \\
-    \underline{Case:}
-
+    Let \( w(n) = h(n) - cu(n) \). Consider the following cases for \( w(n) \). \\
+    \\
+    \underline{Case — \( w(n) > 0 \):} \\
+    Notice that \( w(n) > 0 \implies h(n) - cu(n) > 0 \implies h(n) > cu(n) \). \\
+    Since \( u \) is a nonnegative function, then \( h(n) \) must be positive. \\
+    \\
+    Recall \( |h(n)| \leq c|(u + v)(n)| = c|u(n) + v(n)| \), and both \( u, v \) are nonnegative functions. \\
+    \\
+    It follows that
+    \begin{equation*}
+        \begin{aligned}
+            |w(n)| &= |h(n) - cu(n)| = h(n) - cu(n) \\
+            &= |h(n)| - cu(n) \leq |cu(n) + cv(n)| - cu(n) \\
+            &= \cancel{cu(n)} + cv(n) - \cancel{cu(n)} = cv(n) = c|v(n)| \text{.}
+        \end{aligned}
+    \end{equation*}
+    Thus, \( |w(n)| \leq c|v(n)| \). This means \( w(n) \in O(v) \). \\
+    \\
+    Write \( h(n) = cu(n) + w(n) \). It is obvious that \( cu(n) \in O(u) \), and recall that \( w(n) \in O(v) \). \\
+    \\
+    Thus, \( h(n) \in O(u + v) \). \\
+    \\
+    \underline{Case — \( w(n) \leq 0 \):} \\
+    Notice that \( w(n) \leq 0 \implies h(n) - cu(n) \leq 0 \implies h(n) \leq cu(n) \). So, choose \( h(n) = cu(n) \). \\
+    Then, \( w(n) = h(n) - cu(n) = \cancel{cu(n)} - \cancel{cu(n)} = 0 \). \\
+    \\
+    Notice that \( |w(n)| = |0| = 0 \leq c|v(n)| \), in fact, for any \( c > 0 \). \\
+    Clearly, \( w(n) \in O(v) \). \\
+    \\
+    Write \( h(n) = cu(n) + w(n) \). It is obvious that \( cu(n) \in O(u) \), and recall that \( w(n) \in O(v) \). \\
+    \\
+    Thus, \( h(n) \in O(u + v) \). \\
+    \\
+    \underline{Conclusion of Cases:} \\
+    In all cases, \( h(n) \in O(u + v) \) has been demonstrated. \\
+    \\
+    Therefore, \( O(u) + O(v) \subseteq O(u + v) \). \\
+    \\
+    \underline{Conclusion:} \\
+    Since both inclusions hold, \( O(u) + O(v) = O(u + v) \). \\
 \end{proof}
 \pagebreak
 

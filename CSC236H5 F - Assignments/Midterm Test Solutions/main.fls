@@ -1,8 +1,8 @@
-PWD c:/Users/33576/LaTeX Projects/CSC236H5 F - Assignments/Midterm Test Solutions
+PWD c:/Users/33576/CSC236/CSC236/CSC236H5 F - Assignments/Midterm Test Solutions
 INPUT c:/texlive/2024/texmf.cnf
 INPUT c:/texlive/2024/texmf-dist/web2c/texmf.cnf
 INPUT c:/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT c:/Users/33576/LaTeX Projects/CSC236H5 F - Assignments/Midterm Test Solutions/main.tex
+INPUT c:/Users/33576/CSC236/CSC236/CSC236H5 F - Assignments/Midterm Test Solutions/main.tex
 OUTPUT main.log
 INPUT c:/texlive/2024/texmf-dist/tex/latex/base/article.cls
 INPUT c:/texlive/2024/texmf-dist/tex/latex/base/article.cls
@@ -262,5 +262,6 @@ INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb
+INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/latxfont/line10.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb
 INPUT c:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb
