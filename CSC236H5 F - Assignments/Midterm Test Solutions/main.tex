@@ -146,7 +146,203 @@ Also recall that, if \( h \in \mathcal{F} \), then
 \end{proof}
 \pagebreak
 
-\section*{Question \#X}
+\section*{Question \#2}
+Let \( \mathcal{F} \) be as in \textit{Question \#1}. Let \( \mathcal{G} \) be the collection of all functions with domain \( \mathcal{N} \times \mathcal{N} \) and co-domain \( \mathcal{R} \). Let \( V \in \mathcal{G} \). \\
+For every \( i \in \mathbb{N} \), let \( g_i(n) = \sum_{j=1}^{i} V(j, n) \), and let \( f_i(n) = V(i, n) \).
+\subsection*{(a)}
+\textbf{\underline{Claim:}} For all \( i \in \mathbb{N} \), it follows that \( O(g_i) = \sum_{j=0}^{i} O(f_j) \).
+\begin{proof}
+\leavevmode\\
+    Denote the predicate:
+    \[
+        P(i) \coloneq O(g_i) = \sum_{j=0}^{i} O(f_j)
+    \]
+    Proceed using the principle of simple induction over \( P(i) \) for all \( i \in \mathbb{N} \). \\
+    \\
+    \underline{Base Case:} \\
+    Let \( i = 0 \). \\
+    \\
+    Then,
+    \begin{equation*}
+        \begin{aligned}
+            O(g_i) &= O(g_0) \\
+            &= O(\sum_{j=0}^{0} V(j, n)) \\
+            &= O(V(0, n)) \\
+            &= O(f_0) \\
+            &= \sum_{j=0}^{0} O(f_j) \\
+            &= \sum_{j=0}^{i} O(f_j) \text{.}
+        \end{aligned}
+    \end{equation*}
+    Thus, \( P(0) \). \\
+    \\
+    \underline{Induction Hypothesis:} \\
+    Assume for some \( k \in \mathbb{N} \), \( P(k) \). \\
+    \\
+    This means \( O(g_k) = \sum_{j=0}^{k} O(f_j) \). \\
+    \\
+    \underline{Induction Step:} \\
+    Notice that
+    \begin{equation*}
+        \begin{aligned}
+            O(g_{k + 1}) &= O(\sum_{j=0}^{k + 1} V(j, n)) \\
+            &= O(\sum_{j=0}^{k + 1} f_j) \\
+            &= O(\sum_{j=0}^{k} f_j + f_{k + 1}) \\
+            &= O(\sum_{j=0}^{k} f_j) + O(f_{k + 1}) \text{, by \textit{Question \#1}} \\
+            &= \sum_{j=0}^{k} O(f_j) + O(f_{k + 1}) \text{, by the Induction Hypothesis} \\
+            &= \sum_{j=0}^{k + 1} O(f_j) \text{.}
+        \end{aligned}
+    \end{equation*}
+    Thus, \( P(k) \implies P(k + 1) \). \\
+    \\
+    \underline{Conclusion:} \\
+    Therefore, by the principle of simple induction, \( P(i) \) holds for all \( i \in \mathbb{N} \). \\
+\end{proof}
+\subsection*{(b)}
+\textbf{\underline{Claim:}} If \( g(n) = g_n(n) \), then \( O(g) = \sum_{j=0}^{n} O(f_j) \) does \textbf{not} necessarily hold.
+\subsection*{(b)}
+\textbf{\underline{Claim:}} If \( g(n) = g_n(n) \), then \( O(g) = \sum_{j=0}^{n} O(f_j) \) does \textbf{not} necessarily hold.
+\begin{proof}
+\leavevmode\\
+    To show that the equivalence in the claim does not necessarily hold, consider a counterexample. \\
+    \\
+    Fix \( n_0 \). Define \( f_j(n) \) as follows:
+    \[
+    f_j(n) = \begin{cases} 
+        n^2 & \text{if } j = n, \\
+        1   & \text{if } j \neq n.
+    \end{cases}
+    \]
+    Consider the function \( g_n(n) = \sum_{j=0}^n f_j(n) \).
+    \\
+    For \( n > n_0 \), compute \( g_n(n) \) as follows:
+    \[
+    g_n(n) = \sum_{j=0}^{n} f_j(n) = \sum_{j=0}^{n-1} f_j(n) + f_n(n).
+    \]
+    Substituting the definition of \( f_j(n) \), this leads to:
+    \[
+    \sum_{j=0}^{n-1} f_j(n) = \sum_{j=0}^{n-1} 1 = n.
+    \]
+    Since \( f_n(n) = n^2 \), it follows that:
+    \[
+    g_n(n) = n + n^2.
+    \]
+    Therefore, \( O(g_n) = O(n + n^2) = O(n^2) \). Let this be the left-hand side (LHS). \\
+    \\
+    On the other hand, consider \( \sum_{j=0}^n O(f_j) \):
+    \[
+    f_j(n) = 1 \text{ for all } j \neq n.
+    \]
+    Hence, \( O(f_j) = O(1) \). There are \( n \) terms where \( f_j(n) = 1 \), so:
+    \[
+    \sum_{j=0}^n O(f_j) = \sum_{j=0}^n O(1) = (n + 1) O(1).
+    \]
+    This simplifies to \( O(n + 1) = O(n) \). Let this be the right-hand side (RHS). \\
+    \\
+    Clearly, \( LHS = O(n^2) \neq O(n) = RHS \). \\
+    \\
+    Note that this analysis holds for \( n > n_0 \), as \( n_0 \) is fixed and \( n \) can grow arbitrarily large. Fixing \( n_0 \) ensures a concrete starting point, while allowing \( n > n_0 \) provides generality for the counterexample. The counterexample demonstrates that \( O(g) = \sum_{j=0}^{n} O(f_j) \) does not necessarily hold in general. \\
+    \\
+    Thus, the equivalence in the claim is disproved. \\
+\end{proof}
+\pagebreak
+
+\section*{Question \#3}
+\textbf{\underline{Claim:}} \( f(n) = \lceil \sqrt{n} \rceil - \lfloor \sqrt{n} - 4 \rfloor \) is asymptotically constant (i.e. \( f(n) \in \Theta(1) \)).
+\begin{proof}
+\leavevmode\\
+    By definition, if \(x\) and \(y\) are arbitrary real numbers, then \[ (x \leq \lceil x \rceil < x + 1) \] and \[ (y - 1 < \lfloor y \rfloor \leq y) \text{.} \] \\
+    Rewrite the second inequality as \( -y \leq - \lfloor y \rfloor < - (y - 1) \). \\
+    \\
+    By adding the two inequalities, it follows that \( x - y \leq \lceil x \rceil - \lfloor y \rfloor < x + 1 - (y - 1) = x - y + 2 \). \\
+    \\
+    Let \( x = \sqrt{n} \) and \( y = \sqrt{n} - 4 \), for arbitrary natural \( n \). \\
+    Then, \( \lceil x \rceil - \lfloor y \rfloor = \lceil \sqrt{n} \rceil - \lfloor \sqrt{n} - 4 \rfloor = f(n) \). As well, \( x - y = \cancel{\sqrt{n}} - (\cancel{\sqrt{n}} - 4) = 4 \). \\
+    \\
+    This means \( x - y \leq \lceil x \rceil - \lfloor y \rfloor < x - y + 2 \implies 4 \leq f(n) < 4 + 2 \implies 4 \leq f(n) < 6 \). \\
+    \\
+    Let \( n_0 = 0, c = 4, d = 6 \). Let \( g(n) = 1 \). \\
+    Notice that \( 4 \leq f(n) < 6 \implies cg(n) \leq f(n) \leq dg(n) \), for all \( n \geq n_0 = 0 \) with \( c = 4, d = 6 \). \\
+    \\
+    Therefore, \( f(n) \in \Theta(g(n)) \implies f(n) \in \Theta(1) \). Indeed, \( f(n) \) is asymptotically constant. \\
+\end{proof}
+\pagebreak
+
+\section*{Question \#4}
+\textbf{\underline{Claim:}} The recurrence, \( T(n) = 3T(\frac{n}{3}) + n^2 - n \), can be solved using the master theorem, and there exists a function \( g(n) \) such that \( T \in \Theta(g(n)) \).
+\begin{proof}
+\leavevmode\\
+    The recurrence \( T(n) = 3T(\frac{n}{3}) + n^2 - n \) has the form \( T(n) = aT(\frac{n}{b}) + f(n) \), where \( a = 3 \), \( b = 3 \), and \( f(n) = n^2 - n \). Since \( f(n) = n^2 - n \) asymptotically behaves like \( n^2 \), it follows that \( f(n) \in \Theta(n^2) \), implying \( k = 2 \). \\
+    \\
+    Master theorem applies to recurrences of this form, provided \( a > 0 \), \( b > 1 \), and \( f(n) \) is non-negative for sufficiently large \( n \). Here, \( a = 3 \), \( b = 3 \), and \( f(n) = n^2 - n \) satisfies all these conditions since \( n^2 \) dominates \( n \) as \( n \to \infty \). \\
+    \\
+    Next, compute \( \log_b a \):
+    \[
+    \log_b a = \log_3 3 = 1 \text{.}
+    \]
+    Compare \( \log_b a \) with \( k \):
+    \[
+    k = 2 > \log_3 3 = 1 \text{.}
+    \]
+    By the master theorem, when \( k > \log_b a \), this leads to \( T(n) \in \Theta(n^k) \). \\
+    Thus:
+    \[
+    T(n) \in \Theta(n^2) \text{.}
+    \]
+    \\
+    Therefore, there exists a function \( g(n) = n^2 \) such that \( T(n) \in \Theta(g(n)) \). \\
+\end{proof}
+\pagebreak
+
+\section*{Question \#5}
+\textbf{\underline{Claim:}} Every regex without the Kleene star \( * \) represents a finite language.
+\begin{proof}
+\leavevmode\\
+    Let \( r \) be a regular expression without the Kleene star \( * \). \\
+    Define the predicate:
+    \[
+        P(r) \coloneq \mathcal{L}(r) \text{ is a finite language.}
+    \]
+    Proceed using the principle of structural induction over \( P(r) \) for all regular expressions \( r \) without the Kleene star \( *\). \\
+    \\
+    \underline{Base Case:} \\
+    By the definition of regular expressions,
+    \begin{itemize}
+        \item \( \mathcal{L}(\varnothing) = \varnothing \)
+        \item \( \mathcal{L}(\epsilon) = \{ \epsilon \} \)
+        \item \( \mathcal{L}(a) = \{ a \} \), where \( a \in \Sigma \) is an arbitrary symbol 
+    \end{itemize}
+    Clearly, all three languages as denoted above are finite. \\
+    \\
+    Thus, \( P(\varnothing), P(\epsilon), P(a) \) all hold. \\
+    \\
+    \underline{Induction Hypothesis:} \\
+    Assume that for some regular expressions \( r_1, r_2 \) without the Kleene star \( * \), \( P(r_1), P(r_2) \) hold. \\
+    \\
+    This means the languages \( \mathcal{L}(r_1), \mathcal{L}(r_2) \) are finite. \\
+    \\
+    \underline{Induction Step:} \\
+    Consider that every language without the Kleene star \( * \) can be obtained by the union or concatenation of languages. \\
+    \\
+    By the Induction Hypothesis, \( \mathcal{L}(r_1) \) and \( \mathcal{L}(r_2) \) are finite languages. Recall that languages are sets of elements, where the elements are symbols of some alphabet \( \Sigma \). \\
+    \\
+    By definition, \( \mathcal{L}(r_1 + r_2) = \mathcal{L}(r_1) \cup \mathcal{L}(r_2) \), which is finite as the union of finite sets (languages) is a finite set. \\
+    By definition, \( \mathcal{L}(r_1 r_2) = \mathcal{L}(r_1) \overset{\frown}{\ } \mathcal{L}(r_2) \), which is finite as the concatenation of two finite languages remains finite. \\
+    \\
+    \underline{Conclusion:} \\
+    By the principle of structural induction, every regular expression without the Kleene star \( * \) represents a finite language. \\
+\end{proof}
+\pagebreak
+
+\section*{Question \#6}
+wordsgohere
+
+\begin{proof}
+\leavevmode\\
+    proofgoeshere \\
+\end{proof}
+\pagebreak
+
+\section*{Question \#7}
 wordsgohere
 
 \begin{proof}
