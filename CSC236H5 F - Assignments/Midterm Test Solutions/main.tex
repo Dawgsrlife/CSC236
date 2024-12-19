@@ -435,7 +435,7 @@ def optimalschedule(intervals):
 \leavevmode\\
     Denote the loop invariant:
     \[
-        Q(k): P(s) \text{ holds at the beginning of the \( k ^{\text{th}} \) iteration.}
+        Q(k): P(S) \text{ holds at the beginning of the \( k ^{\text{th}} \) iteration.}
     \]
     To show that \texttt{optimalschedule()} is correct—that is, \texttt{optimalschedule()} returns an optimal schedule, show that \( Q(k) \) is true for all \( k \in \mathbb{N} \). \\
     \\
@@ -451,7 +451,7 @@ def optimalschedule(intervals):
     This means \( S \) is \textbf{looking good} at the beginning of the \( k^{\text{th}} \) iteration. \\
     \\
     \underline{Induction Step:} \\
-    By the induction hypothesis and the assumption, \( S \) is also \textbf{looking good} at the beginning of the \( (j + 1)^{\text{th}} \) iteration. \\
+    By the induction hypothesis and the assumption, \( S \) is also \textbf{looking good} at the beginning of the \( (k + 1)^{\text{th}} \) iteration. \\
     \\
     \underline{Induction Conclusion:} \\
     Therefore, \( Q(k) \) holds for all \( k \in \mathbb{N} \). \\
