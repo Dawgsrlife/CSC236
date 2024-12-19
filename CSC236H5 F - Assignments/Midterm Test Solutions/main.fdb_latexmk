@@ -1,13 +1,13 @@
 # Fdb version 4
-["biber main"] 1734576675.4462 "main.bcf" "main.bbl" "main" 1734578607.56765 0
-  "main.bcf" 1734578607 107186 eaaa4cd7e05e4b6c6a6fb3c31db72029 "pdflatex"
+["biber main"] 1734579114.46309 "main.bcf" "main.bbl" "main" 1734579346.43406 0
+  "main.bcf" 1734579346 107186 eaaa4cd7e05e4b6c6a6fb3c31db72029 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1734578606.15741 "c:/Users/33576/CSC236/CSC236/CSC236H5 F - Assignments/Midterm Test Solutions/main.tex" "main.pdf" "main" 1734578607.5684 0
+["pdflatex"] 1734579345.04047 "c:/Users/33576/CSC236/CSC236/CSC236H5 F - Assignments/Midterm Test Solutions/main.tex" "main.pdf" "main" 1734579346.43476 0
   "EngReport.sty" 1734489226 781 805ea08727a6b1ae905b91ce3a3df8be ""
-  "c:/Users/33576/CSC236/CSC236/CSC236H5 F - Assignments/Midterm Test Solutions/main.tex" 1734578605 15710 02b46a34ffade94f2693b13348e96d2b ""
+  "c:/Users/33576/CSC236/CSC236/CSC236H5 F - Assignments/Midterm Test Solutions/main.tex" 1734579344 16916 e938ef2d02ce8731ba36b8fa118cd281 ""
   "c:/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1727661218 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "c:/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1727662439 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2024/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm" 1727661938 1536 74b7293ec3713bb7fdca8dd1bd1f469c ""
@@ -137,10 +137,10 @@
   "c:/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1727667508 3326000 e50a3050267ae49201883b1e00fe5837 ""
   "c:/texlive/2024/texmf.cnf" 1727667323 713 e69b156964470283e0530f5060668171 ""
   "headerfooter.tex" 1734489226 316 fced52473b7e5686ebff682df8fe2e80 ""
-  "main.aux" 1734578607 150 97ac9e4087e52a6f5ddf9a6a5e875b6b "pdflatex"
-  "main.bbl" 1734576676 0 d41d8cd98f00b204e9800998ecf8427e "biber main"
-  "main.run.xml" 1734578607 2224 bc6149f5caee4074188e1b81a66978d0 "pdflatex"
-  "main.tex" 1734578605 15710 02b46a34ffade94f2693b13348e96d2b ""
+  "main.aux" 1734579346 150 97ac9e4087e52a6f5ddf9a6a5e875b6b "pdflatex"
+  "main.bbl" 1734579115 0 d41d8cd98f00b204e9800998ecf8427e "biber main"
+  "main.run.xml" 1734579346 2224 bc6149f5caee4074188e1b81a66978d0 "pdflatex"
+  "main.tex" 1734579344 16916 e938ef2d02ce8731ba36b8fa118cd281 ""
   "titlepage.tex" 1734489226 594 337e3895094ddcc25611c9032a91af49 ""
   (generated)
   "main.aux"

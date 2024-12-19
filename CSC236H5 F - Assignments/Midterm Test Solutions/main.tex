@@ -334,11 +334,21 @@ For every \( i \in \mathbb{N} \), let \( g_i(n) = \sum_{j=1}^{i} V(j, n) \), and
 \pagebreak
 
 \section*{Question \#6}
-wordsgohere
-
+\textbf{\underline{Claim:}} The collection of regular languages is closed under complementation (i.e. if \( L \) is a regular langauge on an alphabet \( \Sigma \), then \( \Sigma^* \setminus L \) is also a regular language).
 \begin{proof}
 \leavevmode\\
-    proofgoeshere \\
+    Suppose \( L \) is a regular langauge over an arbitrary alphabet \( \Sigma \). \\
+    Then, there exists a DFA \( \mathcal{D} = (\Sigma, Q, \delta, s, F) \) that accepts \( L \). \\
+    \\
+    Consider the DFA \( \mathcal{D}' = (\Sigma, Q, \delta, s, Q \setminus F) \), and proceed to show that \( D' \) accepts \( \Sigma^* \setminus L \). \\
+    \\
+    Let \( w \in \Sigma^* \setminus L \). \\
+    Then, \( \mathcal{D} \) rejects \( w \), and \( \delta(s, w) \notin F \implies \delta(s, w) \in Q \setminus F \). Clearly, \( \mathcal{D}' \) accepts \( w \). \\
+    \\
+    Conversely, let \( x \in \Sigma^* \) such that \( \mathcal{D}' \) accepts \( x \). \\
+    Then, \( \delta(s, x) \in Q \setminus F \implies \delta(s, x) \notin F \). This means \( \mathcal{D} \) rejects \( x \), so \( x \notin L \) but \( x \in \Sigma^* \setminus L \). \\
+    \\
+    Therefore, the DFA \( \mathcal{D}' \) accepts \( \Sigma^* \setminus L \), demonstrating that \( \Sigma^* \setminus L \) is a regular language. \\
 \end{proof}
 \pagebreak
 
